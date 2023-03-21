@@ -3,7 +3,7 @@
       "list": [
         {
           "builtIn": 1,
-          "datasource": "solar-bt-monitor",
+          "datasource": "solar-battery-bt-monitor",
           "enable": true,
           "hide": true,
           "iconColor": "rgba(0, 211, 255, 1)",
@@ -489,7 +489,7 @@
           {
             "datasource": {
               "type": "prometheus",
-              "uid": "solar-bt-monitor"
+              "uid": "solar-battery-bt-monitor"
             },
             "exemplar": true,
             "expr": "solarmon_charging_amp_hours_today",
@@ -567,7 +567,7 @@
           {
             "datasource": {
               "type": "prometheus",
-              "uid": "solar-bt-monitor"
+              "uid": "solar-battery-bt-monitor"
             },
             "exemplar": true,
             "expr": "solarmon_discharging_amp_hours_today",
@@ -645,7 +645,7 @@
           {
             "datasource": {
               "type": "prometheus",
-              "uid": "solar-bt-monitor"
+              "uid": "solar-battery-bt-monitor"
             },
             "exemplar": true,
             "expr": "solarmon_max_charging_power_today",
@@ -723,7 +723,7 @@
           {
             "datasource": {
               "type": "prometheus",
-              "uid": "solar-bt-monitor"
+              "uid": "solar-battery-bt-monitor"
             },
             "exemplar": true,
             "expr": "solarmon_power_generation_today",
@@ -801,7 +801,7 @@
           {
             "datasource": {
               "type": "prometheus",
-              "uid": "solar-bt-monitor"
+              "uid": "solar-battery-bt-monitor"
             },
             "exemplar": true,
             "expr": "solarmon_power_generation_total",
@@ -1403,7 +1403,7 @@
           {
             "datasource": {
               "type": "prometheus",
-              "uid": "solar-bt-monitor"
+              "uid": "solar-battery-bt-monitor"
             },
             "exemplar": true,
             "expr": "solarmon_load_volts",
@@ -1633,7 +1633,7 @@
           {
             "datasource": {
               "type": "prometheus",
-              "uid": "solar-bt-monitor"
+              "uid": "solar-battery-bt-monitor"
             },
             "exemplar": true,
             "expr": "solarmon_battery_current",

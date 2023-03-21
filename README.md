@@ -29,10 +29,22 @@ This setup uses prometheus for logging data and leverages grafana to create a re
     sudo apt-get upgrade
     ```
 
+## Install Project
+
+1. Install this project on your Raspberry Pi - https://github.com/chriskomus/solar-battery-bt-monitor.git
+    ```
+    cd ~/
+    git clone https://github.com/chriskomus/solar-battery-bt-monitor.git
+    cd solar-battery-bt-monitor
+    cp solar-battery-bt-monitor.ini.dist solar-battery-bt-monitor.ini
+    ```
+
+
 ## Install Prometheus
 
 1. Check the [prometheus website](https://prometheus.io/download/) for the latest version of their application.  The URL below may link to older versions.
     ```
+    cd ~/
     wget https://github.com/prometheus/prometheus/releases/download/v2.42.0/prometheus-2.42.0.linux-armv7.tar.gz
     tar xfz prometheus-2.42.0.linux-armv7.tar.gz
     rm prometheus-2.42.0.linux-armv7.tar.gz
@@ -40,7 +52,7 @@ This setup uses prometheus for logging data and leverages grafana to create a re
     ```
 2. Copy the file in this project (`prometheus\prometheus.yml`) into the prometheus install folder (`~/prometheus/prometheus.yml`), overwriting the existing file:
    ```
-   cp ~/solar-bt-monitor/prometheus/prometheus.yml ~/prometheus/prometheus.yml
+   cp ~/solar-battery-bt-monitor/prometheus/prometheus.yml ~/prometheus/prometheus.yml
    ```
 
 3. Create the prometheus.service file in /etc/systemd/system/prometheus.service
@@ -81,10 +93,11 @@ This setup uses prometheus for logging data and leverages grafana to create a re
 
 1. Check the [Grafana web site](https://grafana.com/grafana/download) for the latest version of their application.  The URL below may link to older versions.
    ```
+   cd ~/
    wget https://dl.grafana.com/enterprise/release/grafana-enterprise-9.3.6.linux-armv7.tar.gz
    tar -zxvf grafana-enterprise-9.3.6.linux-armv7.tar.gz
    rm grafana-enterprise-9.3.6.linux-armv7.tar.gz
-   mv grafana-9.3.6/ grafana/   
+   mv grafana-9.3.6/ grafana/
    ```
 2. Create the grafana.service file in /etc/systemd/system/grafana.service
    ```
@@ -120,30 +133,22 @@ This setup uses prometheus for logging data and leverages grafana to create a re
 
 ## Setup Project
 
-1. Install this project on your Raspberry Pi - https://github.com/chriskomus/solar-bt-monitor.git
-    ```
-    cd ~/
-    git clone https://github.com/chriskomus/solar-bt-monitor.git
-    cd solar-bt-monitor
-    cp solar-bt-monitor.ini.dist solar-bt-monitor.ini
-    ```
-
-2. Install the GATT library
+1. Install the GATT library
     ```
     pip install gatt
     ```
-3. Install the prometheus-client library
+2. Install the prometheus-client library
     ```
     pip install prometheus-client
     ```
-4. Install libscrc. I had to build libscrc because it's not installable with pip3
+3. Install libscrc. I had to build libscrc because it's not installable with pip3
     ```
     git clone https://github.com/hex-in/libscrc
     cd libscrc/
     python3 setup.py build
     sudo python3 setup.py install
     ```
-5. Now you'll need to edit the solar-bt-monitor.ini with the specifics of your setup. You need to get the MAC address of your particular BT-1 device.
+4. Now you'll need to edit the solar-battery-bt-monitor.ini with the specifics of your setup. You need to get the MAC address of your particular BT-1 device.
    - You can use a BLE scanner app like:
       - [BLE Scanner (Apple App Store)](https://apps.apple.com/us/app/ble-scanner-4-0/id1221763603)
       - [BLE Scanner (Google Play)](https://play.google.com/store/apps/details?id=com.macdom.ble.blescanner)
@@ -152,12 +157,13 @@ This setup uses prometheus for logging data and leverages grafana to create a re
    sudo bluetoothctl
    scan on
    ```
-6. Look for devics with alias `BT-TH-XXXX..`.  If the device doesn't show up in the scanner, make sure you force quit any of the Renogy apps that might be connected to your BT-1. If you are using BLE Scanner, connect to the BT-TH device and get the MAC address from the bytes in the Advertisement Data section: {length = 6, bytes = 0x806fb0000000}
+5. Look for devics with alias `BT-TH-XXXX..`.  If the device doesn't show up in the scanner, make sure you force quit any of the Renogy apps that might be connected to your BT-1. If you are using BLE Scanner, connect to the BT-TH device and get the MAC address from the bytes in the Advertisement Data section: {length = 6, bytes = 0x806fb0000000}
 
-7. Edit solar-bt-monitor.ini file with the device name and MAC address, it's time to test it out:
+6. Edit solar-battery-bt-monitor.ini file with the device name and MAC address.
+7. It's time to test it out:
     ```
-    cd ~/solar-bt-monitor
-    ./solar-monitor.py
+    cd ~/solar-battery-bt-monitor
+    python3 solar-battery-bt-monitor.py
     ```
 8. The script will attempt to connect to your BT-1.  Often times, the bluetooth libraries will immediately disconnect. This script is set up by default to reconnect if that happens. Usually after 3-4 reconnect attempts, the application will connect and you'll see the values output on the console.
 
@@ -192,55 +198,55 @@ This setup uses prometheus for logging data and leverages grafana to create a re
 
 ## Run The Script Automatically
 
-There are a few methods to run the script at startup. Either as a service or adding to ~/.config/autostart/solar-bt-monitor.desktop.
+There are a few methods to run the script at startup. Either as a service or adding to ~/.config/autostart/solar-battery-bt-monitor.desktop.
 
-I ran into issues with the BT dongle not playing well with solar-bt-monitor when it ran as a service, so I opted for Option B, but I'd suggest trying Service method first. There are other options as well, but don't add to .bashrc or rc.local.
+I ran into issues with the BT dongle not playing well with solar-battery-bt-monitor when it ran as a service, so I opted for Option B, but I'd suggest trying Service method first. There are other options as well, but don't add to .bashrc or rc.local.
 
 ### Option A: As a Service
 
 This is the best and simplest method for running headless.
 
-1. Create the solar-bt-service.service file in /etc/systemd/system/solar-bt-monitor.service
+1. Create the solar-bt-service.service file in /etc/systemd/system/solar-battery-bt-monitor.service
    ```
-   sudo nano /etc/systemd/system/solar-bt-monitor.service
+   sudo nano /etc/systemd/system/solar-battery-bt-monitor.service
    ```
    Paste the following and save. Change the User and the file paths to your username and the correct filepaths.
    ```
    [Unit]
    Description=Solar Bluetooth Monitor
    After=network.target
-    
+
    [Service]
    Type=simple
    User=pi
-   WorkingDirectory=/home/pi/solar-bt-monitor
-   ExecStart=/usr/bin/python3 /home/pi/solar-bt-monitor/solar-bt-monitor.py
+   WorkingDirectory=/home/pi/solar-battery-bt-monitor
+   ExecStart=/usr/bin/python3 /home/pi/solar-battery-bt-monitor/solar-battery-bt-monitor.py
    RestartSec=13
    Restart=always
-    
+
    [Install]
    WantedBy=multi-user.target
    ```
-2. Start up the solar-bt-monitor service
+2. Start up the solar-battery-bt-monitor service
    ```
    sudo systemctl daemon-reload
-   sudo systemctl start solar-bt-monitor
-   sudo systemctl status solar-bt-monitor
-   sudo systemctl enable solar-bt-monitor
+   sudo systemctl start solar-battery-bt-monitor
+   sudo systemctl status solar-battery-bt-monitor
+   sudo systemctl enable solar-battery-bt-monitor
    ```
 
-### Option B: Add to ~/.config/autostart/solar-bt-monitor.desktop
+### Option B: Add to ~/.config/autostart/solar-battery-bt-monitor.desktop
 
-1. Edit ~/.config/autostart/solar-bt-monitor.desktop, make sure to use correct username in directory
+1. Edit ~/.config/autostart/solar-battery-bt-monitor.desktop, make sure to use correct username in directory
    ```
    mkdir /home/pi/.config/autostart
-   nano /home/pi/.config/autostart/solar-bt-monitor.desktop
+   nano /home/pi/.config/autostart/solar-battery-bt-monitor.desktop
    ```
 2. Add to the file:
    ```
    [Desktop Entry]
-   Name=Solar-BT-Monitor
-   Exec=/home/pi/solar-bt-monitor/start.sh
+   Name=solar-battery-bt-monitor
+   Exec=/home/pi/solar-battery-bt-monitor/start.sh
    ```
 3. Enable GUI Autologin:
     ```
@@ -249,7 +255,7 @@ This is the best and simplest method for running headless.
    - System Options -> Boot / Auto Login -> Desktop Autologin
 4. Make script executable:
    ```
-   cd ~/solar-bt-monitor
+   cd ~/solar-battery-bt-monitor
    sudo chmod +x start.sh
    ```
 
@@ -270,7 +276,12 @@ This is the best and simplest method for running headless.
 
 ## BT Issues
 
-Some BT dongles work better than others. It's probably best to use a Pi with integrated BT, but I have had success with this [Broadcom based BT Dongle](https://www.amazon.ca/gp/product/B007Q45EF4/).
+Some BT dongles work better than others. It's probably best to use a Pi with integrated BT, but I ran into issues with that too. I have had success with this [Broadcom based BT Dongle](https://www.amazon.ca/gp/product/B007Q45EF4/).
+
+Try this:
+```
+sudo hciconfig hci0 down; sudo systemctl restart bluetooth
+```
 
 Unload and reload btusb kernel:
 ```
@@ -284,11 +295,11 @@ power off
 power on
 scan on
 ```
-Restart the solar-bt-monitor service and check the status:
+Restart the solar-battery-bt-monitor service and check the status:
 ```
 sudo systemctl daemon-reload
-sudo service solar-bt-monitor restart
-sudo service solar-bt-monitor status
+sudo service solar-battery-bt-monitor restart
+sudo service solar-battery-bt-monitor status
 ```
 If that doesn't work, try to restart the bluetooth service:
 ```
@@ -297,22 +308,22 @@ sudo service bluetooth status
 ```
 
 
-## Solar-BT-Monitor Service Issues
+## solar-battery-bt-monitor Service Issues
 
 In case you run into issues running as a Service and want to stop and disable it:
 ```
-sudo systemctl stop solar-bt-service
-sudo systemctl disable solar-bt-service
+sudo systemctl stop solar-battery-bt-monitor
+sudo systemctl disable solar-battery-bt-monitor
 ```
 Run the script instead
 ```
-python3 ~/solar-bt-monitor/solar-bt-monitor.py
+python3 ~/solar-battery-bt-monitor/solar-battery-bt-monitor.py
 ```
 
 # Credits
 
-This project is based off of [snichol67's solar-bt-monitor](https://github.com/snichol67/solar-bt-monitor), and contains elements of the following projects:
-- [snichol67/solar-bt-monitor](https://github.com/snichol67/solar-bt-monitor)
+This project is based off of [snichol67's solar-battery-bt-monitor](https://github.com/snichol67/solar-battery-bt-monitor), and contains elements of the following projects:
+- [snichol67/solar-battery-bt-monitor](https://github.com/snichol67/solar-battery-bt-monitor)
 - [Olen/solar-monitor](https://github.com/Olen/solar-monitor)
 - [cyrils/renogy-bt1](https://github.com/cyrils/renogy-bt1)
 - [corbinbs/solarshed](https://github.com/corbinbs/solarshed)

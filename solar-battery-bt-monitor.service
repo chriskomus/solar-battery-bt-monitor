@@ -1,15 +1,15 @@
 [Unit]
 Description=Solar Bluetooth Monitor
 After=network.target
- 
+
 [Service]
 Type=simple
 User=pi
-WorkingDirectory=/home/pi/solar-bt-monitor
-ExecStart=/home/pi/solar-bt-monitor/solar-bt-monitor.py
+WorkingDirectory=/home/pi/solar-battery-bt-monitor
+ExecStart=/home/pi/solar-battery-bt-monitor/solar-battery-bt-monitor.py
 RestartSec=13
 Restart=always
- 
+
 [Install]
 WantedBy=multi-user.target
 

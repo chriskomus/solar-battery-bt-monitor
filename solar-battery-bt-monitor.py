@@ -5,26 +5,26 @@
 # https://github.com/snichol67/solar-bt-monitor
 #
 # Sets up logging, reads the configuration file, and
-# attempts to connect to the bluetooth module. If 
+# attempts to connect to the bluetooth module. If
 # continuous monitoring is set, the BTOneApp has been
-# modified to sleep for 30 seconds, then request 
+# modified to sleep for 30 seconds, then request
 # another data read from the BT-1 device
-# 
+#
 # If auto_reconnect is set, if the bluetooth connection
-# initially fails (and it often does), the script 
+# initially fails (and it often does), the script
 # sleeps for 10 seconds and tries to reconnect again.
-# 
+#
 # Feel free to reuse this code for any purpose
 # ------------------------------------------------------
 
 from BTOneApp import BTOneApp
-import logging 
+import logging
 import duallog
 import configparser
 
 # Read configuration file
 config = configparser.ConfigParser()
-config.read('solar-bt-monitor.ini')
+config.read('solar-battery-bt-monitor.ini')
 
 # Set logging level
 log_level = config.get('monitor', 'log_level', fallback='INFO')
@@ -37,7 +37,7 @@ elif (log_level == "WARN"):
 elif (log_level == "ERROR"):
     level = logging.ERROR
 
-duallog.setup('solar-bt-monitor', minLevel=level, fileLevel=level, rotation='daily', keep=30)
+duallog.setup('solar-battery-bt-monitor', minLevel=level, fileLevel=level, rotation='daily', keep=30)
 
 mac_addr = config.get('monitor', 'mac_addr', fallback=None)
 logging.debug("[CONFIG] mac_addr: {}".format(mac_addr))
@@ -73,7 +73,7 @@ else:
     if (logger_type == 'prometheus'):
         from prometheus_logger import prometheus_logger
         data_logger = prometheus_logger()
-    
+
     if (data_logger is not None):
         bt1 = BTOneApp("hci0", mac_addr, alias, data_logger.data_received_callback, auto_reconnect=reconnect, continuous=continuous, interval=interval)
         bt1.connect()
