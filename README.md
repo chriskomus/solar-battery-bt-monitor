@@ -165,7 +165,7 @@ This setup uses prometheus for logging data and leverages grafana to create a re
     cd ~/solar-battery-bt-monitor
     python3 solar-battery-bt-monitor.py
     ```
-8. The script will attempt to connect to your BT-1.  Often times, the bluetooth libraries will immediately disconnect. This script is set up by default to reconnect if that happens. Usually after 3-4 reconnect attempts, the application will connect and you'll see the values output on the console.
+8. The script will attempt to connect to your BT-1.  Often times, the bluetooth libraries will immediately disconnect. This script is set up by default to reconnect if that happens. Usually after a handful of reconnect attempts, the application will connect and you'll see the values output on the console.
 
 9. The script by default logs the data read from the controller to prometheus. If prometheus is running on your pi, you should be able to go to the URL http://192.168.0.XXX:5000 or http://solar-monitor.local:5000 and see some output that looks something like the following (you'll likely see a bunch of additional parameters).
     ```
@@ -200,40 +200,40 @@ This setup uses prometheus for logging data and leverages grafana to create a re
 
 There are a few methods to run the script at startup. Either as a service or adding to ~/.config/autostart/solar-battery-bt-monitor.desktop.
 
-I ran into issues with the BT dongle not playing well with solar-battery-bt-monitor when it ran as a service, so I opted for Option B, but I'd suggest trying Service method first. There are other options as well, but don't add to .bashrc or rc.local.
+I'd suggest trying Service method first, and using Option B as a fallback. There are other options as well, but don't add to .bashrc or rc.local.
 
 ### Option A: As a Service
 
 This is the best and simplest method for running headless.
 
 1. Create the solar-bt-service.service file in /etc/systemd/system/solar-battery-bt-monitor.service
-   ```
-   sudo nano /etc/systemd/system/solar-battery-bt-monitor.service
-   ```
-   Paste the following and save. Change the User and the file paths to your username and the correct filepaths.
-   ```
-   [Unit]
-   Description=Solar Bluetooth Monitor
-   After=network.target
+```
+sudo nano /etc/systemd/system/solar-battery-bt-monitor.service
+```
+Paste the following and save. Change the User and the file paths to your username and the correct filepaths.
+```
+[Unit]
+Description=Solar Bluetooth Monitor
+After=network.target
 
-   [Service]
-   Type=simple
-   User=pi
-   WorkingDirectory=/home/pi/solar-battery-bt-monitor
-   ExecStart=/usr/bin/python3 /home/pi/solar-battery-bt-monitor/solar-battery-bt-monitor.py
-   RestartSec=13
-   Restart=always
+[Service]
+Type=simple
+User=pi
+WorkingDirectory=/home/pi/solar-battery-bt-monitor
+ExecStart=/usr/bin/python3 /home/pi/solar-battery-bt-monitor/solar-battery-bt-monitor.py
+RestartSec=13
+Restart=always
 
-   [Install]
-   WantedBy=multi-user.target
-   ```
+[Install]
+WantedBy=multi-user.target
+```
 2. Start up the solar-battery-bt-monitor service
-   ```
-   sudo systemctl daemon-reload
-   sudo systemctl start solar-battery-bt-monitor
-   sudo systemctl status solar-battery-bt-monitor
-   sudo systemctl enable solar-battery-bt-monitor
-   ```
+```
+sudo systemctl daemon-reload
+sudo systemctl start solar-battery-bt-monitor
+sudo systemctl status solar-battery-bt-monitor
+sudo systemctl enable solar-battery-bt-monitor
+```
 
 ### Option B: Add to ~/.config/autostart/solar-battery-bt-monitor.desktop
 
@@ -277,6 +277,9 @@ This is the best and simplest method for running headless.
 ## BT Issues
 
 Some BT dongles work better than others. It's probably best to use a Pi with integrated BT, but I ran into issues with that too. I have had success with this [Broadcom based BT Dongle](https://www.amazon.ca/gp/product/B007Q45EF4/).
+
+
+
 
 Try this:
 ```

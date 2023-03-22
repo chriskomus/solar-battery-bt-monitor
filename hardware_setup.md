@@ -9,8 +9,8 @@ Any capable Raspberry Pi setup should work, as long as it has bluetooth. I'm usi
 - Raspberry Pi Compute Module CM4IO Board
 - 64gb microSD card
 - USB to DC Barrel Jack Power Cable 5.5 x 2.1 mm 5V
-- BrosTrend AC650 Dual Band WiFi https://cdn.shopify.com/s/files/1/0270/1023/6487/files/AC1L_AC3L_AC5L_Linux_Manual_BrosTrend_WiFi_Adapter_v8.pdf?v=1671154201
-- Kinivo BTD400 Bluetooth Low Energy USB Adapter https://community.kinivo.com/t/how-to-raspberry-pi-setup/173
+- BrosTrend AC650 Dual Band WiFi [installation guide](https://cdn.shopify.com/s/files/1/0270/1023/6487/files/AC1L_AC3L_AC5L_Linux_Manual_BrosTrend_WiFi_Adapter_v8.pdf?v=1671154201)
+- Kinivo BTD400 Bluetooth Low Energy USB Adapter [installation guide](https://community.kinivo.com/t/how-to-raspberry-pi-setup/173)
 
 ### Renogy Solar Equipment
 - Renogy Adventurer Solar Charge Controller
@@ -63,7 +63,10 @@ Any capable Raspberry Pi setup should work, as long as it has bluetooth. I'm usi
 1. Plug in the BT dongle.
 2. Install:
 ```
-sudo apt-get install --no-install-recommends bluetooth bluez-utils blueman bluez python-gobject python-gobject-2
+sudo apt-get install --no-install-recommends bluetooth
+sudo apt-get install --no-install-recommends bluez-utils
+sudo apt-get install --no-install-recommends blueman
+sudo apt-get install --no-install-recommends bluez
 ```
 3. If you need audio support:
 ```
@@ -78,9 +81,9 @@ sudo nano /etc/systemd/system/bluetooth.target.wants/bluetooth.service
 ExecStart=/usr/lib/bluetooth/bluetoothd
 ```
 To:
-   ```
-   ExecStart=/usr/lib/bluetooth/bluetoothd --noplugin=sap
-   ```
+```
+ExecStart=/usr/lib/bluetooth/bluetoothd --noplugin=sap
+```
 6. Reload the systemd:
 ```
 sudo systemctl daemon-reload
