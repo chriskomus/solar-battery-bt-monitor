@@ -4,3 +4,4 @@ venv
 __pycache__/
 solar-battery-bt-monitor/
 solar-battery-bt-monitor.ini
+solar-battery-bt-monitor.log
