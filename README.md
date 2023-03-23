@@ -91,45 +91,29 @@ This setup uses prometheus for logging data and leverages grafana to create a re
 
 ## Install Grafana
 
-1. Check the [Grafana web site](https://grafana.com/grafana/download) for the latest version of their application.  The URL below may link to older versions.
+1. Add the APT key used to authenticate packages.
    ```
-   cd ~/
-   wget https://dl.grafana.com/enterprise/release/grafana-enterprise-9.3.6.linux-armv7.tar.gz
-   tar -zxvf grafana-enterprise-9.3.6.linux-armv7.tar.gz
-   rm grafana-enterprise-9.3.6.linux-armv7.tar.gz
-   mv grafana-9.3.6/ grafana/
+   wget -q -O - https://packages.grafana.com/gpg.key | sudo apt-key add -
    ```
-2. Create the grafana.service file in /etc/systemd/system/grafana.service
+2. Add the Grafana APT repository
    ```
-   sudo nano /etc/systemd/system/grafana.service
+   echo "deb https://packages.grafana.com/oss/deb stable main" | sudo tee -a /etc/apt/sources.list.d/grafana.list
    ```
-   Paste the following and save. Change the User and the file paths to your username and the correct filepaths.
+3. Install Grafana.
    ```
-   [Unit]
-   Description=Grafana Server
-   After=network.target
-
-   [Service]
-   Type=simple
-   User=pi
-   ExecStart=/home/pi/grafana/bin/grafana-server
-   WorkingDirectory=/home/pi/grafana/
-   Restart=always
-   RestartSec=10
-
-   [Install]
-   WantedBy=multi-user.target
+   sudo apt-get update
+   sudo apt-get install -y grafana
    ```
-3. Set Up the Grafana Service
+3. Enable and start the Grafana server
     ```
-    sudo systemctl daemon-reload
-    sudo systemctl start grafana
-    sudo systemctl status grafana
-    sudo systemctl enable grafana
+    sudo /bin/systemctl enable grafana-server
+    sudo /bin/systemctl start grafana-server
     ```
 4. After grafana is installed, go to http://192.168.0.36:3000 or http://solar-monitor.local:3000/
    - Default log in is username: admin, password: admin
    - You'll be prompted to create a unique password for your installation
+
+5. More info on installing Grafana on a Raspberry Pi [here](https://grafana.com/tutorials/install-grafana-on-raspberry-pi/).
 
 ## Setup Project
 
@@ -143,22 +127,18 @@ This setup uses prometheus for logging data and leverages grafana to create a re
     ```
 3. Install libscrc. I had to build libscrc because it's not installable with pip3
     ```
+    cd ~/
     git clone https://github.com/hex-in/libscrc
     cd libscrc/
     python3 setup.py build
     sudo python3 setup.py install
     ```
 4. Now you'll need to edit the solar-battery-bt-monitor.ini with the specifics of your setup. You need to get the MAC address of your particular BT-1 device.
-   - You can use a BLE scanner app like:
-      - [BLE Scanner (Apple App Store)](https://apps.apple.com/us/app/ble-scanner-4-0/id1221763603)
-      - [BLE Scanner (Google Play)](https://play.google.com/store/apps/details?id=com.macdom.ble.blescanner)
-   - OR you can use:
    ```
    sudo bluetoothctl
    scan on
    ```
-5. Look for devics with alias `BT-TH-XXXX..`.  If the device doesn't show up in the scanner, make sure you force quit any of the Renogy apps that might be connected to your BT-1. If you are using BLE Scanner, connect to the BT-TH device and get the MAC address from the bytes in the Advertisement Data section: {length = 6, bytes = 0x806fb0000000}
-
+5. Look for devics with alias `BT-TH-XXXX..`.  If the device doesn't show up in the scanner, make sure you force quit any of the Renogy apps that might be connected to your BT-1.
 6. Edit solar-battery-bt-monitor.ini file with the device name and MAC address.
 7. It's time to test it out:
     ```
