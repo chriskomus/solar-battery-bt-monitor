@@ -7,7 +7,10 @@ mac_addr = C4:64:E3:3C:XX:XX
 #Log Level (DEBUG | INFO | WARN | ERROR)
 log_level = INFO
 
-# Continuous monitoring of values, script sleeps for 
+#Temperature (C [Celsius] | K [Kelvin] | F [Farenheit])
+temperature = C
+
+# Continuous monitoring of values, script sleeps for
 # number of seconds specified in data_read_interval
 # then makes another read attempt
 continuous_monitor = True

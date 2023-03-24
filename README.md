@@ -303,11 +303,21 @@ Run the script instead
 python3 ~/solar-battery-bt-monitor/solar-battery-bt-monitor.py
 ```
 
+# New Features
+
+- Upgraded Grafana:
+   - New Time Series replaced deprecated line charts
+   - Added 24hr offset historical overlay on some graphs
+   - Converted to Celcius
+   - More colours for safe temperature ranges
+- Added Celcius and Fehrenheit
+
 # Credits
 
 This project is based off of [snichol67's solar-battery-bt-monitor](https://github.com/snichol67/solar-battery-bt-monitor), and contains elements of the following projects:
 - [snichol67/solar-battery-bt-monitor](https://github.com/snichol67/solar-battery-bt-monitor)
 - [Olen/solar-monitor](https://github.com/Olen/solar-monitor)
 - [cyrils/renogy-bt1](https://github.com/cyrils/renogy-bt1)
+- [BarkinSpider/SolarShed](https://github.com/BarkinSpider/SolarShed)
 - [corbinbs/solarshed](https://github.com/corbinbs/solarshed)
 - [Rover 20A/40A Charge Controller—MODBUS Protocol](https://docs.google.com/document/d/1OSW3gluYNK8d_gSz4Bk89LMQ4ZrzjQY6/edit)
