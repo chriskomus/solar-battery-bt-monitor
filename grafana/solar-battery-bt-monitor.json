@@ -124,6 +124,7 @@
         "type": "prometheus",
         "uid": "OVK6hOB4z"
       },
+      "description": "Colour ranges here are specifically for Lead Acid. Disable this and use the Battery Voltage (LiFePo) Gauge instead if you have a LiFePo battery.",
       "fieldConfig": {
         "defaults": {
           "color": {
@@ -140,20 +141,34 @@
               "type": "special"
             }
           ],
+          "max": 14,
+          "min": 10,
           "thresholds": {
             "mode": "absolute",
             "steps": [
               {
-                "color": "#d44a3a",
+                "color": "dark-red",
                 "value": null
               },
               {
-                "color": "rgba(237, 129, 40, 0.89)",
-                "value": 8
+                "color": "semi-dark-red",
+                "value": 11.31
               },
               {
-                "color": "#299c46",
-                "value": 14
+                "color": "yellow",
+                "value": 11.58
+              },
+              {
+                "color": "orange",
+                "value": 11.8
+              },
+              {
+                "color": "dark-green",
+                "value": 12.06
+              },
+              {
+                "color": "blue",
+                "value": 13
               }
             ]
           },
@@ -162,19 +177,16 @@
         "overrides": []
       },
       "gridPos": {
-        "h": 3,
-        "w": 5,
-        "x": 6,
+        "h": 6,
+        "w": 4,
+        "x": 4,
         "y": 0
       },
-      "id": 5,
+      "id": 28,
       "links": [],
       "maxDataPoints": 100,
       "options": {
-        "colorMode": "value",
-        "graphMode": "none",
-        "justifyMode": "auto",
-        "orientation": "horizontal",
+        "orientation": "auto",
         "reduceOptions": {
           "calcs": [
             "lastNotNull"
@@ -182,8 +194,9 @@
           "fields": "",
           "values": false
         },
-        "text": {},
-        "textMode": "auto"
+        "showThresholdLabels": false,
+        "showThresholdMarkers": true,
+        "text": {}
       },
       "pluginVersion": "9.4.7",
       "targets": [
@@ -192,18 +205,20 @@
             "type": "prometheus",
             "uid": "OVK6hOB4z"
           },
+          "editorMode": "code",
           "exemplar": true,
-          "expr": "solarmon_solar_volts",
+          "expr": "solarmon_battery_volts  ",
           "format": "time_series",
           "hide": false,
           "interval": "",
           "intervalFactor": 2,
-          "legendFormat": "Solar Volts",
+          "legendFormat": "Battery Charge",
+          "range": true,
           "refId": "A"
         }
       ],
-      "title": "Solar Volts",
-      "type": "stat"
+      "title": "Battery Voltage (Lead Acid)",
+      "type": "gauge"
     },
     {
       "datasource": {
@@ -472,88 +487,6 @@
         }
       ],
       "title": "Charging State",
-      "type": "stat"
-    },
-    {
-      "datasource": {
-        "type": "prometheus",
-        "uid": "solar-bt-monitor"
-      },
-      "fieldConfig": {
-        "defaults": {
-          "color": {
-            "mode": "thresholds"
-          },
-          "mappings": [
-            {
-              "options": {
-                "match": "null",
-                "result": {
-                  "text": "N/A"
-                }
-              },
-              "type": "special"
-            }
-          ],
-          "thresholds": {
-            "mode": "absolute",
-            "steps": [
-              {
-                "color": "green",
-                "value": null
-              },
-              {
-                "color": "red",
-                "value": 80
-              }
-            ]
-          },
-          "unit": "amph"
-        },
-        "overrides": []
-      },
-      "gridPos": {
-        "h": 3,
-        "w": 5,
-        "x": 6,
-        "y": 3
-      },
-      "id": 23,
-      "links": [],
-      "maxDataPoints": 100,
-      "options": {
-        "colorMode": "none",
-        "graphMode": "none",
-        "justifyMode": "auto",
-        "orientation": "horizontal",
-        "reduceOptions": {
-          "calcs": [
-            "lastNotNull"
-          ],
-          "fields": "",
-          "values": false
-        },
-        "text": {},
-        "textMode": "auto"
-      },
-      "pluginVersion": "9.4.7",
-      "targets": [
-        {
-          "datasource": {
-            "type": "prometheus",
-            "uid": "solar-bt-monitor"
-          },
-          "exemplar": true,
-          "expr": "solarmon_discharging_amp_hours_today",
-          "format": "time_series",
-          "hide": false,
-          "interval": "",
-          "intervalFactor": 2,
-          "legendFormat": "Solar Amps",
-          "refId": "A"
-        }
-      ],
-      "title": "Discharge Today (Ah)",
       "type": "stat"
     },
     {
@@ -885,6 +818,174 @@
       "type": "stat"
     },
     {
+      "datasource": {
+        "type": "prometheus",
+        "uid": "OVK6hOB4z"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "thresholds"
+          },
+          "mappings": [
+            {
+              "options": {
+                "match": "null",
+                "result": {
+                  "text": "N/A"
+                }
+              },
+              "type": "special"
+            }
+          ],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "#d44a3a",
+                "value": null
+              },
+              {
+                "color": "rgba(237, 129, 40, 0.89)",
+                "value": 8
+              },
+              {
+                "color": "#299c46",
+                "value": 14
+              }
+            ]
+          },
+          "unit": "volt"
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 3,
+        "w": 5,
+        "x": 6,
+        "y": 6
+      },
+      "id": 5,
+      "links": [],
+      "maxDataPoints": 100,
+      "options": {
+        "colorMode": "value",
+        "graphMode": "none",
+        "justifyMode": "auto",
+        "orientation": "horizontal",
+        "reduceOptions": {
+          "calcs": [
+            "lastNotNull"
+          ],
+          "fields": "",
+          "values": false
+        },
+        "text": {},
+        "textMode": "auto"
+      },
+      "pluginVersion": "9.4.7",
+      "targets": [
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "OVK6hOB4z"
+          },
+          "exemplar": true,
+          "expr": "solarmon_solar_volts",
+          "format": "time_series",
+          "hide": false,
+          "interval": "",
+          "intervalFactor": 2,
+          "legendFormat": "Solar Volts",
+          "refId": "A"
+        }
+      ],
+      "title": "Solar Volts",
+      "type": "stat"
+    },
+    {
+      "datasource": {
+        "type": "prometheus",
+        "uid": "solar-bt-monitor"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "thresholds"
+          },
+          "mappings": [
+            {
+              "options": {
+                "match": "null",
+                "result": {
+                  "text": "N/A"
+                }
+              },
+              "type": "special"
+            }
+          ],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              },
+              {
+                "color": "red",
+                "value": 80
+              }
+            ]
+          },
+          "unit": "amph"
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 3,
+        "w": 5,
+        "x": 6,
+        "y": 9
+      },
+      "id": 23,
+      "links": [],
+      "maxDataPoints": 100,
+      "options": {
+        "colorMode": "none",
+        "graphMode": "none",
+        "justifyMode": "auto",
+        "orientation": "horizontal",
+        "reduceOptions": {
+          "calcs": [
+            "lastNotNull"
+          ],
+          "fields": "",
+          "values": false
+        },
+        "text": {},
+        "textMode": "auto"
+      },
+      "pluginVersion": "9.4.7",
+      "targets": [
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "solar-bt-monitor"
+          },
+          "exemplar": true,
+          "expr": "solarmon_discharging_amp_hours_today",
+          "format": "time_series",
+          "hide": false,
+          "interval": "",
+          "intervalFactor": 2,
+          "legendFormat": "Solar Amps",
+          "refId": "A"
+        }
+      ],
+      "title": "Discharge Today (Ah)",
+      "type": "stat"
+    },
+    {
       "alert": {
         "alertRuleTags": {},
         "conditions": [
@@ -1056,7 +1157,7 @@
         "h": 9,
         "w": 24,
         "x": 0,
-        "y": 9
+        "y": 12
       },
       "id": 16,
       "links": [],
@@ -1177,7 +1278,7 @@
         "h": 8,
         "w": 8,
         "x": 0,
-        "y": 18
+        "y": 21
       },
       "id": 15,
       "links": [],
@@ -1279,7 +1380,7 @@
         "h": 8,
         "w": 8,
         "x": 8,
-        "y": 18
+        "y": 21
       },
       "id": 7,
       "links": [],
@@ -1381,7 +1482,7 @@
         "h": 8,
         "w": 8,
         "x": 16,
-        "y": 18
+        "y": 21
       },
       "id": 13,
       "links": [],
@@ -1481,7 +1582,7 @@
         "h": 8,
         "w": 8,
         "x": 0,
-        "y": 26
+        "y": 29
       },
       "id": 14,
       "links": [],
@@ -1581,7 +1682,7 @@
         "h": 8,
         "w": 8,
         "x": 8,
-        "y": 26
+        "y": 29
       },
       "id": 21,
       "links": [],
@@ -1681,7 +1782,7 @@
         "h": 8,
         "w": 8,
         "x": 16,
-        "y": 26
+        "y": 29
       },
       "id": 11,
       "links": [],
@@ -1787,7 +1888,7 @@
         "h": 9,
         "w": 8,
         "x": 0,
-        "y": 34
+        "y": 37
       },
       "id": 10,
       "links": [],
@@ -1897,7 +1998,7 @@
         "h": 9,
         "w": 8,
         "x": 8,
-        "y": 34
+        "y": 37
       },
       "id": 9,
       "links": [],
@@ -2009,7 +2110,7 @@
         "h": 9,
         "w": 8,
         "x": 16,
-        "y": 34
+        "y": 37
       },
       "id": 17,
       "links": [],
@@ -2080,7 +2181,7 @@
             "lineStyle": {
               "fill": "solid"
             },
-            "lineWidth": 1,
+            "lineWidth": 3,
             "pointSize": 5,
             "scaleDistribution": {
               "type": "linear"
@@ -2135,7 +2236,7 @@
         "h": 9,
         "w": 8,
         "x": 0,
-        "y": 43
+        "y": 46
       },
       "id": 1,
       "links": [],
@@ -2207,7 +2308,7 @@
             "lineStyle": {
               "fill": "solid"
             },
-            "lineWidth": 1,
+            "lineWidth": 3,
             "pointSize": 5,
             "scaleDistribution": {
               "type": "linear"
@@ -2262,7 +2363,7 @@
         "h": 9,
         "w": 8,
         "x": 8,
-        "y": 43
+        "y": 46
       },
       "id": 27,
       "links": [],
@@ -2366,7 +2467,7 @@
         "h": 9,
         "w": 8,
         "x": 16,
-        "y": 43
+        "y": 46
       },
       "id": 18,
       "links": [],
@@ -2404,6 +2505,107 @@
       ],
       "title": "Battery Current",
       "type": "timeseries"
+    },
+    {
+      "datasource": {
+        "type": "prometheus",
+        "uid": "OVK6hOB4z"
+      },
+      "description": "Colour ranges here are specifically for LiFePo. Disable this and use the Battery Voltage (Lead Acid) chart instead if you have a Lead Acid battery.",
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "thresholds"
+          },
+          "mappings": [
+            {
+              "options": {
+                "match": "null",
+                "result": {
+                  "text": "N/A"
+                }
+              },
+              "type": "special"
+            }
+          ],
+          "max": 14,
+          "min": 10,
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "dark-red",
+                "value": null
+              },
+              {
+                "color": "semi-dark-red",
+                "value": 11
+              },
+              {
+                "color": "orange",
+                "value": 12.5
+              },
+              {
+                "color": "yellow",
+                "value": 12.8
+              },
+              {
+                "color": "dark-green",
+                "value": 12.9
+              },
+              {
+                "color": "blue",
+                "value": 13.6
+              }
+            ]
+          },
+          "unit": "volt"
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 6,
+        "w": 4,
+        "x": 0,
+        "y": 55
+      },
+      "id": 29,
+      "links": [],
+      "maxDataPoints": 100,
+      "options": {
+        "orientation": "auto",
+        "reduceOptions": {
+          "calcs": [
+            "lastNotNull"
+          ],
+          "fields": "",
+          "values": false
+        },
+        "showThresholdLabels": false,
+        "showThresholdMarkers": true,
+        "text": {}
+      },
+      "pluginVersion": "9.4.7",
+      "targets": [
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "OVK6hOB4z"
+          },
+          "editorMode": "code",
+          "exemplar": true,
+          "expr": "solarmon_battery_volts  ",
+          "format": "time_series",
+          "hide": false,
+          "interval": "",
+          "intervalFactor": 2,
+          "legendFormat": "Battery Charge",
+          "range": true,
+          "refId": "A"
+        }
+      ],
+      "title": "Battery Voltage (LiFePo)",
+      "type": "gauge"
     }
   ],
   "refresh": "30s",
@@ -2446,6 +2648,6 @@
   "timezone": "",
   "title": "Solar Bluetooth Monitor",
   "uid": "solarmon-01",
-  "version": 19,
+  "version": 24,
   "weekStart": ""
 }

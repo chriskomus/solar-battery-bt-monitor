@@ -310,6 +310,7 @@ python3 ~/solar-battery-bt-monitor/solar-battery-bt-monitor.py
    - Added 24hr offset historical overlay on some graphs
    - Converted to Celcius
    - More colours for safe temperature ranges
+   - Colour coded gauges and charts for both lifepo4 and lead acid
 - Added Celcius and Fehrenheit
 
 # Credits
