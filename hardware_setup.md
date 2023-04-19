@@ -135,8 +135,13 @@ scan on
 
 ## LCD Setup
 
-1. Follow the [installation instructions](https://www.waveshare.com/wiki/7inch_HDMI_LCD_(H)_(with_case))
-2. Please note there is an error in the text that is to be added to confix.txt. Add the following lines to the end of config.txt:
+1. Follow the [installation instructions](https://www.waveshare.com/wiki/7inch_HDMI_LCD_(H)_(with_case)) but please note there is an error in the text that is to be added to config.txt
+2. Edit the /boot/config.txt file:
+```
+cd /boot
+sudo nano config.txt
+```
+3. Add the following to the end of the file and save:
 ```
 hdmi_force_hotplug=1
 config_hdmi_boost=10
@@ -144,3 +149,8 @@ hdmi_group=2
 hdmi_mode=87
 hdmi_cvt=1024 600 60 6 0 0 0
 ```
+4. Reboot:
+```
+sudo shutdown -r now
+```
+5. Plug in HDMI and USB cable.
