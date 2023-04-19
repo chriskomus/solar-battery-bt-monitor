@@ -82,8 +82,9 @@
         "y": 0
       },
       "id": 4,
+      "interval": "15s",
       "links": [],
-      "maxDataPoints": 100,
+      "maxDataPoints": 10000,
       "options": {
         "orientation": "auto",
         "reduceOptions": {
@@ -184,7 +185,7 @@
       },
       "id": 28,
       "links": [],
-      "maxDataPoints": 100,
+      "maxDataPoints": 10000,
       "options": {
         "orientation": "auto",
         "reduceOptions": {
@@ -1033,7 +1034,7 @@
       "fieldConfig": {
         "defaults": {
           "color": {
-            "mode": "continuous-RdYlGr",
+            "mode": "thresholds",
             "seriesBy": "last"
           },
           "custom": {
@@ -1081,7 +1082,7 @@
           "max": 100,
           "min": 0,
           "thresholds": {
-            "mode": "absolute",
+            "mode": "percentage",
             "steps": [
               {
                 "color": "#d44a3a",
@@ -1089,15 +1090,15 @@
               },
               {
                 "color": "dark-red",
-                "value": 25
-              },
-              {
-                "color": "yellow",
                 "value": 50
               },
               {
-                "color": "#299c46",
+                "color": "yellow",
                 "value": 75
+              },
+              {
+                "color": "#299c46",
+                "value": 90
               }
             ]
           },
@@ -1834,6 +1835,7 @@
           "custom": {
             "axisCenteredZero": false,
             "axisColorMode": "text",
+            "axisLabel": "",
             "axisPlacement": "auto",
             "barAlignment": 0,
             "drawStyle": "line",
@@ -1938,7 +1940,8 @@
       "fieldConfig": {
         "defaults": {
           "color": {
-            "mode": "thresholds"
+            "mode": "thresholds",
+            "seriesBy": "last"
           },
           "custom": {
             "axisCenteredZero": false,
@@ -1971,7 +1974,6 @@
             }
           },
           "mappings": [],
-          "max": 60,
           "min": 0,
           "thresholds": {
             "mode": "absolute",
@@ -2571,7 +2573,7 @@
       },
       "id": 29,
       "links": [],
-      "maxDataPoints": 100,
+      "maxDataPoints": 10000,
       "options": {
         "orientation": "auto",
         "reduceOptions": {
@@ -2617,7 +2619,7 @@
     "list": []
   },
   "time": {
-    "from": "now-3h",
+    "from": "now-1h",
     "to": "now"
   },
   "timepicker": {
@@ -2648,6 +2650,6 @@
   "timezone": "",
   "title": "Solar Bluetooth Monitor",
   "uid": "solarmon-01",
-  "version": 24,
+  "version": 27,
   "weekStart": ""
 }

@@ -11,11 +11,17 @@ Any capable Raspberry Pi setup should work, as long as it has bluetooth. I'm usi
 - USB to DC Barrel Jack Power Cable 5.5 x 2.1 mm 5V
 - BrosTrend AC650 Dual Band WiFi [installation guide](https://cdn.shopify.com/s/files/1/0270/1023/6487/files/AC1L_AC3L_AC5L_Linux_Manual_BrosTrend_WiFi_Adapter_v8.pdf?v=1671154201)
 - Kinivo BTD400 Bluetooth Low Energy USB Adapter [installation guide](https://community.kinivo.com/t/how-to-raspberry-pi-setup/173)
+- 7inch HDMI LCD (H) Display (with case), 1024x600, IPS [installation guide](https://www.waveshare.com/wiki/7inch_HDMI_LCD_(H)_(with_case))
 
 ### Renogy Solar Equipment
 - Renogy Adventurer Solar Charge Controller
 - Renogy BT-1 Bluetooth Module
 - 2x 100 watt solar panels
+
+### Battery Monitor
+- Junctek Battery Monitor KH140F [user manual](http://68.168.132.244/KG-F_EN_manual.pdf)
+
+### Battery
 - 12v 100ah lead acid deep cycle battery
 
 ## Raspberry Pi Setup
@@ -126,3 +132,15 @@ sudo bluetoothctl
 scan on
 ```
 10. The Raspberry Pi should be ready for use.
+
+## LCD Setup
+
+1. Follow the [installation instructions](https://www.waveshare.com/wiki/7inch_HDMI_LCD_(H)_(with_case))
+2. Please note there is an error in the text that is to be added to confix.txt. Add the following lines to the end of config.txt:
+```
+hdmi_force_hotplug=1
+config_hdmi_boost=10
+hdmi_group=2
+hdmi_mode=87
+hdmi_cvt=1024 600 60 6 0 0 0
+```
