@@ -143,11 +143,9 @@ sudo nano config.txt
 ```
 3. Add the following to the end of the file and save:
 ```
-hdmi_force_hotplug=1
-config_hdmi_boost=10
-hdmi_group=2
-hdmi_mode=87
-hdmi_cvt=1024 600 60 6 0 0 0
+hdmi_group:1=2
+hdmi_mode:1=87
+hdmi_cvt:1 1024 600 60 6 0 0 0
 ```
 4. Reboot:
 ```
