@@ -317,11 +317,15 @@ sudo nano lxsession/LXDE-pi/autostart
 point-rpi
 @chromium-browser --start-fullscreen --start-maximized
 ```
-17. Reboot. The grafana dashboard should load after the reset.
+17. Optional: Install virtual keyboard for the touchscreen.
+```
+sudo apt install onboard
+```
+18. Reboot.
 ```
 sudo shutdown -r now
 ```
-
+19. The grafana dashboard should load after the reset. F11 to toggle fullscreen.
 
 # Troubleshooting
 
@@ -373,11 +377,11 @@ python3 ~/solar-battery-bt-monitor/solar-battery-bt-monitor.py
 
 ## Touchscreen issues
 
-The hardware guide is designed for Raspberry Pi CM4. Use the following settings instead if using a Pi 3. Note: This hasn't been personally tested.
+The hardware guide is designed for Raspberry Pi CM4, which has 2 HDMI ports. Use the following settings instead if using a Pi 3.
 ```
 hdmi_group=2
 hdmi_mode=87
-hdmi_cvt=1024 600 60 6 0 0 0
+hdmi_cvt 1024 600 60 6 0 0 0
 ```
 
 # New Features
