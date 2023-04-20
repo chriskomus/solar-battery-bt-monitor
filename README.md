@@ -1,10 +1,18 @@
 # Solar Panel and Battery Bluetooth Monitor
 
-## For Monitoring Renogy BT-1 Devices
+All-in-one DIY solar charge controller and battery monitoring solution!
 
-Python app to read data from Renogy solar Charge Controllers using the [BT-1](https://www.renogy.com/bt-1-bluetooth-module-new-version/) bluetooth adapter. Tested with a **Rover 40A Charge Controller** and **Adventurer 30A Charge Controller**. May also work with Renogy **Wanderer** series charge controllers.  My setup uses a **Raspberry Pi Compute Module 4 with the Compute Module 4 IO Board**. It might also work with other  "SRNE like" devices like Rich Solar, PowMr, WEIZE etc.
+This guide is for Renogy BT-1 compatible charge controllers and the Junctek KH140F bluetooth battery monitor.
 
-This setup uses prometheus for logging data and leverages grafana to create a real-time dashboard for monitoring the performance of your system.
+Real-time dashboard for monitoring the performance of your system on a touch-screen LCD using Grafana and Prometheus for data logging.
+
+## Monitoring Renogy BT-1 Devices
+
+**BT-1 Compatible Charge Controllers**: This python script reads data from Renogy solar Charge Controllers using the [BT-1](https://www.renogy.com/bt-1-bluetooth-module-new-version/) bluetooth adapter. Tested with a **Rover 40A Charge Controller** and **Adventurer 30A Charge Controller**. May also work with Renogy **Wanderer** series charge controllers. It might also work with other  "SRNE like" devices like Rich Solar, PowMr, WEIZE etc.
+
+**Junctek KH140F Bluetooth Battery Monitor**: This python script reads data from the Junctek KH140F battery monitor.
+
+My setup uses a **Raspberry Pi Compute Module 4 with the Compute Module 4 IO Board**. [See the hardware instructions specific to that build.](hardware_setup.md)
 
 
 
@@ -252,14 +260,74 @@ sudo systemctl enable solar-battery-bt-monitor
    - Scroll to the bottom and select Save & Test
 5. From the Create menu (Dashboard -> + icon on left navigation panel), choose Import and import the example dashboard json file included in the grafana folder in this project
 
+## Setup Complete!
+Yay! At this point setup should be complete. Go to http://192.168.0.XXX:3000 or http://solar-monitor.local:3000 and you should start seeing at minimum a battery charge % and a battery voltage. Additional information should also display if the battery monitor is working and the solar panels are supplying power.
+
+## Optional: Grafana on Touch Screen LCD
+This is an optional step if you have a touch screen LCD. [See the hardware instructions on setting up the touch-screen LCD.](hardware_setup.md)
+
+1. Edit the grafana config file:
+```
+sudo nano /etc/grafana/config.ini
+```
+2. Look for the section starting with [auth.anonymous] and change to the following values (don't forget to remove the ; at the beginning of the line):
+```
+[auth.anonymous]
+# enable anonymous access
+enabled = true
+
+# specify organization name that should be used for unauthenticated users
+org_name = SolarBluetoothMonitor
+
+# specify role for unauthenticated users
+org_role = Viewer
+
+# mask the Grafana version number for unauthenticated users
+hide_version = true
+```
+3. In a browser go to http://192.168.0.XXX:3000 or http://solar-monitor.local:3000
+4. From the navigation bar running down the left side of the window, select Server admin (shield icon) -> Organizations:
+   - Click on the organizations
+   - Update the Organization name in Grafana to `SolarBluetoothMonitor` or whatever you chose in step 2.
+5. From the navigation bar, select Dashboards -> Browse:
+   - Click on Solar Bluetooth Monitor
+   - Click on the star to make it the default.
+6. From the navigation bar, select Configuration -> Preferences.
+   - Set the Home dashboard for the organisation
+   - Set the Org name to to match the name above
+7. If you completed the above steps on the Raspberry Pi, log out of grafana.
+8. On the Raspberry Pi, ensure you are logged out of grafana dashboard, then go to http://192.168.0.XXX:3000 or http://solar-monitor.local:3000
+9. You should now see the dashboard without having logged in.
+10. Bookmark the dashboard with the settings you'd like to see as a default.
+11. Go into Chromium settings -> Appearance -> Show Home Button.
+12. Set the home button to the grafana url that you bookmarked.
+13. Go into Chromium settings -> On start-up -> Open a specific page... -> Add a new page
+14. Paste the grafana url.
+15. Open a terminal and type this to get to the configuration setting:
+```
+cd .config
+sudo mkdir -p lxsession/LXDE-pi
+sudo nano lxsession/LXDE-pi/autostart
+```
+16. Paste this into nano and save:
+```
+@lxpanel --profile LXDE-pi
+@pcmanfm --desktop --profile LXDE-pi
+#@xscreensaver -no-splash
+point-rpi
+@chromium-browser --start-fullscreen --start-maximized
+```
+17. Reboot. The grafana dashboard should load after the reset.
+```
+sudo shutdown -r now
+```
+
+
 # Troubleshooting
 
 ## BT Issues
 
 Some BT dongles work better than others. It's probably best to use a Pi with integrated BT, but I ran into issues with that too. I have had success with this [Broadcom based BT Dongle](https://www.amazon.ca/gp/product/B007Q45EF4/).
-
-
-
 
 Try this:
 ```
@@ -301,6 +369,15 @@ sudo systemctl disable solar-battery-bt-monitor
 Run the script instead
 ```
 python3 ~/solar-battery-bt-monitor/solar-battery-bt-monitor.py
+```
+
+## Touchscreen issues
+
+The hardware guide is designed for Raspberry Pi CM4. Use the following settings instead if using a Pi 3. Note: This hasn't been personally tested.
+```
+hdmi_group=2
+hdmi_mode=87
+hdmi_cvt=1024 600 60 6 0 0 0
 ```
 
 # New Features
