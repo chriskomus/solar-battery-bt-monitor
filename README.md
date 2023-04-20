@@ -326,6 +326,8 @@ sudo apt install onboard
 sudo shutdown -r now
 ```
 19. The grafana dashboard should load after the reset. F11 to toggle fullscreen.
+20. Go to Main Menu -> Preferences -> Raspberry Pi Configuration -> Display tag.
+21. Disable Scree-Blanking. 
 
 # Troubleshooting
 
