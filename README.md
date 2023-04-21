@@ -375,16 +375,6 @@ hdmi_mode=87
 hdmi_cvt 1024 600 60 6 0 0 0
 ```
 
-# New Features
-
-- Upgraded Grafana:
-   - New Time Series replaced deprecated line charts
-   - Added 24hr offset historical overlay on some graphs
-   - Converted to Celcius
-   - More colours for safe temperature ranges
-   - Colour coded gauges and charts for both lifepo4 and lead acid
-- Added Celcius and Fehrenheit
-
 # Credits
 
 This project is based off of [snichol67's solar-battery-bt-monitor](https://github.com/snichol67/solar-battery-bt-monitor), and contains elements of the following projects:
