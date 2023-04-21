@@ -4,7 +4,7 @@
       {
         "builtIn": 1,
         "datasource": {
-          "uid": "solar-bt-monitor"
+          "uid": "OVK6hOB4z"
         },
         "enable": true,
         "hide": true,
@@ -1110,8 +1110,7 @@
             "mode": "absolute",
             "steps": [
               {
-                "color": "green",
-                "value": null
+                "color": "green"
               },
               {
                 "color": "yellow",
@@ -1222,8 +1221,7 @@
             "mode": "absolute",
             "steps": [
               {
-                "color": "green",
-                "value": null
+                "color": "green"
               },
               {
                 "color": "yellow",
@@ -1336,8 +1334,7 @@
             "mode": "absolute",
             "steps": [
               {
-                "color": "dark-red",
-                "value": null
+                "color": "dark-red"
               },
               {
                 "color": "semi-dark-red",
@@ -1459,8 +1456,7 @@
             "mode": "absolute",
             "steps": [
               {
-                "color": "green",
-                "value": null
+                "color": "green"
               },
               {
                 "color": "yellow",
@@ -1768,8 +1764,7 @@
             "mode": "absolute",
             "steps": [
               {
-                "color": "green",
-                "value": null
+                "color": "green"
               },
               {
                 "color": "red",
@@ -1826,7 +1821,7 @@
     {
       "datasource": {
         "type": "prometheus",
-        "uid": "solar-bt-monitor"
+        "uid": "OVK6hOB4z"
       },
       "fieldConfig": {
         "defaults": {
@@ -1868,8 +1863,7 @@
             "mode": "absolute",
             "steps": [
               {
-                "color": "green",
-                "value": null
+                "color": "green"
               },
               {
                 "color": "red",
@@ -1909,14 +1903,14 @@
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "solar-bt-monitor"
+            "uid": "OVK6hOB4z"
           },
           "exemplar": true,
           "expr": "solarmon_load_volts",
           "format": "time_series",
           "interval": "",
           "intervalFactor": 2,
-          "legendFormat": "Load Watts",
+          "legendFormat": "Load Volts",
           "refId": "A"
         }
       ],
@@ -1968,8 +1962,7 @@
             "mode": "absolute",
             "steps": [
               {
-                "color": "green",
-                "value": null
+                "color": "green"
               },
               {
                 "color": "red",
@@ -2026,7 +2019,7 @@
     {
       "datasource": {
         "type": "prometheus",
-        "uid": "solar-bt-monitor"
+        "uid": "OVK6hOB4z"
       },
       "fieldConfig": {
         "defaults": {
@@ -2048,8 +2041,7 @@
             "mode": "absolute",
             "steps": [
               {
-                "color": "green",
-                "value": null
+                "color": "green"
               },
               {
                 "color": "red",
@@ -2090,7 +2082,7 @@
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "solar-bt-monitor"
+            "uid": "OVK6hOB4z"
           },
           "exemplar": true,
           "expr": "solarmon_max_charging_power_today",
@@ -2108,7 +2100,7 @@
     {
       "datasource": {
         "type": "prometheus",
-        "uid": "solar-bt-monitor"
+        "uid": "OVK6hOB4z"
       },
       "fieldConfig": {
         "defaults": {
@@ -2130,8 +2122,7 @@
             "mode": "absolute",
             "steps": [
               {
-                "color": "green",
-                "value": null
+                "color": "green"
               },
               {
                 "color": "red",
@@ -2172,7 +2163,7 @@
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "solar-bt-monitor"
+            "uid": "OVK6hOB4z"
           },
           "exemplar": true,
           "expr": "solarmon_discharging_amp_hours_today",
@@ -2190,7 +2181,7 @@
     {
       "datasource": {
         "type": "prometheus",
-        "uid": "solar-bt-monitor"
+        "uid": "OVK6hOB4z"
       },
       "fieldConfig": {
         "defaults": {
@@ -2212,8 +2203,7 @@
             "mode": "absolute",
             "steps": [
               {
-                "color": "green",
-                "value": null
+                "color": "green"
               },
               {
                 "color": "red",
@@ -2254,7 +2244,7 @@
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "solar-bt-monitor"
+            "uid": "OVK6hOB4z"
           },
           "exemplar": true,
           "expr": "solarmon_charging_amp_hours_today",
@@ -2272,7 +2262,7 @@
     {
       "datasource": {
         "type": "prometheus",
-        "uid": "solar-bt-monitor"
+        "uid": "OVK6hOB4z"
       },
       "fieldConfig": {
         "defaults": {
@@ -2294,8 +2284,7 @@
             "mode": "absolute",
             "steps": [
               {
-                "color": "green",
-                "value": null
+                "color": "green"
               },
               {
                 "color": "red",
@@ -2336,7 +2325,7 @@
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "solar-bt-monitor"
+            "uid": "OVK6hOB4z"
           },
           "exemplar": true,
           "expr": "solarmon_power_generation_today",
@@ -2354,7 +2343,7 @@
     {
       "datasource": {
         "type": "prometheus",
-        "uid": "solar-bt-monitor"
+        "uid": "OVK6hOB4z"
       },
       "fieldConfig": {
         "defaults": {
@@ -2376,8 +2365,7 @@
             "mode": "absolute",
             "steps": [
               {
-                "color": "green",
-                "value": null
+                "color": "green"
               },
               {
                 "color": "red",
@@ -2418,7 +2406,7 @@
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "solar-bt-monitor"
+            "uid": "OVK6hOB4z"
           },
           "exemplar": true,
           "expr": "solarmon_power_generation_total",
@@ -2662,7 +2650,7 @@
     {
       "datasource": {
         "type": "prometheus",
-        "uid": "solar-bt-monitor"
+        "uid": "OVK6hOB4z"
       },
       "fieldConfig": {
         "defaults": {
@@ -2704,8 +2692,7 @@
             "mode": "absolute",
             "steps": [
               {
-                "color": "green",
-                "value": null
+                "color": "green"
               },
               {
                 "color": "red",
@@ -2745,7 +2732,7 @@
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "solar-bt-monitor"
+            "uid": "OVK6hOB4z"
           },
           "exemplar": true,
           "expr": "solarmon_battery_current",
@@ -2797,6 +2784,6 @@
   "timezone": "",
   "title": "Solar Bluetooth Monitor",
   "uid": "solarmon-01",
-  "version": 70,
+  "version": 74,
   "weekStart": ""
 }

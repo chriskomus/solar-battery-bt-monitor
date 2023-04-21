@@ -51,6 +51,7 @@ Any capable Raspberry Pi setup should work, as long as it has bluetooth. I'm usi
 
 ## SSH Setup
 
+### Part 1
 1. At this point the Pi should be accessible via VNC/SSH/etc. Unplug the ethernet, keyboard, and mouse, after confirming remote access.
 2. First check if you already have an SSH key on your local machine (not the Pi).
 3. This is typically located at ```~/.ssh/id_ed25519.pub``` on macOS / Linux, and the .ssh directory in your user profile folder on Windows (for example ```C:\Users\your-user\.ssh\id_ed25519.pub```).
@@ -68,8 +69,27 @@ Any capable Raspberry Pi setup should work, as long as it has bluetooth. I'm usi
    $pubKey=(Get-Content "$PUBKEYPATH" | Out-String); ssh "$USER_AT_HOST" "mkdir -p ~/.ssh && chmod 700 ~/.ssh && echo '${pubKey}' >> ~/.ssh/authorized_keys && chmod 600 ~/.ssh/authorized_keys"
    ```
 7. Now test the connection: ```ssh username@solar-monitor.local```. If it worked you shouldn't need a password.
+
+### Part 2 - Setting up VSCode
 8. More info on setting up key based auth: https://code.visualstudio.com/docs/remote/troubleshooting#_configuring-key-based-authentication
 9. More info on setting up vscode: https://code.visualstudio.com/docs/remote/ssh
+
+### Part 3 - Add Key to Github
+10. Create new SSH Key
+```
+cd ~/.ssh
+ssh-keygen -t rsa -C "youremail@address.com"
+```
+11. Accept the default options.
+12. Copy the contents of the file
+```
+sudo nano ~/.ssh/id_rsa.pub
+```
+13. Goto https://github.com/settings/keys and create new SSH key
+14. You should get a success message if everything worked:
+```
+ssh -T git@github.com
+```
 
 ## BT Setup
 

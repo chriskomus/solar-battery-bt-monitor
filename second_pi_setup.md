@@ -8,31 +8,13 @@ In this configuration the logging server does all the work and should remain pow
 
 ## Configure Two Pi's
 
-To set up the main **server Pi**, follow the instructions in the [readme](README.md) and [hardware setup](hardware_setup.md), however the following sections should instead be done on the **kiosk Pi**:
+1. Set up the main **server Pi** by following the instructions in the [readme](README.md) and [hardware setup](hardware_setup.md).
 
-[Hardware Setup: Raspberry Pi Setup](hardware_setup.md#raspberry-pi-setup) - Use a different hostname from the server Pi.
-
-[Hardware Setup: SSH Setup](hardware_setup.md#raspberry-pi-setup)
-
-[Hardware Setup: LCD Setup](hardware_setup.md#raspberry-pi-setup)
-
-### Optional: Install Full Screen Button for Chromium
-1. Goto https://chrome.google.com/webstore/detail/full-screen-button/
-
-### Optional: Increase Swap Size
-1. If the Kiosk Pi is running really slow, increase the swap size. First stop swapfile:
-```
-sudo dphys-swapfile swapoff
-```
-2. Modify swapfile config
-```
-sudo nano /etc/dphys-swapfile
-```
-3. Change `CONF_SWAPSIZE=100` to `CONF_SWAPSIZE=1024`
-4. Restart swapfile
-```
-sudo dphys-swapfile setup
-sudo dphys-swapfile swapon
-```
-
-[Readme: Grafana on Touch Screen](README.md#optional-grafana-on-touch-screen-lcd) - Start at #8
+2. Repeat the following sections for the **kiosk Pi**:
+  - [Hardware Setup: Raspberry Pi Setup](hardware_setup.md#raspberry-pi-setup) - Use a different hostname from the server Pi.
+  - [Hardware Setup: SSH Setup](hardware_setup.md#ssh-setup)
+  - [Hardware Setup: LCD Setup](hardware_setup.md#lcd-setup)
+  - [Readme: Grafana on Touch Screen](README.md#part-2---launch-chromium-at-startup) - Start at Part 2
+  - [Readme: Install Project](README.md#install-project) - Step 1 only
+  - [Optional: Launcher Setup](launcher/readme.md)
+  - [Optional: Increase Swap Size](README.md#freezing-and-hanging-on-pis-with-limited-ram)

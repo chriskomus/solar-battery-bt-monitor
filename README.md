@@ -31,7 +31,10 @@ For simplicity, the [readme](README.md) and [hardware setup](hardware_setup.md) 
 1. Install this project on your Raspberry Pi - https://github.com/chriskomus/solar-battery-bt-monitor.git
     ```
     cd ~/
-    git clone https://github.com/chriskomus/solar-battery-bt-monitor.git
+    git clone git@github.com:chriskomus/solar-battery-bt-monitor.git
+    ```
+2. Copy the ini file
+    ```
     cd solar-battery-bt-monitor
     cp solar-battery-bt-monitor.ini.dist solar-battery-bt-monitor.ini
     ```
@@ -101,16 +104,21 @@ For simplicity, the [readme](README.md) and [hardware setup](hardware_setup.md) 
    sudo apt-get update
    sudo apt-get install -y grafana
    ```
-3. Enable and start the Grafana server
+4. Install Custom Plugins:
+   ```
+   sudo grafana-cli plugins install petrslavotinek-carpetplot-panel
+   sudo grafana-cli plugins install speakyourcode-button-panel
+   ```
+5. Enable and start the Grafana server
     ```
     sudo /bin/systemctl enable grafana-server
     sudo /bin/systemctl start grafana-server
     ```
-4. After grafana is installed, go to http://192.168.0.36:3000 or http://solar-monitor.local:3000/
+6. After grafana is installed, go to http://192.168.0.36:3000 or http://solar-monitor.local:3000/
    - Default log in is username: admin, password: admin
    - You'll be prompted to create a unique password for your installation
 
-5. More info on installing Grafana on a Raspberry Pi [here](https://grafana.com/tutorials/install-grafana-on-raspberry-pi/).
+7. More info on installing Grafana on a Raspberry Pi [here](https://grafana.com/tutorials/install-grafana-on-raspberry-pi/).
 
 ## Setup Project
 
@@ -253,8 +261,9 @@ sudo systemctl enable solar-battery-bt-monitor
 Yay! At this point setup should be complete. Go to http://192.168.0.XXX:3000 or http://solar-monitor.local:3000 and you should start seeing at minimum a battery charge % and a battery voltage. Additional information should also display if the battery monitor is working and the solar panels are supplying power.
 
 ## Optional: Grafana on Touch Screen LCD
-This is an optional step if you have a touch screen LCD. [See the hardware instructions on setting up the touch-screen LCD.](hardware_setup.md)
+This is an optional step if you have a touch screen LCD. [See the hardware instructions on setting up the touch-screen LCD.](hardware_setup.md#lcd-setup)
 
+### Part 1 - Enable Grafana anonymous auth
 1. Edit the grafana config file:
 ```
 sudo nano /etc/grafana/config.ini
@@ -286,19 +295,16 @@ hide_version = true
    - Set the Org name to to match the name above
 7. If you completed the above steps on the Raspberry Pi, log out of grafana.
 8. On the Raspberry Pi that will be running the LCD, ensure you are logged out of grafana dashboard, then go to http://192.168.0.XXX:3000 or http://solar-monitor.local:3000
-9. You should now see the dashboard without having logged in.
-10. Bookmark the dashboard with the settings you'd like to see as a default.
-11. Go into Chromium settings -> Appearance -> Show Home Button.
-12. Set the home button to the grafana url that you bookmarked.
-13. Go into Chromium settings -> On start-up -> Open a specific page... -> Add a new page
-14. Paste the grafana url.
-15. Open a terminal and type this to get to the configuration setting:
+9. You should now see the dashboard without having logged in!
+
+### Part 2 - Launch Chromium at startup
+10. Open a terminal and type this to get to the configuration setting:
 ```
 cd .config
 sudo mkdir -p lxsession/LXDE-pi
 sudo nano lxsession/LXDE-pi/autostart
 ```
-16. Paste this into nano and save:
+11. Paste this into nano and save:
 ```
 @lxpanel --profile LXDE-pi
 @pcmanfm --desktop --profile LXDE-pi
@@ -306,17 +312,28 @@ sudo nano lxsession/LXDE-pi/autostart
 point-rpi
 @chromium-browser --start-fullscreen --start-maximized
 ```
-17. Optional: Install virtual keyboard for the touchscreen.
+12. Optional: Install virtual keyboard for the touchscreen.
 ```
 sudo apt install onboard
 ```
-18. Reboot.
+13. Go to Main Menu -> Preferences -> Raspberry Pi Configuration -> Display tag.
+14. Disable Screen-Blanking.
+15. If you'd like Grafana to launch after booting continue with the following steps. If you prefer an html launcher instead, [read the launcher guide](launcher/readme.md) and skip to step 21 in this section.
+
+### Part 3 - Set up Bookmarks and Home Button
+16. Bookmark the dashboard with the settings you'd like to see as a default.
+17. Go into Chromium settings -> Appearance -> Show Home Button.
+18. Set the home button to the grafana url that you bookmarked.
+19. Go into Chromium settings -> On start-up -> Open a specific page... -> Add a new page
+20. Paste the grafana url.
+### Part 4 - Reboot and test
+21. Reboot.
 ```
 sudo shutdown -r now
 ```
-19. The grafana dashboard should load after the reset. F11 to toggle fullscreen.
-20. Go to Main Menu -> Preferences -> Raspberry Pi Configuration -> Display tag.
-21. Disable Scree-Blanking.
+22. The grafana dashboard should load after the reset. F11 to toggle fullscreen.
+
+
 
 # Troubleshooting
 
@@ -353,9 +370,7 @@ sudo service bluetooth restart
 sudo service bluetooth status
 ```
 
-
 ## solar-battery-bt-monitor Service Issues
-
 In case you run into issues running as a Service and want to stop and disable it:
 ```
 sudo systemctl stop solar-battery-bt-monitor
@@ -367,12 +382,30 @@ python3 ~/solar-battery-bt-monitor/solar-battery-bt-monitor.py
 ```
 
 ## Touchscreen issues
-
 The hardware guide is designed for Raspberry Pi CM4, which has 2 HDMI ports. Use the following settings instead if using a Pi 3.
 ```
 hdmi_group=2
 hdmi_mode=87
 hdmi_cvt 1024 600 60 6 0 0 0
+```
+
+## Chromium Blank White Screen After Booting
+If the Pi gets stuck on a white screen after launching Chromium in full screen after booting, you may have to use the [launcher](launcher/readme.md) instead. Instead of automatically loading Grafana after booting, it will instead load a static html page with a link to Grafana. It also has a button to enable and disable full screen.
+
+## Increase Swap Size
+1. If the Kiosk Pi is running really slow, increase the swap size. First stop swapfile:
+```
+sudo dphys-swapfile swapoff
+```
+2. Modify swapfile config
+```
+sudo nano /etc/dphys-swapfile
+```
+3. Change `CONF_SWAPSIZE=100` to `CONF_SWAPSIZE=1024`
+4. Restart swapfile
+```
+sudo dphys-swapfile setup
+sudo dphys-swapfile swapon
 ```
 
 # Credits
