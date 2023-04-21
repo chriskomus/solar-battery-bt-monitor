@@ -8,12 +8,15 @@ Real-time dashboard for monitoring the performance of your system on a touch-scr
 
 ## Monitoring Renogy BT-1 Devices
 
-**BT-1 Compatible Charge Controllers**: This python script reads data from Renogy solar Charge Controllers using the [BT-1](https://www.renogy.com/bt-1-bluetooth-module-new-version/) bluetooth adapter. Tested with a **Rover 40A Charge Controller** and **Adventurer 30A Charge Controller**. May also work with Renogy **Wanderer** series charge controllers. It might also work with other  "SRNE like" devices like Rich Solar, PowMr, WEIZE etc.
+**[BT-1 Compatible Charge Controllers](https://www.renogy.com/bt-1-bluetooth-module-new-version/)**: A python script reads data from Renogy solar Charge Controllers via its BT-1 bluetooth adapter. Tested with a **Rover 40A Charge Controller** and **Adventurer 30A Charge Controller**. May also work with Renogy **Wanderer** series charge controllers. It might also work with other "SRNE like" devices like Rich Solar, PowMr, WEIZE etc.
 
-**Junctek KH140F Bluetooth Battery Monitor**: This python script reads data from the Junctek KH140F battery monitor.
+**[Junctek KH140F Bluetooth Battery Monitor](https://www.aliexpress.com/item/1005005293243736.html)**: The python script reads data from the Junctek KH140F battery monitor.
 
-My setup uses a **Raspberry Pi Compute Module 4 with the Compute Module 4 IO Board**. [See the hardware instructions specific to that build.](hardware_setup.md)
+My setup utilized two Raspberry Pis:
+- Server: **Raspberry Pi Compute Module 4 with the Compute Module 4 IO Board**. [See the hardware instructions specific to that build.](hardware_setup.md)
+- Touchscren Dashboard: **Raspberry Pi 3 A+** [See 2nd Pi Instructions](second_pi_setup.md)
 
+For simplicity, the [readme](README.md) and [hardware setup](hardware_setup.md) is written for using one Raspberry Pi. [See the 2nd Pi readme for setting up two Pis.](second_pi_setup.md)
 
 
 # Setup
@@ -21,21 +24,7 @@ My setup uses a **Raspberry Pi Compute Module 4 with the Compute Module 4 IO Boa
 ## Getting Started
 
 1. Set up a Raspberry Pi with wifi/bluetooth that can be powered by usb. For this project I am using a Raspberry Pi Compute Module 4 with the Compute Module 4 IO Board. I'm powering it using a 5v USB to Barrel Jack, so that I can power it off the front of the Renogy Solar Charge Controller. YMMV on how well that works depending on your charge controller and Pi power consumption.
-2. [See the hardware instructions specific to that build.](hardware_setup.md)
-3. Enable SSH, VNC, and Hostname:
-    ```
-    sudo raspi-config
-    ```
-   - Interface Options -> Enable SSH
-   - Interface Options -> Enable VNC
-   - System Options -> Hostname
-      - Set a familiar name that you can then reference on your local network (i.e. solar-monitor)
-      - Once this is set up, you can reference your device with a url like http://solar-monitor.local instead of its IP address
-4. Update the system software:
-    ```
-    sudo apt-get update
-    sudo apt-get upgrade
-    ```
+2. [See the hardware instructions specific to my build.](hardware_setup.md) Or set up two Raspberry Pis: one for running python/prometheus/grafana server and the other as a LCD touch-screen dashboard. [See 2nd Pi Instructions](second_pi_setup.md)
 
 ## Install Project
 
@@ -296,7 +285,7 @@ hide_version = true
    - Set the Home dashboard for the organisation
    - Set the Org name to to match the name above
 7. If you completed the above steps on the Raspberry Pi, log out of grafana.
-8. On the Raspberry Pi, ensure you are logged out of grafana dashboard, then go to http://192.168.0.XXX:3000 or http://solar-monitor.local:3000
+8. On the Raspberry Pi that will be running the LCD, ensure you are logged out of grafana dashboard, then go to http://192.168.0.XXX:3000 or http://solar-monitor.local:3000
 9. You should now see the dashboard without having logged in.
 10. Bookmark the dashboard with the settings you'd like to see as a default.
 11. Go into Chromium settings -> Appearance -> Show Home Button.
@@ -327,7 +316,7 @@ sudo shutdown -r now
 ```
 19. The grafana dashboard should load after the reset. F11 to toggle fullscreen.
 20. Go to Main Menu -> Preferences -> Raspberry Pi Configuration -> Display tag.
-21. Disable Scree-Blanking. 
+21. Disable Scree-Blanking.
 
 # Troubleshooting
 

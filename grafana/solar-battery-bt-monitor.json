@@ -80,8 +80,8 @@
         "overrides": []
       },
       "gridPos": {
-        "h": 8,
-        "w": 8,
+        "h": 6,
+        "w": 6,
         "x": 0,
         "y": 0
       },
@@ -174,9 +174,9 @@
         "overrides": []
       },
       "gridPos": {
-        "h": 8,
-        "w": 8,
-        "x": 8,
+        "h": 6,
+        "w": 6,
+        "x": 6,
         "y": 0
       },
       "id": 28,
@@ -274,9 +274,9 @@
         "overrides": []
       },
       "gridPos": {
-        "h": 8,
-        "w": 8,
-        "x": 16,
+        "h": 6,
+        "w": 6,
+        "x": 12,
         "y": 0
       },
       "id": 12,
@@ -313,235 +313,6 @@
       ],
       "title": "Solar Power (W)",
       "type": "gauge"
-    },
-    {
-      "alert": {
-        "alertRuleTags": {},
-        "conditions": [
-          {
-            "evaluator": {
-              "params": [
-                26
-              ],
-              "type": "lt"
-            },
-            "operator": {
-              "type": "and"
-            },
-            "query": {
-              "params": [
-                "A",
-                "5m",
-                "now"
-              ]
-            },
-            "reducer": {
-              "params": [],
-              "type": "avg"
-            },
-            "type": "query"
-          }
-        ],
-        "executionErrorState": "alerting",
-        "for": "5m",
-        "frequency": "1m",
-        "handler": 1,
-        "message": "From Graphana",
-        "name": "Battery Charge % alert",
-        "noDataState": "no_data",
-        "notifications": [
-          {
-            "uid": "xFuCrImRk"
-          }
-        ]
-      },
-      "datasource": {
-        "type": "prometheus",
-        "uid": "OVK6hOB4z"
-      },
-      "fieldConfig": {
-        "defaults": {
-          "color": {
-            "fixedColor": "super-light-blue",
-            "mode": "fixed",
-            "seriesBy": "last"
-          },
-          "custom": {
-            "axisCenteredZero": false,
-            "axisColorMode": "text",
-            "axisLabel": "",
-            "axisPlacement": "auto",
-            "axisSoftMin": 0,
-            "barAlignment": 0,
-            "drawStyle": "line",
-            "fillOpacity": 20,
-            "gradientMode": "hue",
-            "hideFrom": {
-              "legend": false,
-              "tooltip": false,
-              "viz": false
-            },
-            "lineInterpolation": "linear",
-            "lineWidth": 1,
-            "pointSize": 5,
-            "scaleDistribution": {
-              "type": "linear"
-            },
-            "showPoints": "auto",
-            "spanNulls": 3600000,
-            "stacking": {
-              "group": "A",
-              "mode": "none"
-            },
-            "thresholdsStyle": {
-              "mode": "off"
-            }
-          },
-          "mappings": [
-            {
-              "options": {
-                "match": "null",
-                "result": {
-                  "text": "N/A"
-                }
-              },
-              "type": "special"
-            }
-          ],
-          "max": 100,
-          "min": 0,
-          "thresholds": {
-            "mode": "percentage",
-            "steps": [
-              {
-                "color": "#d44a3a"
-              },
-              {
-                "color": "dark-red",
-                "value": 50
-              },
-              {
-                "color": "yellow",
-                "value": 75
-              },
-              {
-                "color": "#299c46",
-                "value": 90
-              }
-            ]
-          },
-          "unit": "percent"
-        },
-        "overrides": [
-          {
-            "matcher": {
-              "id": "byFrameRefID",
-              "options": "B"
-            },
-            "properties": [
-              {
-                "id": "custom.showPoints",
-                "value": "never"
-              },
-              {
-                "id": "custom.fillOpacity",
-                "value": 0
-              },
-              {
-                "id": "color",
-                "value": {
-                  "fixedColor": "blue",
-                  "mode": "fixed"
-                }
-              }
-            ]
-          },
-          {
-            "__systemRef": "hideSeriesFrom",
-            "matcher": {
-              "id": "byNames",
-              "options": {
-                "mode": "exclude",
-                "names": [
-                  "solarmon_battery_percentage{instance=\"localhost:5000\", job=\"solarmon\"}"
-                ],
-                "prefix": "All except:",
-                "readOnly": true
-              }
-            },
-            "properties": [
-              {
-                "id": "custom.hideFrom",
-                "value": {
-                  "legend": false,
-                  "tooltip": false,
-                  "viz": true
-                }
-              }
-            ]
-          }
-        ]
-      },
-      "gridPos": {
-        "h": 7,
-        "w": 16,
-        "x": 0,
-        "y": 8
-      },
-      "id": 16,
-      "links": [],
-      "maxDataPoints": 100,
-      "options": {
-        "legend": {
-          "calcs": [],
-          "displayMode": "list",
-          "placement": "bottom",
-          "showLegend": true
-        },
-        "tooltip": {
-          "mode": "single",
-          "sort": "none"
-        }
-      },
-      "pluginVersion": "8.2.1",
-      "targets": [
-        {
-          "datasource": {
-            "type": "prometheus",
-            "uid": "OVK6hOB4z"
-          },
-          "editorMode": "code",
-          "expr": "solarmon_battery_percentage",
-          "format": "time_series",
-          "hide": false,
-          "intervalFactor": 2,
-          "range": true,
-          "refId": "A"
-        },
-        {
-          "datasource": {
-            "type": "prometheus",
-            "uid": "OVK6hOB4z"
-          },
-          "editorMode": "code",
-          "expr": "solarmon_battery_percentage offset 24h",
-          "format": "time_series",
-          "hide": false,
-          "intervalFactor": 2,
-          "range": true,
-          "refId": "B"
-        }
-      ],
-      "thresholds": [
-        {
-          "colorMode": "critical",
-          "op": "lt",
-          "value": 26,
-          "visible": true
-        }
-      ],
-      "title": "Battery Charge %",
-      "type": "timeseries"
     },
     {
       "datasource": {
@@ -606,10 +377,10 @@
         "overrides": []
       },
       "gridPos": {
-        "h": 4,
-        "w": 8,
-        "x": 16,
-        "y": 8
+        "h": 3,
+        "w": 6,
+        "x": 18,
+        "y": 0
       },
       "id": 19,
       "links": [],
@@ -673,7 +444,8 @@
             "mode": "absolute",
             "steps": [
               {
-                "color": "green"
+                "color": "green",
+                "value": null
               },
               {
                 "color": "red",
@@ -687,9 +459,9 @@
       },
       "gridPos": {
         "h": 3,
-        "w": 4,
-        "x": 16,
-        "y": 12
+        "w": 3,
+        "x": 18,
+        "y": 3
       },
       "id": 6,
       "links": [],
@@ -773,9 +545,9 @@
       },
       "gridPos": {
         "h": 3,
-        "w": 4,
-        "x": 20,
-        "y": 12
+        "w": 3,
+        "x": 21,
+        "y": 3
       },
       "id": 5,
       "links": [],
@@ -816,6 +588,46 @@
       "type": "stat"
     },
     {
+      "alert": {
+        "alertRuleTags": {},
+        "conditions": [
+          {
+            "evaluator": {
+              "params": [
+                26
+              ],
+              "type": "lt"
+            },
+            "operator": {
+              "type": "and"
+            },
+            "query": {
+              "params": [
+                "A",
+                "5m",
+                "now"
+              ]
+            },
+            "reducer": {
+              "params": [],
+              "type": "avg"
+            },
+            "type": "query"
+          }
+        ],
+        "executionErrorState": "alerting",
+        "for": "5m",
+        "frequency": "1m",
+        "handler": 1,
+        "message": "From Graphana",
+        "name": "Battery Charge % alert",
+        "noDataState": "no_data",
+        "notifications": [
+          {
+            "uid": "xFuCrImRk"
+          }
+        ]
+      },
       "datasource": {
         "type": "prometheus",
         "uid": "OVK6hOB4z"
@@ -824,6 +636,273 @@
         "defaults": {
           "color": {
             "fixedColor": "super-light-blue",
+            "mode": "fixed",
+            "seriesBy": "last"
+          },
+          "custom": {
+            "axisCenteredZero": false,
+            "axisColorMode": "text",
+            "axisLabel": "Battery Charge (%)",
+            "axisPlacement": "left",
+            "axisSoftMin": 0,
+            "barAlignment": 0,
+            "drawStyle": "line",
+            "fillOpacity": 20,
+            "gradientMode": "hue",
+            "hideFrom": {
+              "legend": false,
+              "tooltip": false,
+              "viz": false
+            },
+            "lineInterpolation": "linear",
+            "lineWidth": 1,
+            "pointSize": 5,
+            "scaleDistribution": {
+              "type": "linear"
+            },
+            "showPoints": "always",
+            "spanNulls": 3600000,
+            "stacking": {
+              "group": "A",
+              "mode": "none"
+            },
+            "thresholdsStyle": {
+              "mode": "off"
+            }
+          },
+          "mappings": [
+            {
+              "options": {
+                "match": "null",
+                "result": {
+                  "text": "N/A"
+                }
+              },
+              "type": "special"
+            }
+          ],
+          "max": 100,
+          "min": 0,
+          "thresholds": {
+            "mode": "percentage",
+            "steps": [
+              {
+                "color": "#d44a3a",
+                "value": null
+              },
+              {
+                "color": "dark-red",
+                "value": 50
+              },
+              {
+                "color": "yellow",
+                "value": 75
+              },
+              {
+                "color": "#299c46",
+                "value": 90
+              }
+            ]
+          },
+          "unit": "percent"
+        },
+        "overrides": [
+          {
+            "matcher": {
+              "id": "byFrameRefID",
+              "options": "B"
+            },
+            "properties": [
+              {
+                "id": "custom.showPoints",
+                "value": "never"
+              },
+              {
+                "id": "custom.fillOpacity",
+                "value": 0
+              },
+              {
+                "id": "color",
+                "value": {
+                  "fixedColor": "blue",
+                  "mode": "fixed"
+                }
+              }
+            ]
+          },
+          {
+            "__systemRef": "hideSeriesFrom",
+            "matcher": {
+              "id": "byNames",
+              "options": {
+                "mode": "exclude",
+                "names": [
+                  "solarmon_battery_percentage{instance=\"localhost:5000\", job=\"solarmon\"}"
+                ],
+                "prefix": "All except:",
+                "readOnly": true
+              }
+            },
+            "properties": [
+              {
+                "id": "custom.hideFrom",
+                "value": {
+                  "legend": false,
+                  "tooltip": false,
+                  "viz": true
+                }
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byFrameRefID",
+              "options": "C"
+            },
+            "properties": [
+              {
+                "id": "custom.fillOpacity",
+                "value": 0
+              },
+              {
+                "id": "color",
+                "value": {
+                  "fixedColor": "dark-green",
+                  "mode": "fixed"
+                }
+              },
+              {
+                "id": "max",
+                "value": 200
+              },
+              {
+                "id": "unit",
+                "value": "watt"
+              },
+              {
+                "id": "custom.axisPlacement",
+                "value": "right"
+              },
+              {
+                "id": "custom.axisLabel",
+                "value": "Solar Charge (W)"
+              },
+              {
+                "id": "custom.axisGridShow",
+                "value": false
+              }
+            ]
+          }
+        ]
+      },
+      "gridPos": {
+        "h": 9,
+        "w": 18,
+        "x": 0,
+        "y": 6
+      },
+      "id": 16,
+      "links": [],
+      "maxDataPoints": 100,
+      "options": {
+        "legend": {
+          "calcs": [],
+          "displayMode": "list",
+          "placement": "bottom",
+          "showLegend": false
+        },
+        "tooltip": {
+          "mode": "none",
+          "sort": "none"
+        }
+      },
+      "pluginVersion": "8.2.1",
+      "targets": [
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "OVK6hOB4z"
+          },
+          "editorMode": "code",
+          "expr": "solarmon_battery_percentage",
+          "format": "time_series",
+          "hide": false,
+          "intervalFactor": 2,
+          "range": true,
+          "refId": "A"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "OVK6hOB4z"
+          },
+          "editorMode": "code",
+          "expr": "solarmon_battery_percentage offset 24h",
+          "format": "time_series",
+          "hide": false,
+          "intervalFactor": 2,
+          "range": true,
+          "refId": "B"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "OVK6hOB4z"
+          },
+          "editorMode": "code",
+          "expr": "solarmon_solar_watts",
+          "hide": false,
+          "legendFormat": "__auto",
+          "range": true,
+          "refId": "C"
+        }
+      ],
+      "thresholds": [
+        {
+          "colorMode": "critical",
+          "op": "lt",
+          "value": 26,
+          "visible": true
+        }
+      ],
+      "type": "timeseries"
+    },
+    {
+      "datasource": {
+        "type": "prometheus",
+        "uid": "OVK6hOB4z"
+      },
+      "description": "",
+      "gridPos": {
+        "h": 3,
+        "w": 6,
+        "x": 18,
+        "y": 6
+      },
+      "id": 31,
+      "options": {
+        "code": {
+          "language": "plaintext",
+          "showLineNumbers": false,
+          "showMiniMap": false
+        },
+        "content": "[1HR](http://solar-monitor.local:3000/d/solarmon-01/solar-bluetooth-monitor?orgId=1&refresh=30s&from=now-1h&to=now&kiosk) | \r\n[1D](http://solar-monitor.local:3000/d/solarmon-01/solar-bluetooth-monitor?orgId=1&refresh=30s&from=now-24h&to=now&kiosk) | \r\n[3D](http://solar-monitor.local:3000/d/solarmon-01/solar-bluetooth-monitor?orgId=1&refresh=30s&from=now-3d&to=now&kiosk) | \r\n[7D](http://solar-monitor.local:3000/d/solarmon-01/solar-bluetooth-monitor?orgId=1&refresh=30s&from=now-7d&to=now&kiosk) | \r\n[PANEL](http://solar-monitor.local:3000/d/solarmon-01/solar-bluetooth-monitor?orgId=1&refresh=30s&from=now-24h&to=now&kiosk=tv)",
+        "mode": "markdown"
+      },
+      "pluginVersion": "9.4.7",
+      "title": "View Range",
+      "transparent": true,
+      "type": "text"
+    },
+    {
+      "datasource": {
+        "type": "prometheus",
+        "uid": "OVK6hOB4z"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "fixedColor": "green",
             "mode": "fixed"
           },
           "custom": {
@@ -863,7 +942,8 @@
             "mode": "absolute",
             "steps": [
               {
-                "color": "green"
+                "color": "green",
+                "value": null
               }
             ]
           },
@@ -883,7 +963,7 @@
               {
                 "id": "color",
                 "value": {
-                  "fixedColor": "blue",
+                  "fixedColor": "dark-green",
                   "mode": "fixed"
                 }
               },
@@ -892,11 +972,30 @@
                 "value": "never"
               }
             ]
+          },
+          {
+            "matcher": {
+              "id": "byFrameRefID",
+              "options": "C"
+            },
+            "properties": [
+              {
+                "id": "custom.fillOpacity",
+                "value": 0
+              },
+              {
+                "id": "color",
+                "value": {
+                  "fixedColor": "#153711",
+                  "mode": "fixed"
+                }
+              }
+            ]
           }
         ]
       },
       "gridPos": {
-        "h": 16,
+        "h": 8,
         "w": 24,
         "x": 0,
         "y": 15
@@ -946,6 +1045,18 @@
           "legendFormat": "__auto",
           "range": true,
           "refId": "B"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "OVK6hOB4z"
+          },
+          "editorMode": "code",
+          "expr": " solarmon_solar_watts offset 48h",
+          "hide": false,
+          "legendFormat": "__auto",
+          "range": true,
+          "refId": "C"
         }
       ],
       "title": "Solar Watts",
@@ -999,7 +1110,8 @@
             "mode": "absolute",
             "steps": [
               {
-                "color": "green"
+                "color": "green",
+                "value": null
               },
               {
                 "color": "yellow",
@@ -1016,10 +1128,10 @@
         "overrides": []
       },
       "gridPos": {
-        "h": 16,
+        "h": 8,
         "w": 12,
         "x": 0,
-        "y": 31
+        "y": 23
       },
       "id": 9,
       "links": [],
@@ -1110,7 +1222,8 @@
             "mode": "absolute",
             "steps": [
               {
-                "color": "green"
+                "color": "green",
+                "value": null
               },
               {
                 "color": "yellow",
@@ -1127,10 +1240,10 @@
         "overrides": []
       },
       "gridPos": {
-        "h": 16,
+        "h": 8,
         "w": 12,
         "x": 12,
-        "y": 31
+        "y": 23
       },
       "id": 17,
       "links": [],
@@ -1223,7 +1336,8 @@
             "mode": "absolute",
             "steps": [
               {
-                "color": "dark-red"
+                "color": "dark-red",
+                "value": null
               },
               {
                 "color": "semi-dark-red",
@@ -1252,10 +1366,10 @@
         "overrides": []
       },
       "gridPos": {
-        "h": 16,
-        "w": 24,
+        "h": 8,
+        "w": 12,
         "x": 0,
-        "y": 47
+        "y": 31
       },
       "id": 27,
       "links": [],
@@ -1295,6 +1409,116 @@
         }
       ],
       "title": "Battery Voltage (Lead Acid)",
+      "type": "timeseries"
+    },
+    {
+      "datasource": {
+        "type": "prometheus",
+        "uid": "OVK6hOB4z"
+      },
+      "description": "",
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "thresholds"
+          },
+          "custom": {
+            "axisCenteredZero": false,
+            "axisColorMode": "text",
+            "axisLabel": "",
+            "axisPlacement": "auto",
+            "barAlignment": 0,
+            "drawStyle": "line",
+            "fillOpacity": 20,
+            "gradientMode": "scheme",
+            "hideFrom": {
+              "legend": false,
+              "tooltip": false,
+              "viz": false
+            },
+            "lineInterpolation": "linear",
+            "lineWidth": 1,
+            "pointSize": 5,
+            "scaleDistribution": {
+              "type": "linear"
+            },
+            "showPoints": "never",
+            "spanNulls": true,
+            "stacking": {
+              "group": "A",
+              "mode": "none"
+            },
+            "thresholdsStyle": {
+              "mode": "off"
+            }
+          },
+          "mappings": [],
+          "max": 60,
+          "min": 0,
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              },
+              {
+                "color": "yellow",
+                "value": 40
+              },
+              {
+                "color": "dark-red",
+                "value": 50
+              }
+            ]
+          },
+          "unit": "celsius"
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 8,
+        "w": 12,
+        "x": 12,
+        "y": 31
+      },
+      "id": 10,
+      "links": [],
+      "options": {
+        "legend": {
+          "calcs": [
+            "mean",
+            "lastNotNull"
+          ],
+          "displayMode": "list",
+          "placement": "bottom",
+          "showLegend": false
+        },
+        "tooltip": {
+          "mode": "multi",
+          "sort": "none"
+        }
+      },
+      "pluginVersion": "9.4.7",
+      "targets": [
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "OVK6hOB4z"
+          },
+          "editorMode": "code",
+          "exemplar": true,
+          "expr": "solarmon_battery_temperature_celsius",
+          "format": "time_series",
+          "hide": false,
+          "interval": "",
+          "intervalFactor": 2,
+          "legendFormat": "Battery Temp",
+          "range": true,
+          "refId": "A"
+        }
+      ],
+      "title": "Battery Temperature (C)",
       "type": "timeseries"
     },
     {
@@ -1357,10 +1581,10 @@
         "overrides": []
       },
       "gridPos": {
-        "h": 16,
+        "h": 8,
         "w": 12,
         "x": 0,
-        "y": 63
+        "y": 39
       },
       "id": 7,
       "links": [],
@@ -1445,8 +1669,7 @@
             "mode": "absolute",
             "steps": [
               {
-                "color": "green",
-                "value": null
+                "color": "green"
               },
               {
                 "color": "red",
@@ -1459,10 +1682,10 @@
         "overrides": []
       },
       "gridPos": {
-        "h": 16,
+        "h": 8,
         "w": 12,
         "x": 12,
-        "y": 63
+        "y": 39
       },
       "id": 13,
       "links": [],
@@ -1562,7 +1785,7 @@
         "h": 8,
         "w": 8,
         "x": 0,
-        "y": 79
+        "y": 47
       },
       "id": 14,
       "links": [],
@@ -1662,7 +1885,7 @@
         "h": 8,
         "w": 8,
         "x": 8,
-        "y": 79
+        "y": 47
       },
       "id": 21,
       "links": [],
@@ -1762,7 +1985,7 @@
         "h": 8,
         "w": 8,
         "x": 16,
-        "y": 79
+        "y": 47
       },
       "id": 11,
       "links": [],
@@ -1798,217 +2021,6 @@
         }
       ],
       "title": "Load Amps",
-      "type": "timeseries"
-    },
-    {
-      "datasource": {
-        "type": "prometheus",
-        "uid": "OVK6hOB4z"
-      },
-      "description": "",
-      "fieldConfig": {
-        "defaults": {
-          "color": {
-            "mode": "thresholds"
-          },
-          "custom": {
-            "axisCenteredZero": false,
-            "axisColorMode": "text",
-            "axisLabel": "",
-            "axisPlacement": "auto",
-            "barAlignment": 0,
-            "drawStyle": "line",
-            "fillOpacity": 20,
-            "gradientMode": "scheme",
-            "hideFrom": {
-              "legend": false,
-              "tooltip": false,
-              "viz": false
-            },
-            "lineInterpolation": "linear",
-            "lineWidth": 1,
-            "pointSize": 5,
-            "scaleDistribution": {
-              "type": "linear"
-            },
-            "showPoints": "never",
-            "spanNulls": true,
-            "stacking": {
-              "group": "A",
-              "mode": "none"
-            },
-            "thresholdsStyle": {
-              "mode": "off"
-            }
-          },
-          "mappings": [],
-          "max": 60,
-          "min": 0,
-          "thresholds": {
-            "mode": "absolute",
-            "steps": [
-              {
-                "color": "green",
-                "value": null
-              },
-              {
-                "color": "yellow",
-                "value": 40
-              },
-              {
-                "color": "dark-red",
-                "value": 50
-              }
-            ]
-          },
-          "unit": "celsius"
-        },
-        "overrides": []
-      },
-      "gridPos": {
-        "h": 10,
-        "w": 12,
-        "x": 0,
-        "y": 87
-      },
-      "id": 10,
-      "links": [],
-      "options": {
-        "legend": {
-          "calcs": [
-            "mean",
-            "lastNotNull"
-          ],
-          "displayMode": "list",
-          "placement": "bottom",
-          "showLegend": false
-        },
-        "tooltip": {
-          "mode": "multi",
-          "sort": "none"
-        }
-      },
-      "pluginVersion": "9.4.7",
-      "targets": [
-        {
-          "datasource": {
-            "type": "prometheus",
-            "uid": "OVK6hOB4z"
-          },
-          "editorMode": "code",
-          "exemplar": true,
-          "expr": "solarmon_battery_temperature_celsius",
-          "format": "time_series",
-          "hide": false,
-          "interval": "",
-          "intervalFactor": 2,
-          "legendFormat": "Battery Temp",
-          "range": true,
-          "refId": "A"
-        }
-      ],
-      "title": "Battery Temperature (C)",
-      "type": "timeseries"
-    },
-    {
-      "datasource": {
-        "type": "prometheus",
-        "uid": "solar-bt-monitor"
-      },
-      "fieldConfig": {
-        "defaults": {
-          "color": {
-            "mode": "palette-classic"
-          },
-          "custom": {
-            "axisCenteredZero": false,
-            "axisColorMode": "text",
-            "axisLabel": "",
-            "axisPlacement": "auto",
-            "barAlignment": 0,
-            "drawStyle": "line",
-            "fillOpacity": 20,
-            "gradientMode": "hue",
-            "hideFrom": {
-              "legend": false,
-              "tooltip": false,
-              "viz": false
-            },
-            "lineInterpolation": "linear",
-            "lineWidth": 1,
-            "pointSize": 5,
-            "scaleDistribution": {
-              "type": "linear"
-            },
-            "showPoints": "never",
-            "spanNulls": true,
-            "stacking": {
-              "group": "A",
-              "mode": "none"
-            },
-            "thresholdsStyle": {
-              "mode": "off"
-            }
-          },
-          "mappings": [],
-          "thresholds": {
-            "mode": "absolute",
-            "steps": [
-              {
-                "color": "green",
-                "value": null
-              },
-              {
-                "color": "red",
-                "value": 80
-              }
-            ]
-          },
-          "unit": "amp"
-        },
-        "overrides": []
-      },
-      "gridPos": {
-        "h": 10,
-        "w": 12,
-        "x": 12,
-        "y": 87
-      },
-      "id": 18,
-      "links": [],
-      "options": {
-        "legend": {
-          "calcs": [
-            "mean",
-            "lastNotNull"
-          ],
-          "displayMode": "list",
-          "placement": "bottom",
-          "showLegend": false
-        },
-        "tooltip": {
-          "mode": "multi",
-          "sort": "none"
-        }
-      },
-      "pluginVersion": "9.4.7",
-      "targets": [
-        {
-          "datasource": {
-            "type": "prometheus",
-            "uid": "solar-bt-monitor"
-          },
-          "exemplar": true,
-          "expr": "solarmon_battery_current",
-          "format": "time_series",
-          "hide": false,
-          "interval": "",
-          "intervalFactor": 2,
-          "legendFormat": "Battery Volts",
-          "refId": "A"
-        }
-      ],
-      "title": "Battery Current",
       "type": "timeseries"
     },
     {
@@ -2053,7 +2065,7 @@
         "h": 4,
         "w": 8,
         "x": 0,
-        "y": 97
+        "y": 55
       },
       "id": 26,
       "links": [],
@@ -2135,7 +2147,7 @@
         "h": 4,
         "w": 8,
         "x": 8,
-        "y": 97
+        "y": 55
       },
       "id": 23,
       "links": [],
@@ -2217,7 +2229,7 @@
         "h": 4,
         "w": 8,
         "x": 16,
-        "y": 97
+        "y": 55
       },
       "id": 20,
       "links": [],
@@ -2299,7 +2311,7 @@
         "h": 4,
         "w": 8,
         "x": 0,
-        "y": 101
+        "y": 59
       },
       "id": 24,
       "links": [],
@@ -2381,7 +2393,7 @@
         "h": 4,
         "w": 8,
         "x": 8,
-        "y": 101
+        "y": 59
       },
       "id": 25,
       "links": [],
@@ -2478,10 +2490,10 @@
         "overrides": []
       },
       "gridPos": {
-        "h": 8,
-        "w": 8,
+        "h": 6,
+        "w": 6,
         "x": 0,
-        "y": 105
+        "y": 63
       },
       "id": 29,
       "links": [],
@@ -2573,8 +2585,7 @@
             "mode": "absolute",
             "steps": [
               {
-                "color": "dark-red",
-                "value": null
+                "color": "dark-red"
               },
               {
                 "color": "semi-dark-red",
@@ -2603,10 +2614,10 @@
         "overrides": []
       },
       "gridPos": {
-        "h": 9,
-        "w": 8,
-        "x": 8,
-        "y": 105
+        "h": 8,
+        "w": 12,
+        "x": 6,
+        "y": 63
       },
       "id": 1,
       "links": [],
@@ -2647,6 +2658,107 @@
       ],
       "title": "Battery Voltage (LiFePo)",
       "type": "timeseries"
+    },
+    {
+      "datasource": {
+        "type": "prometheus",
+        "uid": "solar-bt-monitor"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "palette-classic"
+          },
+          "custom": {
+            "axisCenteredZero": false,
+            "axisColorMode": "text",
+            "axisLabel": "",
+            "axisPlacement": "auto",
+            "barAlignment": 0,
+            "drawStyle": "line",
+            "fillOpacity": 20,
+            "gradientMode": "hue",
+            "hideFrom": {
+              "legend": false,
+              "tooltip": false,
+              "viz": false
+            },
+            "lineInterpolation": "linear",
+            "lineWidth": 1,
+            "pointSize": 5,
+            "scaleDistribution": {
+              "type": "linear"
+            },
+            "showPoints": "never",
+            "spanNulls": true,
+            "stacking": {
+              "group": "A",
+              "mode": "none"
+            },
+            "thresholdsStyle": {
+              "mode": "off"
+            }
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              },
+              {
+                "color": "red",
+                "value": 80
+              }
+            ]
+          },
+          "unit": "amp"
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 10,
+        "w": 12,
+        "x": 12,
+        "y": 71
+      },
+      "id": 18,
+      "links": [],
+      "options": {
+        "legend": {
+          "calcs": [
+            "mean",
+            "lastNotNull"
+          ],
+          "displayMode": "list",
+          "placement": "bottom",
+          "showLegend": false
+        },
+        "tooltip": {
+          "mode": "multi",
+          "sort": "none"
+        }
+      },
+      "pluginVersion": "9.4.7",
+      "targets": [
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "solar-bt-monitor"
+          },
+          "exemplar": true,
+          "expr": "solarmon_battery_current",
+          "format": "time_series",
+          "hide": false,
+          "interval": "",
+          "intervalFactor": 2,
+          "legendFormat": "Battery Volts",
+          "refId": "A"
+        }
+      ],
+      "title": "Battery Current",
+      "type": "timeseries"
     }
   ],
   "refresh": "30s",
@@ -2663,7 +2775,6 @@
   },
   "timepicker": {
     "refresh_intervals": [
-      "5s",
       "10s",
       "30s",
       "1m",
@@ -2675,13 +2786,10 @@
       "1d"
     ],
     "time_options": [
-      "5m",
       "15m",
       "1h",
-      "6h",
-      "12h",
       "24h",
-      "2d",
+      "3d",
       "7d",
       "30d"
     ]
@@ -2689,6 +2797,6 @@
   "timezone": "",
   "title": "Solar Bluetooth Monitor",
   "uid": "solarmon-01",
-  "version": 49,
+  "version": 70,
   "weekStart": ""
 }
