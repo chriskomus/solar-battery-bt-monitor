@@ -4,6 +4,8 @@
 
 Any capable Raspberry Pi setup should work, as long as it has bluetooth. I'm using the following because that's what I had available at the time. I'd recommend something more compact with integrated wifi and bt. But in this economy, you gotta deal with what is available!
 
+
+
 ### Raspberry Pi
 - Raspberry Pi Compute Module 4, 8GB Lite - CM4008000
 - Raspberry Pi Compute Module CM4IO Board
@@ -11,11 +13,17 @@ Any capable Raspberry Pi setup should work, as long as it has bluetooth. I'm usi
 - USB to DC Barrel Jack Power Cable 5.5 x 2.1 mm 5V
 - BrosTrend AC650 Dual Band WiFi [installation guide](https://cdn.shopify.com/s/files/1/0270/1023/6487/files/AC1L_AC3L_AC5L_Linux_Manual_BrosTrend_WiFi_Adapter_v8.pdf?v=1671154201)
 - Kinivo BTD400 Bluetooth Low Energy USB Adapter [installation guide](https://community.kinivo.com/t/how-to-raspberry-pi-setup/173)
+- 7inch HDMI LCD (H) Display (with case), 1024x600, IPS [installation guide](https://www.waveshare.com/wiki/7inch_HDMI_LCD_(H)_(with_case))
 
 ### Renogy Solar Equipment
 - Renogy Adventurer Solar Charge Controller
 - Renogy BT-1 Bluetooth Module
 - 2x 100 watt solar panels
+
+### Battery Monitor
+- Junctek Battery Monitor KH140F [user manual](http://68.168.132.244/KG-F_EN_manual.pdf)
+
+### Battery
 - 12v 100ah lead acid deep cycle battery
 
 ## Raspberry Pi Setup
@@ -25,16 +33,21 @@ Any capable Raspberry Pi setup should work, as long as it has bluetooth. I'm usi
 3. Using the USB to DC Barrel Jack Power Cable for power, start up Raspberry Pi. This is the bare min power, but the idea is to have it run off the usb port on the front of the Adventurer.
 4. Plug in a monitor, keyboard/mouse, and ethernet.
 5. Install the WiFi driver: https://cdn.shopify.com/s/files/1/0270/1023/6487/files/AC1L_AC3L_AC5L_Linux_Manual_BrosTrend_WiFi_Adapter_v8.pdf?v=1671154201
-6. Enable SSH and VNC:
+6. Enable SSH, VNC, and Hostname:
     ```
-   sudo raspi-config
+    sudo raspi-config
     ```
    - Interface Options -> Enable SSH
    - Interface Options -> Enable VNC
    - System Options -> Hostname
       - Set a familiar name that you can then reference on your local network (i.e. solar-monitor)
-      - Once this is set up, you can reference your device with a url like http://solar-monitor.local instead of its IP address-
-7. Reboot.
+      - Once this is set up, you can reference your device with a url like http://solar-monitor.local instead of its IP address
+7. Update the system software:
+    ```
+    sudo apt-get update
+    sudo apt-get upgrade
+    ```
+8. Reboot.
 
 ## SSH Setup
 
@@ -126,3 +139,32 @@ sudo bluetoothctl
 scan on
 ```
 10. The Raspberry Pi should be ready for use.
+
+## LCD Setup
+
+1. Follow the [installation instructions](https://www.waveshare.com/wiki/7inch_HDMI_LCD_(H)_(with_case)) but please note there is an error in the text that is to be added to config.txt
+2. Edit the /boot/config.txt file:
+```
+sudo nano /boot/config.txt
+```
+3. Add the following to the end of the file and save:
+#### Raspberry Pi 4:
+```
+hdmi_group:1=2
+hdmi_mode:1=87
+hdmi_cvt:1 1024 600 60 6 0 0 0
+```
+
+#### Raspberry Pi 3:
+```
+hdmi_force_hotplug=1
+config_hdmi_boost=10
+hdmi_group=2
+hdmi_mode=87
+hdmi_cvt 1024 600 60 6 0 0 0
+```
+4. Reboot:
+```
+sudo shutdown -r now
+```
+5. Plug in HDMI and USB cable.
