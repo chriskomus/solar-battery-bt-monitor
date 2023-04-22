@@ -4,8 +4,6 @@
 
 Any capable Raspberry Pi setup should work, as long as it has bluetooth. I'm using the following because that's what I had available at the time. I'd recommend something more compact with integrated wifi and bt. But in this economy, you gotta deal with what is available!
 
-
-
 ### Raspberry Pi
 - Raspberry Pi Compute Module 4, 8GB Lite - CM4008000
 - Raspberry Pi Compute Module CM4IO Board
@@ -13,7 +11,11 @@ Any capable Raspberry Pi setup should work, as long as it has bluetooth. I'm usi
 - USB to DC Barrel Jack Power Cable 5.5 x 2.1 mm 5V
 - BrosTrend AC650 Dual Band WiFi [installation guide](https://cdn.shopify.com/s/files/1/0270/1023/6487/files/AC1L_AC3L_AC5L_Linux_Manual_BrosTrend_WiFi_Adapter_v8.pdf?v=1671154201)
 - Kinivo BTD400 Bluetooth Low Energy USB Adapter [installation guide](https://community.kinivo.com/t/how-to-raspberry-pi-setup/173)
+
+I'm currently using a 2nd Pi to display grafana on a touch screen:
+- Raspberry Pi 3 Model A+ [Setup 2nd Pi Instructions](second_pi_setup.md)
 - 7inch HDMI LCD (H) Display (with case), 1024x600, IPS [installation guide](https://www.waveshare.com/wiki/7inch_HDMI_LCD_(H)_(with_case))
+
 
 ### Renogy Solar Equipment
 - Renogy Adventurer Solar Charge Controller

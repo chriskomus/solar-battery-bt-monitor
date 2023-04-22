@@ -257,11 +257,11 @@ sudo systemctl enable solar-battery-bt-monitor
    - Scroll to the bottom and select Save & Test
 5. From the Create menu (Dashboard -> + icon on left navigation panel), choose Import and import the example dashboard json file included in the grafana folder in this project
 
-## Setup Complete!
+## Setup Complete
 Yay! At this point setup should be complete. Go to http://192.168.0.XXX:3000 or http://solar-monitor.local:3000 and you should start seeing at minimum a battery charge % and a battery voltage. Additional information should also display if the battery monitor is working and the solar panels are supplying power.
 
-## Optional: Grafana on Touch Screen LCD
-This is an optional step if you have a touch screen LCD. [See the hardware instructions on setting up the touch-screen LCD.](hardware_setup.md#lcd-setup)
+# Set Up Touch Screen LCD (Optional)
+This is an optional step if you have a touch screen LCD. Complete the [hardware setup instructions first](hardware_setup.md#lcd-setup), if you haven't already.
 
 ### Part 1 - Enable Grafana anonymous auth
 1. Edit the grafana config file:
@@ -326,13 +326,13 @@ sudo apt install onboard
 18. Set the home button to the grafana url that you bookmarked.
 19. Go into Chromium settings -> On start-up -> Open a specific page... -> Add a new page
 20. Paste the grafana url.
+
 ### Part 4 - Reboot and test
-21. Reboot.
+21. Use the shutdown script or reboot:
 ```
 sudo shutdown -r now
 ```
 22. The grafana dashboard should load after the reset. F11 to toggle fullscreen.
-
 
 
 # Troubleshooting
@@ -381,8 +381,8 @@ Run the script instead
 python3 ~/solar-battery-bt-monitor/solar-battery-bt-monitor.py
 ```
 
-## Touchscreen issues
-The hardware guide is designed for Raspberry Pi CM4, which has 2 HDMI ports. Use the following settings instead if using a Pi 3.
+## Low Voltage Warnings
+The correct solution is to
 ```
 hdmi_group=2
 hdmi_mode=87
