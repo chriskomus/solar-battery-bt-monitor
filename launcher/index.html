@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title>Solar Monitor Launcher</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="font.css" rel="stylesheet">
+
+  <style>
+    /* General Styles
+		------------------------------*/
+    body {
+      margin: 0;
+      height: 100vh;
+      background: #eee;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      font-family: 'Roboto Mono', monospace;
+      font-weight: 400;
+      line-height: 1.5;
+      text-align: center;
+    }
+
+    h1 {
+      font-weight: 500;
+      font-size: 1.6em;
+    }
+
+    h2 {
+      font-weight: 400;
+      font-size: 1.125em;
+      width: 80%;
+      max-width: 400px;
+      margin-bottom: 1.5em;
+    }
+
+    .logo {
+      width: 64px;
+    }
+
+    a {
+      color: #aaa;
+      transition: opacity .3s;
+    }
+
+    a:hover {
+      opacity: .5;
+    }
+
+    /* Fullscreen Button
+		------------------------------*/
+    #fullscreen-button {
+      position: absolute;
+      top: 15px;
+      right: 15px;
+      background: rgba(0, 0, 0, 0.05);
+      border: 0;
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      box-sizing: border-box;
+      transition: transform .3s;
+      font-size: 0;
+      opacity: 1;
+      pointer-events: auto;
+      cursor: pointer;
+    }
+
+    #fullscreen-button:hover {
+      transform: scale(1.125);
+    }
+
+    #fullscreen-button span {
+      width: 4px;
+      height: 4px;
+      border-top: 2.5px solid #111;
+      /* color */
+      border-left: 2.5px solid #111;
+      /* color */
+      position: absolute;
+      outline: 1px solid transparent;
+      -webkit-backface-visibility: hidden;
+      transform: translateZ(0);
+      will-change: transform;
+      -webkit-perspective: 1000;
+      transition: .3s;
+      transition-delay: .75s;
+    }
+
+    #fullscreen-button span:nth-child(1) {
+      top: 11px;
+      left: 11px;
+    }
+
+    #fullscreen-button span:nth-child(2) {
+      top: 11px;
+      left: 22px;
+      transform: rotate(90deg);
+    }
+
+    #fullscreen-button span:nth-child(3) {
+      top: 22px;
+      left: 11px;
+      transform: rotate(-90deg);
+    }
+
+    #fullscreen-button span:nth-child(4) {
+      top: 22px;
+      left: 22px;
+      transform: rotate(-180deg);
+    }
+
+
+    /* Fullscreen True
+		------------------------------*/
+
+    [fullscreen] #fullscreen-button span:nth-child(1) {
+      top: 22px;
+      left: 22px;
+    }
+
+    [fullscreen] #fullscreen-button span:nth-child(2) {
+      top: 22px;
+      left: 11px;
+    }
+
+    [fullscreen] #fullscreen-button span:nth-child(3) {
+      top: 11px;
+      left: 22px;
+    }
+
+    [fullscreen] #fullscreen-button span:nth-child(4) {
+      top: 11px;
+      left: 11px;
+    }
+
+
+
+    /* Dark Style
+		------------------------------*/
+
+    [light-mode=dark] {
+      background: #111;
+      color: #fff;
+    }
+
+    [light-mode=dark] #fullscreen-button {
+      background: rgba(255, 255, 255, .05);
+    }
+
+
+    [light-mode=dark] #fullscreen-button span {
+      border-top: 2.5px solid #fff;
+      border-left: 2.5px solid #fff;
+    }
+  </style>
+</head>
+
+<body light-mode="light">
+  <h1>
+    Solar Monitor Launcher
+  </h1>
+  <h2>
+    <a href="http://solar-monitor.local:3000/d/solarmon-01/solar-bluetooth-monitor?orgId=1&refresh=30s&from=now-24h&to=now&kiosk">
+      <img src="grafana_logo.png" alt="Launch Grafana Dashboard" class="logo"><br>
+      LAUNCH DASHBOARD
+    </a>
+  </h2>
+  <h5><a href="http://solar-monitor.local:9090/targets?search=">Prometheus</a> | <a href="http://solar-monitor.local:5000/metrics">Raw Feed</a></h5>
+
+  <script>
+    // Fullscreen button
+    if (document.fullscreenEnabled || document.webkitFullscreenEnabled ||
+      document.msFullscreenEnabled) {
+      create_fullscreen_button();
+    }
+
+    function create_fullscreen_button() {
+      let fullscreen_button = document.createElement("button");
+      fullscreen_button.setAttribute('id', 'fullscreen-button');
+      fullscreen_button.addEventListener("click", toggle_fullscreen);
+      fullscreen_button.innerHTML = `
+            <span></span>
+            <span></span>
+            <span></span>
+            <span></span>
+        `;
+      document.body.appendChild(fullscreen_button);
+    }
+
+    function toggle_fullscreen() {
+      if (!document.fullscreenElement && !document.mozFullScreenElement && !document.webkitFullscreenElement) {
+        if (document.documentElement.requestFullscreen) {
+          document.documentElement.requestFullscreen()
+        } else if (document.documentElement.mozRequestFullScreen) {
+          document.documentElement.mozRequestFullScreen()
+        } else if (document.documentElement.webkitRequestFullscreen) {
+          document.documentElement.webkitRequestFullscreen(Element.ALLOW_KEYBOARD_INPUT)
+        }
+        document.body.setAttribute("fullscreen", "")
+      } else {
+        if (document.cancelFullScreen) {
+          document.cancelFullScreen()
+        } else if (document.mozCancelFullScreen) {
+          document.mozCancelFullScreen()
+        } else if (document.webkitCancelFullScreen) {
+          document.webkitCancelFullScreen()
+        }
+        document.body.removeAttribute("fullscreen")
+      }
+    }
+
+    function check_fullscreen() {
+      // Because users can exit & enter fullscreen by other methods
+      if (document.fullscreenElement || document.webkitIsFullScreen || document.mozFullScreen) {
+        document.body.setAttribute("fullscreen", "")
+      }
+
+      else {
+        document.body.removeAttribute("fullscreen")
+      }
+    }
+    setInterval(function () { check_fullscreen(); }, 1000);
+  </script>
+</body>
+</html>
