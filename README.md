@@ -1,30 +1,28 @@
-# Solar Panel and Battery Bluetooth Monitor
+# Solar Panel and Battery Bluetooth Monitor with Dashboard
 
-All-in-one DIY solar charge controller and battery monitoring solution!
+All-in-one DIY solar charge controller and battery monitoring dashboard solution!
 
-This guide is for Renogy BT-1 compatible charge controllers and the Junctek KH140F bluetooth battery monitor.
+This guide is for Renogy BT-1 compatible charge controllers and the Junctek KH140F bluetooth battery monitor, monitored by a Raspberry Pi.
 
-Real-time dashboard for monitoring the performance of your system on a touch-screen LCD using Grafana and Prometheus for data logging.
+A real-time dashboard for monitoring the performance of your system uses a touch-screen LCD displaying a Grafana dashboard with Prometheus for data logging from a Python script.
 
-## Monitoring Renogy BT-1 Devices
+## Monitoring Renogy BT-1 Devices with Junctek KH140F Battery Monitor
 
-**[BT-1 Compatible Charge Controllers](https://www.renogy.com/bt-1-bluetooth-module-new-version/)**: A python script reads data from Renogy solar Charge Controllers via its BT-1 bluetooth adapter. Tested with a **Rover 40A Charge Controller** and **Adventurer 30A Charge Controller**. May also work with Renogy **Wanderer** series charge controllers. It might also work with other "SRNE like" devices like Rich Solar, PowMr, WEIZE etc.
+**[BT-1 Compatible Charge Controllers](https://www.renogy.com/bt-1-bluetooth-module-new-version/)**: A python script reads data from Renogy solar Charge Controllers via its BT-1 bluetooth adapter. Tested with a **Rover 40A Charge Controller** and **Adventurer 30A Charge Controller**. May also work with Renogy **Wanderer** series charge controllers.
 
 **[Junctek KH140F Bluetooth Battery Monitor](https://www.aliexpress.com/item/1005005293243736.html)**: The python script reads data from the Junctek KH140F battery monitor.
 
-My setup utilized two Raspberry Pis:
-- Server: **Raspberry Pi Compute Module 4 with the Compute Module 4 IO Board**. [See the hardware instructions specific to that build.](hardware_setup.md)
-- Touchscren Dashboard: **Raspberry Pi 3 A+** [See 2nd Pi Instructions](second_pi_setup.md)
+My setup utilizes two Raspberry Pis:
+- Server: **Raspberry Pi Compute Module 4 with the Compute Module 4 IO Board**. [See the hardware instructions specific to that build.](hardware_setup.md) Handles the heavy lifting: running the python script, prometheus and grafana services.
+- Touchscren Dashboard: **Raspberry Pi 3 A+** [See 2nd Pi Instructions](second_pi_setup.md) Runs Chromium in full screen mode displaying the Grafana dashboard.
 
-For simplicity, the [readme](README.md) and [hardware setup](hardware_setup.md) is written for using one Raspberry Pi. [See the 2nd Pi readme for setting up two Pis.](second_pi_setup.md)
-
+For simplicity, the [readme](README.md) and [hardware setup](hardware_setup.md) is written for using one Raspberry Pi. [See the 2nd Pi readme guide for setting up two Pis.](second_pi_setup.md)
 
 # Setup
 
 ## Getting Started
 
-1. Set up a Raspberry Pi with wifi/bluetooth that can be powered by usb. For this project I am using a Raspberry Pi Compute Module 4 with the Compute Module 4 IO Board. I'm powering it using a 5v USB to Barrel Jack, so that I can power it off the front of the Renogy Solar Charge Controller. YMMV on how well that works depending on your charge controller and Pi power consumption.
-2. [See the hardware instructions specific to my build.](hardware_setup.md) Or set up two Raspberry Pis: one for running python/prometheus/grafana server and the other as a LCD touch-screen dashboard. [See 2nd Pi Instructions](second_pi_setup.md)
+1. Set up a Raspberry Pi with wifi/bluetooth. [See the hardware instructions specific to my build.](hardware_setup.md) Or set up two Raspberry Pis: one for running python/prometheus/grafana server and the other as a LCD touch-screen dashboard. [See 2nd Pi Instructions](second_pi_setup.md)
 
 ## Install Project
 
@@ -38,7 +36,6 @@ For simplicity, the [readme](README.md) and [hardware setup](hardware_setup.md) 
     cd solar-battery-bt-monitor
     cp solar-battery-bt-monitor.ini.dist solar-battery-bt-monitor.ini
     ```
-
 
 ## Install Prometheus
 
@@ -181,15 +178,7 @@ For simplicity, the [readme](README.md) and [hardware setup](hardware_setup.md) 
     ...
     ```
 
-## Run The Script Automatically
-
-There are a few methods to run the script at startup. Either as a service or adding to ~/.config/autostart/solar-battery-bt-monitor.desktop.
-
-I'd suggest trying Service method first, and using Option B as a fallback. There are other options as well, but don't add to .bashrc or rc.local.
-
-### Option A: As a Service
-
-This is the best and simplest method for running headless.
+## Run The Script Automatically as a Service
 
 1. Create the solar-bt-service.service file in /etc/systemd/system/solar-battery-bt-monitor.service
 ```
@@ -219,30 +208,6 @@ sudo systemctl start solar-battery-bt-monitor
 sudo systemctl status solar-battery-bt-monitor
 sudo systemctl enable solar-battery-bt-monitor
 ```
-
-### Option B: Add to ~/.config/autostart/solar-battery-bt-monitor.desktop
-
-1. Edit ~/.config/autostart/solar-battery-bt-monitor.desktop, make sure to use correct username in directory
-   ```
-   mkdir /home/pi/.config/autostart
-   nano /home/pi/.config/autostart/solar-battery-bt-monitor.desktop
-   ```
-2. Add to the file:
-   ```
-   [Desktop Entry]
-   Name=solar-battery-bt-monitor
-   Exec=/home/pi/solar-battery-bt-monitor/start.sh
-   ```
-3. Enable GUI Autologin:
-    ```
-    sudo raspi-config
-    ```
-   - System Options -> Boot / Auto Login -> Desktop Autologin
-4. Make script executable:
-   ```
-   cd ~/solar-battery-bt-monitor
-   sudo chmod +x start.sh
-   ```
 
 ## Configure Grafana
 
@@ -382,12 +347,8 @@ python3 ~/solar-battery-bt-monitor/solar-battery-bt-monitor.py
 ```
 
 ## Low Voltage Warnings
-The correct solution is to
-```
-hdmi_group=2
-hdmi_mode=87
-hdmi_cvt 1024 600 60 6 0 0 0
-```
+Powering the Pi off the front USB port on the charge controller can result in low voltage warnings. The best solution is to use an official Raspberry Pi power supply. In a 12v system this means running an inverter 24/7. Alternatively, find some magical combo of USB cables and 12v power where the number of voltage warnings is reduced or eliminated.
+
 
 ## Chromium Blank White Screen After Booting
 If the Pi gets stuck on a white screen after launching Chromium in full screen after booting, you may have to use the [launcher](launcher/readme.md) instead. Instead of automatically loading Grafana after booting, it will instead load a static html page with a link to Grafana. It also has a button to enable and disable full screen.
