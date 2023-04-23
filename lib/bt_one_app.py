@@ -5,12 +5,12 @@
 #
 # Modifications by: Scott Nichol
 # ------------------------------------------------------
-from threading import Timer
 import os
-import logging 
+from threading import Timer
+import logging
 import time
-from SolarDevice import SolarDeviceManager, SolarDevice
-from Utils import create_read_request, parse_charge_controller_info
+from lib.solar_device import SolarDeviceManager, SolarDevice
+from lib.utils import create_request_payload, parse_charge_controller_info
 
 SYSTEM_TIMEOUT = 15 # exit program after this (seconds)
 DISCOVERY_TIMEOUT = 10 # max wait time to complete the bluetooth scanning (seconds)
@@ -64,7 +64,7 @@ class BTOneApp:
             if (wait <= 0):
                 discovering = False
         self.manager.stop_discovery()
-            
+
         if found:
             self._connect()
         else:
@@ -83,13 +83,13 @@ class BTOneApp:
 
     def request_data(self):
         logging.debug("request_data...")
-        request = create_read_request(READ_PARAMS["DEVICE_ID"], READ_PARAMS["FUNCTION"], READ_PARAMS["REGISTER"], READ_PARAMS["WORDS"])
+        request = create_request_payload(READ_PARAMS["DEVICE_ID"], READ_PARAMS["FUNCTION"], READ_PARAMS["REGISTER"], READ_PARAMS["WORDS"])
         self.device.characteristic_write_value(request)
 
     def on_resolved(self):
         logging.debug("resolved services")
         self.request_data()
-    
+
     def on_data_received(self, value):
         logging.debug("data recieved!")
         data = parse_charge_controller_info(value)
@@ -98,7 +98,7 @@ class BTOneApp:
 
         if self.data_callback is not None:
             self.data_callback(self.data)
-        
+
         if (self.continuous and self.interval > 0):
             logging.info("Query BT-1 again in {} seconds...".format(self.interval))
             time.sleep(self.interval)

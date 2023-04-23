@@ -549,6 +549,156 @@
         "show": true,
         "showCrosshair": false
       }
+    },
+    {
+      "aggregate": "AVG",
+      "color": {
+        "colorScheme": "interpolateRdYlGn",
+        "colorSpace": "RGB",
+        "customColors": [
+          {
+            "$$hashKey": "object:54",
+            "color": "#006837"
+          },
+          {
+            "$$hashKey": "object:55",
+            "color": "#aa0526"
+          }
+        ],
+        "invert": false,
+        "mode": "SPECTRUM",
+        "nullColor": "transparent"
+      },
+      "data": {
+        "unitFormat": "percent"
+      },
+      "datasource": {
+        "type": "prometheus",
+        "uid": "OVK6hOB4z"
+      },
+      "description": "",
+      "fragment": "HOUR",
+      "gridPos": {
+        "h": 8,
+        "w": 12,
+        "x": 12,
+        "y": 23
+      },
+      "hideTimeOverride": true,
+      "id": 13,
+      "legend": {
+        "show": false
+      },
+      "scale": {
+        "max": 100,
+        "min": 0
+      },
+      "targets": [
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "OVK6hOB4z"
+          },
+          "editorMode": "code",
+          "expr": "pi_ram_usage",
+          "legendFormat": "__auto",
+          "range": true,
+          "refId": "A"
+        }
+      ],
+      "title": "Raspberry Pi RAM Usage (%)",
+      "tooltip": {
+        "show": false
+      },
+      "type": "petrslavotinek-carpetplot-panel",
+      "xAxis": {
+        "hideLabels": false,
+        "labelFormat": "%a %m/%d",
+        "minBucketWidthToShowWeekends": 4,
+        "show": true,
+        "showCrosshair": true,
+        "showWeekends": true
+      },
+      "yAxis": {
+        "hideLabels": false,
+        "show": true,
+        "showCrosshair": false
+      }
+    },
+    {
+      "aggregate": "AVG",
+      "color": {
+        "colorScheme": "interpolateRdYlGn",
+        "colorSpace": "RGB",
+        "customColors": [
+          {
+            "$$hashKey": "object:54",
+            "color": "#006837"
+          },
+          {
+            "$$hashKey": "object:55",
+            "color": "#aa0526"
+          }
+        ],
+        "invert": false,
+        "mode": "SPECTRUM",
+        "nullColor": "transparent"
+      },
+      "data": {
+        "unitFormat": "percent"
+      },
+      "datasource": {
+        "type": "prometheus",
+        "uid": "OVK6hOB4z"
+      },
+      "description": "",
+      "fragment": "HOUR",
+      "gridPos": {
+        "h": 8,
+        "w": 12,
+        "x": 0,
+        "y": 31
+      },
+      "hideTimeOverride": true,
+      "id": 12,
+      "legend": {
+        "show": false
+      },
+      "scale": {
+        "max": 100,
+        "min": 0
+      },
+      "targets": [
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "OVK6hOB4z"
+          },
+          "editorMode": "code",
+          "expr": "pi_cpu_usage",
+          "legendFormat": "__auto",
+          "range": true,
+          "refId": "A"
+        }
+      ],
+      "title": "Raspberry Pi CPU Usage (%)",
+      "tooltip": {
+        "show": false
+      },
+      "type": "petrslavotinek-carpetplot-panel",
+      "xAxis": {
+        "hideLabels": false,
+        "labelFormat": "%a %m/%d",
+        "minBucketWidthToShowWeekends": 4,
+        "show": true,
+        "showCrosshair": true,
+        "showWeekends": true
+      },
+      "yAxis": {
+        "hideLabels": false,
+        "show": true,
+        "showCrosshair": false
+      }
     }
   ],
   "refresh": "30s",
@@ -560,7 +710,7 @@
     "list": []
   },
   "time": {
-    "from": "now-28d",
+    "from": "now-24h",
     "to": "now"
   },
   "timepicker": {
@@ -587,6 +737,6 @@
   "timezone": "",
   "title": "Solar Bluetooth Monitor - History",
   "uid": "solarmon-03",
-  "version": 17,
+  "version": 19,
   "weekStart": ""
 }
