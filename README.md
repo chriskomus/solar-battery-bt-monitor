@@ -220,7 +220,7 @@ sudo systemctl enable solar-battery-bt-monitor
    - Give the data source a good name (solar-monitor)
    - Under the HTTP section, set the URL to http://192.168.0.XXX:9090 or http://solar-monitor.local:9090
    - Scroll to the bottom and select Save & Test
-5. From the Create menu (Dashboard -> + icon on left navigation panel), choose Import and import the example dashboard json file included in the grafana folder in this project
+5. From the Create menu (Dashboard -> + icon on left navigation panel), choose Import and import the dashboard json files included in the grafana folder in this project. There are multiple files for different views on the LCD. Set `solar-battery-bt-monitor.json` to be the default dashboard. **If hostname is not solar-monitor**, find and replace `http://solar-monitor.local` with whatever the host name is for all the grafana dashboard json files.
 
 ## Setup Complete
 Yay! At this point setup should be complete. Go to http://192.168.0.XXX:3000 or http://solar-monitor.local:3000 and you should start seeing at minimum a battery charge % and a battery voltage. Additional information should also display if the battery monitor is working and the solar panels are supplying power.
