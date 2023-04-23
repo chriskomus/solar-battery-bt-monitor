@@ -54,10 +54,6 @@ class prometheus_logger:
         start_http_server(5000)
 
     def data_received_callback(self, data):
-        '''
-        Upon callback parse the data receieved from BT-1.
-        After parsing BT-1 data, append Pi temp, cpu, ram, and storage stats.
-        '''
         for key in data:
             value = data[key]
             logging.info("{}: {}".format(key, value))
