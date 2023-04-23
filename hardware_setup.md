@@ -4,15 +4,17 @@
 
 Any capable Raspberry Pi setup should work, as long as it has bluetooth. I'm using the following because that's what I had available at the time. I'd recommend something more compact with integrated wifi and bt. But in this economy, you gotta deal with what is available!
 
-
-
 ### Raspberry Pi
 - Raspberry Pi Compute Module 4, 8GB Lite - CM4008000
 - Raspberry Pi Compute Module CM4IO Board
 - 64gb microSD card
-- USB to DC Barrel Jack Power Cable 5.5 x 2.1 mm 5V
+- ~~USB to DC Barrel Jack Power Cable 5.5 x 2.1 mm 5V~~
+- 12V DC 5.5mm x 2.1mm Barrel Jack Power Cable
 - BrosTrend AC650 Dual Band WiFi [installation guide](https://cdn.shopify.com/s/files/1/0270/1023/6487/files/AC1L_AC3L_AC5L_Linux_Manual_BrosTrend_WiFi_Adapter_v8.pdf?v=1671154201)
 - Kinivo BTD400 Bluetooth Low Energy USB Adapter [installation guide](https://community.kinivo.com/t/how-to-raspberry-pi-setup/173)
+
+### 2nd Raspberry Pi
+- Raspberry Pi 3 Model A+ [Setup 2nd Pi Instructions](second_pi_setup.md)
 - 7inch HDMI LCD (H) Display (with case), 1024x600, IPS [installation guide](https://www.waveshare.com/wiki/7inch_HDMI_LCD_(H)_(with_case))
 
 ### Renogy Solar Equipment
@@ -24,14 +26,21 @@ Any capable Raspberry Pi setup should work, as long as it has bluetooth. I'm usi
 - Junctek Battery Monitor KH140F [user manual](http://68.168.132.244/KG-F_EN_manual.pdf)
 
 ### Battery
-- 12v 100ah lead acid deep cycle battery
+- ~~12v 100ah lead acid deep cycle battery~~
+- PowerQueen 12.8v 100ah LifePo4 battery
 
-## Raspberry Pi Setup
+# Raspberry Pi Setup
+
+## Powering the Pi
+
+Insufficient power will cause low voltage warnings. I wanted to power it off the front USB port on the Renogy Solar Charge Controller but I kept getting low voltage warnings, so I ended up just using a 12v DC barrel jack (The Raspberry Pi CM4 Board accepts 12v DC, most other Pis only accept 5v). YMMV on how well powering off the solar charge controller's usb works depending on controller and power cable.
+
+The best solution is to use officially supported power supplies that supply 5.1v.
+
+## Getting Started
 
 1. Download Raspberry Pi OS: https://www.raspberrypi.com/software/
-2. Install onto SD Card.
-3. Using the USB to DC Barrel Jack Power Cable for power, start up Raspberry Pi. This is the bare min power, but the idea is to have it run off the usb port on the front of the Adventurer.
-4. Plug in a monitor, keyboard/mouse, and ethernet.
+2. Install onto SD Card. Install with wifi/ssh settings specified before installing, or use a monitor/keyboard/mouse/ethernet to get started.
 5. Install the WiFi driver: https://cdn.shopify.com/s/files/1/0270/1023/6487/files/AC1L_AC3L_AC5L_Linux_Manual_BrosTrend_WiFi_Adapter_v8.pdf?v=1671154201
 6. Enable SSH, VNC, and Hostname:
     ```
@@ -40,7 +49,7 @@ Any capable Raspberry Pi setup should work, as long as it has bluetooth. I'm usi
    - Interface Options -> Enable SSH
    - Interface Options -> Enable VNC
    - System Options -> Hostname
-      - Set a familiar name that you can then reference on your local network (i.e. solar-monitor)
+      - Set hostname to solar-monitor
       - Once this is set up, you can reference your device with a url like http://solar-monitor.local instead of its IP address
 7. Update the system software:
     ```
@@ -48,11 +57,17 @@ Any capable Raspberry Pi setup should work, as long as it has bluetooth. I'm usi
     sudo apt-get upgrade
     ```
 8. Reboot.
+    ```
+    sudo shutdown -r now
+    ```
 
 ## SSH Setup
 
 ### Part 1
-1. At this point the Pi should be accessible via VNC/SSH/etc. Unplug the ethernet, keyboard, and mouse, after confirming remote access.
+1. At this point the Pi should be accessible via VNC/SSH/etc:
+```
+ssh username@solar-monitor.local
+```
 2. First check if you already have an SSH key on your local machine (not the Pi).
 3. This is typically located at ```~/.ssh/id_ed25519.pub``` on macOS / Linux, and the .ssh directory in your user profile folder on Windows (for example ```C:\Users\your-user\.ssh\id_ed25519.pub```).
 4. If you don't have a key, run this on your local machine: ```ssh-keygen -t rsa -b 4096```
