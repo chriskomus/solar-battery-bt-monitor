@@ -3,6 +3,8 @@
 # ------------------------------------------------------
 # Original Author: Scott Nichol
 # https://github.com/snichol67/solar-bt-monitor
+
+# Modifications by: Chris Komus
 #
 # Sets up logging, reads the configuration file, and
 # attempts to connect to the bluetooth module. If
@@ -17,9 +19,9 @@
 # Feel free to reuse this code for any purpose
 # ------------------------------------------------------
 
-from BTOneApp import BTOneApp
+from lib.bt_one_app import BTOneApp
 import logging
-import duallog
+from lib import dual_log
 import configparser
 
 # Read configuration file
@@ -37,7 +39,7 @@ elif (log_level == "WARN"):
 elif (log_level == "ERROR"):
     level = logging.ERROR
 
-duallog.setup('solar-battery-bt-monitor', minLevel=level, fileLevel=level, rotation='daily', keep=30)
+dual_log.setup('solar-battery-bt-monitor', minLevel=level, fileLevel=level, rotation='daily', keep=30)
 
 mac_addr = config.get('monitor', 'mac_addr', fallback=None)
 logging.debug("[CONFIG] mac_addr: {}".format(mac_addr))
@@ -71,7 +73,7 @@ elif (adapter is None):
 else:
     data_logger = None
     if (logger_type == 'prometheus'):
-        from prometheus_logger import prometheus_logger
+        from lib.prometheus_logger import prometheus_logger
         data_logger = prometheus_logger()
 
     if (data_logger is not None):

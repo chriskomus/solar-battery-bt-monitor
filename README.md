@@ -13,16 +13,16 @@ A real-time dashboard for monitoring the performance of your system uses a touch
 **[Junctek KH140F Bluetooth Battery Monitor](https://www.aliexpress.com/item/1005005293243736.html)**: The python script reads data from the Junctek KH140F battery monitor.
 
 My setup utilizes two Raspberry Pis:
-- Server: **Raspberry Pi Compute Module 4 with the Compute Module 4 IO Board**. [See the hardware instructions specific to that build.](hardware_setup.md) Handles the heavy lifting: running the python script, prometheus and grafana services.
-- Touchscren Dashboard: **Raspberry Pi 3 A+** [See 2nd Pi Instructions](second_pi_setup.md) Runs Chromium in full screen mode displaying the Grafana dashboard.
+- Server: **Raspberry Pi Compute Module 4 with the Compute Module 4 IO Board**. [See the hardware instructions specific to that build.](docs/hardware_setup.md) Handles the heavy lifting: running the python script, prometheus and grafana services.
+- Touchscren Dashboard: **Raspberry Pi 3 A+** [See 2nd Pi Instructions](docs/second_pi_setup.md) Runs Chromium in full screen mode displaying the Grafana dashboard.
 
-For simplicity, the [readme](README.md) and [hardware setup](hardware_setup.md) is written for using one Raspberry Pi. [See the 2nd Pi readme guide for setting up two Pis.](second_pi_setup.md)
+For simplicity, the [readme](README.md) and [hardware setup](docs/hardware_setup.md) is written for using one Raspberry Pi. [See the 2nd Pi readme guide for setting up two Pis.](docs/second_pi_setup.md)
 
 # Setup
 
 ## Getting Started
 
-1. Set up a Raspberry Pi with wifi/bluetooth. [See the hardware instructions specific to my build.](hardware_setup.md) Or set up two Raspberry Pis: one for running python/prometheus/grafana server and the other as a LCD touch-screen dashboard. [See 2nd Pi Instructions](second_pi_setup.md)
+1. Set up a Raspberry Pi with wifi/bluetooth. [See the hardware instructions specific to my build.](docs/hardware_setup.md) Or set up two Raspberry Pis: one for running python/prometheus/grafana server and the other as a LCD touch-screen dashboard. [See 2nd Pi Instructions](docs/second_pi_setup.md)
 
 ## Install Project
 
@@ -122,6 +122,7 @@ For simplicity, the [readme](README.md) and [hardware setup](hardware_setup.md) 
 1. Install the GATT library
     ```
     pip install gatt
+    sudo apt-get install python3-dbus
     ```
 2. Install the prometheus-client library
     ```
@@ -226,7 +227,7 @@ sudo systemctl enable solar-battery-bt-monitor
 Yay! At this point setup should be complete. Go to http://192.168.0.XXX:3000 or http://solar-monitor.local:3000 and you should start seeing at minimum a battery charge % and a battery voltage. Additional information should also display if the battery monitor is working and the solar panels are supplying power.
 
 # Set Up Touch Screen LCD (Optional)
-This is an optional step if you have a touch screen LCD. Complete the [hardware setup instructions first](hardware_setup.md#lcd-setup), if you haven't already.
+This is an optional step if you have a touch screen LCD. Complete the [hardware setup instructions first](docs/hardware_setup.md#lcd-setup), if you haven't already.
 
 ### Part 1 - Enable Grafana anonymous auth
 1. Edit the grafana config file:
@@ -283,7 +284,7 @@ sudo apt install onboard
 ```
 13. Go to Main Menu -> Preferences -> Raspberry Pi Configuration -> Display tag.
 14. Disable Screen-Blanking.
-15. If you'd like Grafana to launch after booting continue with the following steps. If you prefer an html launcher instead, [read the launcher guide](launcher/readme.md) and skip to step 21 in this section.
+15. If you'd like Grafana to launch after booting continue with the following steps. If you prefer an html launcher instead, [read the launcher guide](docs/launcher_readme.md) and skip to step 21 in this section.
 
 ### Part 3 - Set up Bookmarks and Home Button
 16. Bookmark the dashboard with the settings you'd like to see as a default.
@@ -351,7 +352,7 @@ Powering the Pi off the front USB port on the charge controller can result in lo
 
 
 ## Chromium Blank White Screen After Booting
-If the Pi gets stuck on a white screen after launching Chromium in full screen after booting, you may have to use the [launcher](launcher/readme.md) instead. Instead of automatically loading Grafana after booting, it will instead load a static html page with a link to Grafana. It also has a button to enable and disable full screen.
+If the Pi gets stuck on a white screen after launching Chromium in full screen after booting, you may have to use the [launcher](docs/launcher_readme.md) instead. Instead of automatically loading Grafana after booting, it will instead load a static html page with a link to Grafana. It also has a button to enable and disable full screen.
 
 ## Increase Swap Size
 1. If the Kiosk Pi is running really slow, increase the swap size. First stop swapfile:
