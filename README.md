@@ -2,7 +2,7 @@
 
 All-in-one DIY solar charge controller and battery monitoring dashboard solution!
 
-This guide is for Renogy BT-1 compatible charge controllers and the Junctek KH140F bluetooth battery monitor, monitored by a Raspberry Pi.
+This guide is for Renogy BT-1 compatible charge controllers and the Junctek KG-F Series bluetooth battery monitor, monitored by a Raspberry Pi.
 
 A real-time dashboard for monitoring the performance of your system uses a touch-screen LCD displaying a Grafana dashboard with Prometheus for data logging from a Python script.
 
@@ -10,7 +10,7 @@ A real-time dashboard for monitoring the performance of your system uses a touch
 
 **[BT-1 Compatible Charge Controllers](https://www.renogy.com/bt-1-bluetooth-module-new-version/)**: A python script reads data from Renogy solar Charge Controllers via its BT-1 bluetooth adapter. Tested with a **Rover 40A Charge Controller** and **Adventurer 30A Charge Controller**. May also work with Renogy **Wanderer** series charge controllers.
 
-**[Junctek KH140F Bluetooth Battery Monitor](https://www.aliexpress.com/item/1005005293243736.html)**: The python script reads data from the Junctek KH140F battery monitor.
+**[Junctek KG-F Series KH140F Bluetooth Battery Monitor](https://www.aliexpress.com/item/1005005293243736.html)**: The python script reads data from the Junctek KH140F battery monitor.
 
 My setup utilizes two Raspberry Pis:
 - Server: **Raspberry Pi Compute Module 4 with the Compute Module 4 IO Board**. [See the hardware instructions specific to that build.](docs/hardware_setup.md) Handles the heavy lifting: running the python script, prometheus and grafana services.
@@ -119,6 +119,7 @@ For simplicity, the [readme](README.md) and [hardware setup](docs/hardware_setup
 
 ## Setup Project
 
+### Install Packages
 1. Install the GATT library
     ```
     pip install gatt
@@ -136,19 +137,32 @@ For simplicity, the [readme](README.md) and [hardware setup](docs/hardware_setup
     python3 setup.py build
     sudo python3 setup.py install
     ```
-4. Now you'll need to edit the solar-battery-bt-monitor.ini with the specifics of your setup. You need to get the MAC address of your particular BT-1 device.
+
+### Configure your BT Devices
+4. Now you'll need to edit the solar-battery-bt-monitor.ini with the specifics of your setup. You need to get the MAC address of your particular Renogy BT-1 device and Junctek KG-F Series device.
    ```
    sudo bluetoothctl
    scan on
    ```
-5. Look for devics with alias `BT-TH-XXXX..`.  If the device doesn't show up in the scanner, make sure you force quit any of the Renogy apps that might be connected to your BT-1.
-6. Edit solar-battery-bt-monitor.ini file with the device name and MAC address.
+
+#### Renogy BT-1
+5. Look for devices with alias `BT-TH-XXXX..` and note the device name and mac address. If the device doesn't show up in the scanner, make sure you force quit any of the Renogy apps that might be connected to your BT-1.
+
+#### Junctek KG-F Series KH140F
+6. Look for devices with alias `BTGXXX` and note the device name and mac address. **Note** there is no documention online regarding the BT device name for this device. So I'm taking a guess that other KG-F Series devices have a similar alias. Download the official Juncket app, and tap "Search" and it should bring up the device name. Tap connect to confirm it's correct, then be sure to disconnect before proceeding.
+
+#### Edit solar-battery-bt-monitor.ini
+7. If you are using BT-1 data, set `renogy_enable` to True.
+8. If you are using KG-F Series data, set `junctek_enable` to True.
+6. Edit solar-battery-bt-monitor.ini file with the device name and MAC address for both devices.
+
+### Fire it up!
 7. It's time to test it out:
     ```
     cd ~/solar-battery-bt-monitor
     python3 solar-battery-bt-monitor.py
     ```
-8. The script will attempt to connect to your BT-1.  Often times, the bluetooth libraries will immediately disconnect. This script is set up by default to reconnect if that happens. Usually after a handful of reconnect attempts, the application will connect and you'll see the values output on the console.
+8. The script will attempt to connect to your BT-1 and KG-F Series device.  Often times, the bluetooth libraries will immediately disconnect. This script is set up by default to reconnect if that happens. Usually after a handful of reconnect attempts, the application will connect and you'll see the values output on the console.
 
 9. The script by default logs the data read from the controller to prometheus. If prometheus is running on your pi, you should be able to go to the URL http://192.168.0.XXX:5000 or http://solar-monitor.local:5000 and see some output that looks something like the following (you'll likely see a bunch of additional parameters).
     ```
@@ -370,10 +384,17 @@ sudo dphys-swapfile setup
 sudo dphys-swapfile swapon
 ```
 
+# Reverse Engineering A BT Device
+
+If you want to learn more about the process of reverse engineering a BT device using just the device and a Raspberry Pi, check out my guide here:
+[BLE Sniffer Walkthrough for Junctek BT Battery Monitor](https://github.com/chriskomus/ble-sniffer-walkthrough)
+
 # Credits
 
-This project is based off of [snichol67's solar-battery-bt-monitor](https://github.com/snichol67/solar-battery-bt-monitor), and contains elements of the following projects:
-- [snichol67/solar-battery-bt-monitor](https://github.com/snichol67/solar-battery-bt-monitor)
+Big thanks to [snichol67's solar-bt-monitor](https://github.com/snichol67/solar-bt-monitor) for his implementation using grafana and prometheus, and [Olen's solar-monitor](https://github.com/Olen/solar-monitor) which stands as the foundation of this project, and contains the Junctek plugin that I wrote and then adapted for this project.
+
+This project contains elements of the following:
+- [snichol67/solar-bt-monitor](https://github.com/snichol67/solar-bt-monitor)
 - [Olen/solar-monitor](https://github.com/Olen/solar-monitor)
 - [cyrils/renogy-bt1](https://github.com/cyrils/renogy-bt1)
 - [BarkinSpider/SolarShed](https://github.com/BarkinSpider/SolarShed)

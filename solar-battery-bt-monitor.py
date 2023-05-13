@@ -19,64 +19,140 @@
 # Feel free to reuse this code for any purpose
 # ------------------------------------------------------
 
-from lib.bt_one_app import BTOneApp
 import logging
-from lib import dual_log
 import configparser
+
+from lib import dual_log
+from lib.bt_one.bt_one_app import BTOneApp
+from lib.junctek.junctek_app import JunctekApp
 
 # Read configuration file
 config = configparser.ConfigParser()
-config.read('solar-battery-bt-monitor.ini')
+config.read("solar-battery-bt-monitor.ini")
 
 # Set logging level
-log_level = config.get('monitor', 'log_level', fallback='INFO')
-if (log_level is None or log_level == "INFO"):
+log_level = config.get("monitor", "log_level", fallback="INFO")
+if log_level is None or log_level == "INFO":
     level = logging.INFO
-elif (log_level == "DEBUG"):
+elif log_level == "DEBUG":
     level = logging.DEBUG
-elif (log_level == "WARN"):
+elif log_level == "WARN":
     level = logging.WARN
-elif (log_level == "ERROR"):
+elif log_level == "ERROR":
     level = logging.ERROR
 
-dual_log.setup('solar-battery-bt-monitor', minLevel=level, fileLevel=level, rotation='daily', keep=30)
+dual_log.setup(
+    "solar-battery-bt-monitor",
+    minLevel=level,
+    fileLevel=level,
+    rotation="daily",
+    keep=30,
+)
 
-mac_addr = config.get('monitor', 'mac_addr', fallback=None)
-logging.debug("[CONFIG] mac_addr: {}".format(mac_addr))
-
-alias = config.get('monitor', 'device_alias', fallback=None)
-logging.debug("[CONFIG] alias: {}".format(alias))
-
-adapter = config.get('monitor', 'adapter', fallback=None)
+adapter = config.get("monitor", "adapter", fallback=None)
 logging.debug("[CONFIG] adapter: {}".format(adapter))
 
-reconnect = config.getboolean('monitor', 'reconnect', fallback=False)
+reconnect = config.getboolean("monitor", "reconnect", fallback=False)
 logging.debug("[CONFIG] reconnect: {}".format(reconnect))
 
-continuous = config.getboolean('monitor', 'continuous_monitor', fallback=False)
-logging.debug("[CONFIG] continuous_monitor: {}".format(continuous))
 
-interval = -1
-if (continuous):
-    interval = config.getint('monitor', 'data_read_interval', fallback=-1)
-    logging.debug("[CONFIG] data_read_interval: {}".format(interval))
+# Renogy BT-1
+renogy_enabled = config.getboolean("renogy", "enabled", fallback=False)
+logging.debug("[CONFIG] renogy_enabled: {}".format(renogy_enabled))
 
-logger_type = config.get('monitor', 'data_logger', fallback='prometheus')
+renogy_mac_addr = config.get("renogy", "mac_addr", fallback=None)
+logging.debug("[CONFIG] renogy_mac_addr: {}".format(renogy_mac_addr))
+
+renogy_alias = config.get("renogy", "device_alias", fallback=None)
+logging.debug("[CONFIG] renogy_alias: {}".format(renogy_alias))
+
+renogy_continuous = config.getboolean("renogy", "continuous_monitor", fallback=False)
+logging.debug("[CONFIG] continuous_monitor: {}".format(renogy_continuous))
+
+renogy_interval = -1
+if renogy_continuous:
+    renogy_interval = config.getint("renogy", "data_read_interval", fallback=-1)
+    logging.debug("[CONFIG] data_read_interval: {}".format(renogy_interval))
+
+# Junctek KH140F
+junctek_enabled = config.getboolean("junctek", "enabled", fallback=False)
+logging.debug("[CONFIG] junctek_enabled: {}".format(junctek_enabled))
+
+junctek_mac_addr = config.get("junctek", "mac_addr", fallback=None)
+logging.debug("[CONFIG] junctek_mac_addr: {}".format(junctek_mac_addr))
+
+junctek_alias = config.get("junctek", "device_alias", fallback=None)
+logging.debug("[CONFIG] junctek_alias: {}".format(junctek_alias))
+
+junctek_continuous = config.getboolean("junctek", "continuous_monitor", fallback=False)
+logging.debug("[CONFIG] junctek_continuous_monitor: {}".format(junctek_continuous))
+
+junctek_interval = -1
+if junctek_continuous:
+    junctek_interval = config.getint("junctek", "data_read_interval", fallback=-1)
+    logging.debug("[CONFIG] junctek_data_read_interval: {}".format(junctek_interval))
+
+junctek_battery_capacity_ah = config.getint("junctek", "battery_capacity_ah", fallback=100)
+logging.debug(
+    "[CONFIG] junctek_battery_capacity_ah: {}".format(junctek_battery_capacity_ah)
+)
+
+junctek_start_script_as_charging = config.getboolean(
+    "junctek", "start_script_as_charging", fallback=False
+)
+logging.debug(
+    "[CONFIG] junctek_start_script_as_charging: {}".format(
+        junctek_start_script_as_charging
+    )
+)
+
+# Logging
+logger_type = config.get("monitor", "data_logger", fallback="prometheus")
 logging.debug("[CONFIG] logger_type: {}".format(logger_type))
 
-if (mac_addr is None):
-    logging.error("No configuration item for mac_addr. This configuration item is required.")
-elif (alias is None):
-    logging.error("No configuration item for device_alias.  This configuration item is required.")
-elif (adapter is None):
-    logging.error("No configuration item for adapter.  This configuration item is required.")
+# Connect to BT-1 and Junctek
+if renogy_mac_addr is None:
+    logging.error(
+        "No configuration item for renogy_mac_addr. This configuration item is required."
+    )
+elif renogy_alias is None:
+    logging.error(
+        "No configuration item for renogy_device_alias.  This configuration item is required."
+    )
+elif adapter is None:
+    logging.error(
+        "No configuration item for adapter.  This configuration item is required."
+    )
 else:
     data_logger = None
-    if (logger_type == 'prometheus'):
+    if logger_type == "prometheus":
         from lib.prometheus_logger import prometheus_logger
+
         data_logger = prometheus_logger()
 
-    if (data_logger is not None):
-        bt1 = BTOneApp("hci0", mac_addr, alias, data_logger.data_received_callback, auto_reconnect=reconnect, continuous=continuous, interval=interval)
-        bt1.connect()
+    if data_logger is not None:
+        if renogy_enabled:
+            bt1 = BTOneApp(
+                adapter_name=adapter,
+                mac_address=renogy_mac_addr,
+                alias=renogy_alias,
+                on_data_received=data_logger.data_received_callback,
+                auto_reconnect=reconnect,
+                continuous=renogy_continuous,
+                interval=renogy_interval,
+            )
+            bt1.connect()
 
+        if junctek_enabled:
+            junctek = JunctekApp(
+                adapter_name=adapter,
+                mac_address=junctek_mac_addr,
+                alias=junctek_alias,
+                on_data_received=data_logger.data_received_callback,
+                auto_reconnect=reconnect,
+                continuous=junctek_continuous,
+                interval=junctek_interval,
+                battery_capacity_ah=junctek_battery_capacity_ah,
+                start_script_as_charging=junctek_start_script_as_charging,
+            )
+            junctek.connect()
