@@ -28,495 +28,6 @@
   "liveNow": false,
   "panels": [
     {
-      "datasource": {
-        "type": "prometheus",
-        "uid": "OVK6hOB4z"
-      },
-      "fieldConfig": {
-        "defaults": {
-          "color": {
-            "mode": "thresholds"
-          },
-          "mappings": [
-            {
-              "options": {
-                "match": "null",
-                "result": {
-                  "text": "N/A"
-                }
-              },
-              "type": "special"
-            }
-          ],
-          "max": 100,
-          "min": 0,
-          "thresholds": {
-            "mode": "absolute",
-            "steps": [
-              {
-                "color": "dark-red",
-                "value": null
-              },
-              {
-                "color": "semi-dark-red",
-                "value": 20
-              },
-              {
-                "color": "yellow",
-                "value": 30
-              },
-              {
-                "color": "green",
-                "value": 50
-              },
-              {
-                "color": "#299c46",
-                "value": 80
-              },
-              {
-                "color": "blue",
-                "value": 95
-              }
-            ]
-          },
-          "unit": "percent"
-        },
-        "overrides": []
-      },
-      "gridPos": {
-        "h": 6,
-        "w": 6,
-        "x": 0,
-        "y": 0
-      },
-      "id": 4,
-      "interval": "15s",
-      "links": [],
-      "maxDataPoints": 10000,
-      "options": {
-        "orientation": "auto",
-        "reduceOptions": {
-          "calcs": [
-            "lastNotNull"
-          ],
-          "fields": "",
-          "values": false
-        },
-        "showThresholdLabels": false,
-        "showThresholdMarkers": true,
-        "text": {}
-      },
-      "pluginVersion": "9.4.7",
-      "targets": [
-        {
-          "datasource": {
-            "type": "prometheus",
-            "uid": "OVK6hOB4z"
-          },
-          "editorMode": "code",
-          "exemplar": true,
-          "expr": "junctek_battery_percentage",
-          "format": "time_series",
-          "hide": false,
-          "interval": "",
-          "intervalFactor": 2,
-          "legendFormat": "Battery Charge",
-          "range": true,
-          "refId": "A"
-        }
-      ],
-      "title": "Battery Charge %",
-      "type": "gauge"
-    },
-    {
-      "datasource": {
-        "type": "prometheus",
-        "uid": "OVK6hOB4z"
-      },
-      "description": "",
-      "fieldConfig": {
-        "defaults": {
-          "color": {
-            "mode": "thresholds"
-          },
-          "mappings": [
-            {
-              "options": {
-                "match": "null",
-                "result": {
-                  "text": "N/A"
-                }
-              },
-              "type": "special"
-            }
-          ],
-          "max": 14.6,
-          "min": 10,
-          "thresholds": {
-            "mode": "absolute",
-            "steps": [
-              {
-                "color": "dark-red",
-                "value": null
-              },
-              {
-                "color": "semi-dark-red",
-                "value": 12.9
-              },
-              {
-                "color": "yellow",
-                "value": 13
-              },
-              {
-                "color": "green",
-                "value": 13.1
-              },
-              {
-                "color": "dark-green",
-                "value": 13.2
-              },
-              {
-                "color": "blue",
-                "value": 14
-              }
-            ]
-          },
-          "unit": "volt"
-        },
-        "overrides": []
-      },
-      "gridPos": {
-        "h": 6,
-        "w": 6,
-        "x": 6,
-        "y": 0
-      },
-      "id": 29,
-      "links": [],
-      "maxDataPoints": 10000,
-      "options": {
-        "orientation": "auto",
-        "reduceOptions": {
-          "calcs": [
-            "lastNotNull"
-          ],
-          "fields": "",
-          "values": false
-        },
-        "showThresholdLabels": false,
-        "showThresholdMarkers": true,
-        "text": {}
-      },
-      "pluginVersion": "9.4.7",
-      "targets": [
-        {
-          "datasource": {
-            "type": "prometheus",
-            "uid": "OVK6hOB4z"
-          },
-          "editorMode": "code",
-          "exemplar": true,
-          "expr": "junctek_load_volts",
-          "format": "time_series",
-          "hide": false,
-          "interval": "",
-          "intervalFactor": 2,
-          "legendFormat": "Battery Charge",
-          "range": true,
-          "refId": "A"
-        }
-      ],
-      "title": "Battery Voltage",
-      "type": "gauge"
-    },
-    {
-      "datasource": {
-        "type": "prometheus",
-        "uid": "OVK6hOB4z"
-      },
-      "fieldConfig": {
-        "defaults": {
-          "color": {
-            "mode": "thresholds"
-          },
-          "mappings": [
-            {
-              "options": {
-                "match": "null",
-                "result": {
-                  "text": "N/A"
-                }
-              },
-              "type": "special"
-            }
-          ],
-          "max": 200,
-          "min": 0,
-          "thresholds": {
-            "mode": "absolute",
-            "steps": [
-              {
-                "color": "dark-red",
-                "value": null
-              },
-              {
-                "color": "yellow",
-                "value": 50
-              },
-              {
-                "color": "green",
-                "value": 100
-              },
-              {
-                "color": "semi-dark-green",
-                "value": 125
-              },
-              {
-                "color": "dark-green",
-                "value": 150
-              },
-              {
-                "color": "blue",
-                "value": 175
-              }
-            ]
-          },
-          "unit": "watt"
-        },
-        "overrides": []
-      },
-      "gridPos": {
-        "h": 6,
-        "w": 6,
-        "x": 12,
-        "y": 0
-      },
-      "id": 12,
-      "links": [],
-      "maxDataPoints": 100,
-      "options": {
-        "orientation": "horizontal",
-        "reduceOptions": {
-          "calcs": [
-            "lastNotNull"
-          ],
-          "fields": "",
-          "values": false
-        },
-        "showThresholdLabels": false,
-        "showThresholdMarkers": true
-      },
-      "pluginVersion": "9.4.7",
-      "targets": [
-        {
-          "datasource": {
-            "type": "prometheus",
-            "uid": "OVK6hOB4z"
-          },
-          "exemplar": true,
-          "expr": "solarmon_solar_watts",
-          "format": "time_series",
-          "hide": false,
-          "interval": "",
-          "intervalFactor": 2,
-          "legendFormat": "Solar Watts",
-          "refId": "A"
-        }
-      ],
-      "title": "Solar Power (W)",
-      "type": "gauge"
-    },
-    {
-      "datasource": {
-        "type": "prometheus",
-        "uid": "OVK6hOB4z"
-      },
-      "fieldConfig": {
-        "defaults": {
-          "color": {
-            "mode": "thresholds"
-          },
-          "mappings": [
-            {
-              "options": {
-                "0": {
-                  "color": "yellow",
-                  "index": 1,
-                  "text": "Discharging"
-                },
-                "1": {
-                  "color": "blue",
-                  "index": 0,
-                  "text": "Charging"
-                }
-              },
-              "type": "value"
-            }
-          ],
-          "thresholds": {
-            "mode": "absolute",
-            "steps": [
-              {
-                "color": "green",
-                "value": null
-              }
-            ]
-          },
-          "unit": "none"
-        },
-        "overrides": []
-      },
-      "gridPos": {
-        "h": 3,
-        "w": 6,
-        "x": 18,
-        "y": 0
-      },
-      "id": 48,
-      "links": [],
-      "maxDataPoints": 10000,
-      "options": {
-        "colorMode": "none",
-        "graphMode": "none",
-        "justifyMode": "auto",
-        "orientation": "horizontal",
-        "reduceOptions": {
-          "calcs": [
-            "lastNotNull"
-          ],
-          "fields": "",
-          "values": false
-        },
-        "text": {},
-        "textMode": "auto"
-      },
-      "pluginVersion": "9.4.7",
-      "targets": [
-        {
-          "datasource": {
-            "type": "prometheus",
-            "uid": "OVK6hOB4z"
-          },
-          "editorMode": "code",
-          "exemplar": true,
-          "expr": "junctek_load_status",
-          "format": "time_series",
-          "interval": "",
-          "intervalFactor": 2,
-          "legendFormat": "Charge State",
-          "range": true,
-          "refId": "A"
-        }
-      ],
-      "title": "Battery Charging State",
-      "type": "stat"
-    },
-    {
-      "datasource": {
-        "type": "prometheus",
-        "uid": "OVK6hOB4z"
-      },
-      "fieldConfig": {
-        "defaults": {
-          "color": {
-            "mode": "thresholds"
-          },
-          "mappings": [
-            {
-              "options": {
-                "0": {
-                  "index": 6,
-                  "text": "Deactivated"
-                },
-                "1": {
-                  "index": 5,
-                  "text": "Activated"
-                },
-                "2": {
-                  "index": 4,
-                  "text": "MPPT"
-                },
-                "3": {
-                  "index": 3,
-                  "text": "Equalizing"
-                },
-                "4": {
-                  "index": 2,
-                  "text": "Boost"
-                },
-                "5": {
-                  "index": 1,
-                  "text": "Floating"
-                },
-                "6": {
-                  "index": 0,
-                  "text": "Current Limiting"
-                }
-              },
-              "type": "value"
-            }
-          ],
-          "thresholds": {
-            "mode": "absolute",
-            "steps": [
-              {
-                "color": "green",
-                "value": null
-              },
-              {
-                "color": "red",
-                "value": 80
-              }
-            ]
-          },
-          "unit": "none"
-        },
-        "overrides": []
-      },
-      "gridPos": {
-        "h": 3,
-        "w": 6,
-        "x": 18,
-        "y": 3
-      },
-      "id": 19,
-      "links": [],
-      "maxDataPoints": 10000,
-      "options": {
-        "colorMode": "none",
-        "graphMode": "none",
-        "justifyMode": "auto",
-        "orientation": "horizontal",
-        "reduceOptions": {
-          "calcs": [
-            "lastNotNull"
-          ],
-          "fields": "",
-          "values": false
-        },
-        "text": {},
-        "textMode": "auto"
-      },
-      "pluginVersion": "9.4.7",
-      "targets": [
-        {
-          "datasource": {
-            "type": "prometheus",
-            "uid": "OVK6hOB4z"
-          },
-          "exemplar": true,
-          "expr": "solarmon_controller_charging_state",
-          "format": "time_series",
-          "interval": "",
-          "intervalFactor": 2,
-          "legendFormat": "Charge State",
-          "refId": "A"
-        }
-      ],
-      "title": "Solar Charging State",
-      "type": "stat"
-    },
-    {
       "alert": {
         "alertRuleTags": {},
         "conditions": [
@@ -570,8 +81,8 @@
           },
           "custom": {
             "axisCenteredZero": false,
-            "axisColorMode": "text",
-            "axisLabel": "Battery Charge (%)",
+            "axisColorMode": "series",
+            "axisLabel": "",
             "axisPlacement": "left",
             "axisSoftMin": 0,
             "barAlignment": 0,
@@ -691,7 +202,7 @@
             "properties": [
               {
                 "id": "custom.fillOpacity",
-                "value": 0
+                "value": 20
               },
               {
                 "id": "color",
@@ -702,33 +213,78 @@
               },
               {
                 "id": "max",
-                "value": 200
+                "value": 20
               },
               {
                 "id": "unit",
-                "value": "watt"
+                "value": "amp"
               },
               {
                 "id": "custom.axisPlacement",
                 "value": "right"
               },
               {
-                "id": "custom.axisLabel",
-                "value": "Solar Charge (W)"
+                "id": "custom.axisLabel"
               },
               {
                 "id": "custom.axisGridShow",
                 "value": false
+              },
+              {
+                "id": "custom.showPoints",
+                "value": "never"
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byFrameRefID",
+              "options": "D"
+            },
+            "properties": [
+              {
+                "id": "custom.fillOpacity",
+                "value": 20
+              },
+              {
+                "id": "color",
+                "value": {
+                  "fixedColor": "yellow",
+                  "mode": "fixed"
+                }
+              },
+              {
+                "id": "max",
+                "value": 20
+              },
+              {
+                "id": "unit",
+                "value": "amp"
+              },
+              {
+                "id": "custom.axisPlacement",
+                "value": "right"
+              },
+              {
+                "id": "custom.axisLabel"
+              },
+              {
+                "id": "custom.axisGridShow",
+                "value": false
+              },
+              {
+                "id": "custom.showPoints",
+                "value": "never"
               }
             ]
           }
         ]
       },
       "gridPos": {
-        "h": 9,
-        "w": 18,
+        "h": 10,
+        "w": 24,
         "x": 0,
-        "y": 6
+        "y": 0
       },
       "id": 16,
       "interval": "15s",
@@ -739,7 +295,7 @@
           "calcs": [],
           "displayMode": "list",
           "placement": "bottom",
-          "showLegend": false
+          "showLegend": true
         },
         "tooltip": {
           "mode": "none",
@@ -758,6 +314,7 @@
           "format": "time_series",
           "hide": false,
           "intervalFactor": 2,
+          "legendFormat": "SoC (%)",
           "range": true,
           "refId": "A"
         },
@@ -767,10 +324,11 @@
             "uid": "OVK6hOB4z"
           },
           "editorMode": "code",
-          "expr": "junctek_battery_percentage offset 24h",
+          "expr": "junctek_battery_percentage  offset 24h",
           "format": "time_series",
           "hide": false,
           "intervalFactor": 2,
+          "legendFormat": "SoC - 24hr offset (%)",
           "range": true,
           "refId": "B"
         },
@@ -780,11 +338,23 @@
             "uid": "OVK6hOB4z"
           },
           "editorMode": "code",
-          "expr": "solarmon_solar_watts",
+          "expr": "solarmon_load_amperes",
           "hide": false,
-          "legendFormat": "__auto",
+          "legendFormat": "Solar Charge (A)",
           "range": true,
           "refId": "C"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "OVK6hOB4z"
+          },
+          "editorMode": "code",
+          "expr": "junctek_load_amps",
+          "hide": false,
+          "legendFormat": "Load (A)",
+          "range": true,
+          "refId": "D"
         }
       ],
       "thresholds": [
@@ -795,7 +365,401 @@
           "visible": true
         }
       ],
+      "title": "Solar and Battery Monitor",
       "type": "timeseries"
+    },
+    {
+      "datasource": {
+        "type": "prometheus",
+        "uid": "OVK6hOB4z"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "thresholds"
+          },
+          "mappings": [
+            {
+              "options": {
+                "match": "null",
+                "result": {
+                  "text": "N/A"
+                }
+              },
+              "type": "special"
+            }
+          ],
+          "max": 100,
+          "min": 0,
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "dark-red",
+                "value": null
+              },
+              {
+                "color": "semi-dark-red",
+                "value": 20
+              },
+              {
+                "color": "yellow",
+                "value": 30
+              },
+              {
+                "color": "green",
+                "value": 50
+              },
+              {
+                "color": "#299c46",
+                "value": 80
+              },
+              {
+                "color": "blue",
+                "value": 95
+              }
+            ]
+          },
+          "unit": "percent"
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 6,
+        "w": 5,
+        "x": 0,
+        "y": 10
+      },
+      "id": 4,
+      "interval": "15s",
+      "links": [],
+      "maxDataPoints": 10000,
+      "options": {
+        "orientation": "auto",
+        "reduceOptions": {
+          "calcs": [
+            "lastNotNull"
+          ],
+          "fields": "",
+          "values": false
+        },
+        "showThresholdLabels": false,
+        "showThresholdMarkers": true,
+        "text": {}
+      },
+      "pluginVersion": "9.4.7",
+      "targets": [
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "OVK6hOB4z"
+          },
+          "editorMode": "code",
+          "exemplar": true,
+          "expr": "junctek_battery_percentage",
+          "format": "time_series",
+          "hide": false,
+          "interval": "",
+          "intervalFactor": 2,
+          "legendFormat": "Battery Charge",
+          "range": true,
+          "refId": "A"
+        }
+      ],
+      "title": "Battery Charge %",
+      "transparent": true,
+      "type": "gauge"
+    },
+    {
+      "datasource": {
+        "type": "prometheus",
+        "uid": "OVK6hOB4z"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "thresholds"
+          },
+          "mappings": [
+            {
+              "options": {
+                "match": "null",
+                "result": {
+                  "text": "N/A"
+                }
+              },
+              "type": "special"
+            }
+          ],
+          "max": 50,
+          "min": -20,
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "blue",
+                "value": null
+              },
+              {
+                "color": "blue",
+                "value": -5
+              },
+              {
+                "color": "dark-green",
+                "value": 0
+              },
+              {
+                "color": "green",
+                "value": 3
+              },
+              {
+                "color": "yellow",
+                "value": 5
+              },
+              {
+                "color": "orange",
+                "value": 10
+              },
+              {
+                "color": "red",
+                "value": 15
+              },
+              {
+                "color": "dark-red",
+                "value": 25
+              }
+            ]
+          },
+          "unit": "amp"
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 6,
+        "w": 5,
+        "x": 5,
+        "y": 10
+      },
+      "id": 54,
+      "links": [],
+      "maxDataPoints": 10000,
+      "options": {
+        "orientation": "horizontal",
+        "reduceOptions": {
+          "calcs": [
+            "lastNotNull"
+          ],
+          "fields": "",
+          "values": false
+        },
+        "showThresholdLabels": false,
+        "showThresholdMarkers": true
+      },
+      "pluginVersion": "9.4.7",
+      "targets": [
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "OVK6hOB4z"
+          },
+          "editorMode": "code",
+          "exemplar": true,
+          "expr": "junctek_load_amps",
+          "format": "time_series",
+          "hide": false,
+          "interval": "",
+          "intervalFactor": 2,
+          "legendFormat": "Solar Watts",
+          "range": true,
+          "refId": "A"
+        }
+      ],
+      "title": "Load (A)",
+      "transparent": true,
+      "type": "gauge"
+    },
+    {
+      "datasource": {
+        "type": "prometheus",
+        "uid": "OVK6hOB4z"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "thresholds"
+          },
+          "mappings": [
+            {
+              "options": {
+                "match": "null",
+                "result": {
+                  "text": "N/A"
+                }
+              },
+              "type": "special"
+            }
+          ],
+          "max": 200,
+          "min": 0,
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "text",
+                "value": null
+              },
+              {
+                "color": "super-light-green",
+                "value": 50
+              },
+              {
+                "color": "green",
+                "value": 100
+              },
+              {
+                "color": "semi-dark-green",
+                "value": 125
+              },
+              {
+                "color": "dark-green",
+                "value": 150
+              },
+              {
+                "color": "blue",
+                "value": 175
+              }
+            ]
+          },
+          "unit": "watt"
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 6,
+        "w": 5,
+        "x": 10,
+        "y": 10
+      },
+      "id": 12,
+      "links": [],
+      "maxDataPoints": 10000,
+      "options": {
+        "orientation": "horizontal",
+        "reduceOptions": {
+          "calcs": [
+            "lastNotNull"
+          ],
+          "fields": "",
+          "values": false
+        },
+        "showThresholdLabels": false,
+        "showThresholdMarkers": true
+      },
+      "pluginVersion": "9.4.7",
+      "targets": [
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "OVK6hOB4z"
+          },
+          "exemplar": true,
+          "expr": "solarmon_solar_watts",
+          "format": "time_series",
+          "hide": false,
+          "interval": "",
+          "intervalFactor": 2,
+          "legendFormat": "Solar Watts",
+          "refId": "A"
+        }
+      ],
+      "title": "Solar Power (W)",
+      "transparent": true,
+      "type": "gauge"
+    },
+    {
+      "datasource": {
+        "type": "prometheus",
+        "uid": "OVK6hOB4z"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "thresholds"
+          },
+          "mappings": [
+            {
+              "options": {
+                "0": {
+                  "color": "yellow",
+                  "index": 1,
+                  "text": "Discharging"
+                },
+                "1": {
+                  "color": "blue",
+                  "index": 0,
+                  "text": "Charging"
+                }
+              },
+              "type": "value"
+            }
+          ],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              }
+            ]
+          },
+          "unit": "none"
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 3,
+        "w": 3,
+        "x": 15,
+        "y": 10
+      },
+      "id": 48,
+      "links": [],
+      "maxDataPoints": 10000,
+      "options": {
+        "colorMode": "background",
+        "graphMode": "area",
+        "justifyMode": "auto",
+        "orientation": "horizontal",
+        "reduceOptions": {
+          "calcs": [
+            "lastNotNull"
+          ],
+          "fields": "",
+          "values": false
+        },
+        "text": {},
+        "textMode": "auto"
+      },
+      "pluginVersion": "9.4.7",
+      "targets": [
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "OVK6hOB4z"
+          },
+          "editorMode": "code",
+          "exemplar": true,
+          "expr": "junctek_load_status",
+          "format": "time_series",
+          "interval": "",
+          "intervalFactor": 2,
+          "legendFormat": "Battery:",
+          "range": true,
+          "refId": "A"
+        }
+      ],
+      "transparent": true,
+      "type": "stat"
     },
     {
       "datasource": {
@@ -807,7 +771,7 @@
         "h": 6,
         "w": 6,
         "x": 18,
-        "y": 6
+        "y": 10
       },
       "id": 36,
       "options": {
@@ -816,7 +780,7 @@
           "showLineNumbers": false,
           "showMiniMap": false
         },
-        "content": "<div class=\"gf-form\">\r\n  <a class=\"gf-form-label gf-form-label\" style=\"font-size: 1.5em;\" href=\"http://solar-monitor.local:3000/d/solarmon-01/solar-bluetooth-monitor?orgId=1&refresh=30s&from=now-1h&to=now&kiosk\">1h</a>\r\n  <a class=\"gf-form-label gf-form-label\" style=\"font-size: 1.5em;\" href=\"http://solar-monitor.local:3000/d/solarmon-01/solar-bluetooth-monitor?orgId=1&refresh=30s&from=now-24h&to=now&kiosk\">1d</a>\r\n  <a class=\"gf-form-label gf-form-label\" style=\"font-size: 1.5em;\" href=\"http://solar-monitor.local:3000/d/solarmon-01/solar-bluetooth-monitor?orgId=1&refresh=30s&from=now-3d&to=now&kiosk\">3d</a>\r\n  <a class=\"gf-form-label gf-form-label\" style=\"font-size: 1.5em;\" href=\"http://solar-monitor.local:3000/d/solarmon-01/solar-bluetooth-monitor?orgId=1&refresh=30s&from=now-7d&to=now&kiosk\">7d</a>\r\n  <a class=\"gf-form-label gf-form-label\" style=\"font-size: 1.5em;\" href=\"http://solar-monitor.local:3000/d/solarmon-01/solar-bluetooth-monitor?orgId=1&refresh=30s&from=now-28d&to=now&kiosk\">4w</a>\r\n</div>\r\n<div class=\"gf-form\">\r\n  \r\n  <a class=\"gf-form-label gf-form-label--dashlink\" style=\"font-size: 1.5em;\" href=\"http://solar-monitor.local:3000/d/solarmon-04/solar-bluetooth-monitor-detailed?orgId=1&refresh=30s&from=now-7d&to=now&kiosk\">CHARTS</a>\r\n  <a class=\"gf-form-label gf-form-label--dashlink\" style=\"font-size: 1.5em;\" href=\"http://solar-monitor.local:3000/d/solarmon-03/solar-bluetooth-monitor-history?orgId=1&refresh=30s&from=now-28d&to=now&kiosk\">HISTORY</a>\r\n</div>\r\n<div class=\"gf-form\">\r\n  \r\n  <a class=\"gf-form-label gf-form-label--dashlink\" style=\"font-size: 1.5em;\" href=\"http://solar-monitor.local:3000/d/solarmon-01/solar-bluetooth-monitor?orgId=1&refresh=30s&kiosk=tv\">SHOW DASH</a>\r\n  <a class=\"gf-form-label gf-form-label--dashlink\" style=\"font-size: 1.5em;\" href=\"http://solar-monitor.local:7800/\">EXIT</a>\r\n</div>\r\n",
+        "content": "<div class=\"gf-form\">\r\n  <a class=\"gf-form-label gf-form-label\" style=\"font-size: 1.5em;\" href=\"http://solar-monitor.local:3000/d/solarmon-01/solar-bluetooth-monitor?orgId=1&refresh=30s&from=now-1h&to=now&kiosk\">1h</a>\r\n  <a class=\"gf-form-label gf-form-label\" style=\"font-size: 1.5em;\" href=\"http://solar-monitor.local:3000/d/solarmon-01/solar-bluetooth-monitor?orgId=1&refresh=30s&from=now-24h&to=now&kiosk\">1d</a>\r\n  <a class=\"gf-form-label gf-form-label\" style=\"font-size: 1.5em;\" href=\"http://solar-monitor.local:3000/d/solarmon-01/solar-bluetooth-monitor?orgId=1&refresh=30s&from=now-3d&to=now&kiosk\">3d</a>\r\n  <a class=\"gf-form-label gf-form-label\" style=\"font-size: 1.5em;\" href=\"http://solar-monitor.local:3000/d/solarmon-01/solar-bluetooth-monitor?orgId=1&refresh=30s&from=now-7d&to=now&kiosk\">7d</a>\r\n  <a class=\"gf-form-label gf-form-label\" style=\"font-size: 1.5em;\" href=\"http://solar-monitor.local:3000/d/solarmon-01/solar-bluetooth-monitor?orgId=1&refresh=30s&from=now-28d&to=now&kiosk\">4w</a>\r\n</div>\r\n<div class=\"gf-form\">\r\n  <a class=\"gf-form-label gf-form-label--dashlink\" style=\"font-size: 1.5em;\" href=\"http://solar-monitor.local:3000/d/solarmon-01/solar-bluetooth-monitor?orgId=1&refresh=30s&from=now-1d&to=now&kiosk\">MAIN</a>\r\n  <a class=\"gf-form-label gf-form-label--dashlink\" style=\"font-size: 1.5em;\" href=\"http://solar-monitor.local:3000/d/solarmon-05/solar-bluetooth-monitor-gauges?orgId=1&refresh=30s&from=now-1d&to=now&kiosk\">GAUGES</a>\r\n</div>\r\n<div class=\"gf-form\">\r\n  <a class=\"gf-form-label gf-form-label--dashlink\" style=\"font-size: 1.5em;\" href=\"http://solar-monitor.local:3000/d/solarmon-04/solar-bluetooth-monitor-detailed?orgId=1&refresh=30s&from=now-3d&to=now&kiosk\">CHARTS</a>\r\n  <a class=\"gf-form-label gf-form-label--dashlink\" style=\"font-size: 1.5em;\" href=\"http://solar-monitor.local:3000/d/solarmon-03/solar-bluetooth-monitor-history?orgId=1&refresh=30s&from=now-28d&to=now&kiosk\">HISTORY</a>\r\n</div>\r\n<div class=\"gf-form\">\r\n  <a class=\"gf-form-label gf-form-label--dashlink\" style=\"font-size: 1.5em;\" href=\"http://solar-monitor.local:3000/d/solarmon-01/solar-bluetooth-monitor?orgId=1&refresh=30s&kiosk=tv\">DASH</a>\r\n  <a class=\"gf-form-label gf-form-label--dashlink\" style=\"font-size: 1.5em;\" href=\"http://solar-monitor.local:7800/\">EXIT</a>\r\n</div>\r\n",
         "mode": "html"
       },
       "pluginVersion": "9.4.7",
@@ -829,7 +793,7 @@
           "refId": "A"
         }
       ],
-      "title": "View Options",
+      "title": "Options",
       "transparent": true,
       "type": "text"
     },
@@ -846,12 +810,43 @@
           "mappings": [
             {
               "options": {
-                "match": "null",
-                "result": {
-                  "text": "N/A"
+                "0": {
+                  "color": "#e5e5e5",
+                  "index": 6,
+                  "text": "Deactivated"
+                },
+                "1": {
+                  "color": "green",
+                  "index": 5,
+                  "text": "Activated"
+                },
+                "2": {
+                  "color": "green",
+                  "index": 4,
+                  "text": "MPPT"
+                },
+                "3": {
+                  "color": "green",
+                  "index": 3,
+                  "text": "Equalizing"
+                },
+                "4": {
+                  "color": "blue",
+                  "index": 2,
+                  "text": "Boost"
+                },
+                "5": {
+                  "color": "blue",
+                  "index": 1,
+                  "text": "Floating"
+                },
+                "6": {
+                  "color": "red",
+                  "index": 0,
+                  "text": "Current Limiting"
                 }
               },
-              "type": "special"
+              "type": "value"
             }
           ],
           "thresholds": {
@@ -867,33 +862,160 @@
               }
             ]
           },
+          "unit": "none"
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 3,
+        "w": 3,
+        "x": 15,
+        "y": 13
+      },
+      "id": 19,
+      "links": [],
+      "maxDataPoints": 10000,
+      "options": {
+        "colorMode": "background",
+        "graphMode": "area",
+        "justifyMode": "auto",
+        "orientation": "horizontal",
+        "reduceOptions": {
+          "calcs": [
+            "lastNotNull"
+          ],
+          "fields": "",
+          "values": false
+        },
+        "text": {},
+        "textMode": "auto"
+      },
+      "pluginVersion": "9.4.7",
+      "targets": [
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "OVK6hOB4z"
+          },
+          "editorMode": "code",
+          "exemplar": true,
+          "expr": "solarmon_controller_charging_state",
+          "format": "time_series",
+          "interval": "",
+          "intervalFactor": 2,
+          "legendFormat": "Solar Panels:",
+          "range": true,
+          "refId": "A"
+        }
+      ],
+      "transparent": true,
+      "type": "stat"
+    },
+    {
+      "datasource": {
+        "type": "prometheus",
+        "uid": "OVK6hOB4z"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "thresholds",
+            "seriesBy": "last"
+          },
+          "custom": {
+            "axisCenteredZero": false,
+            "axisColorMode": "text",
+            "axisLabel": "",
+            "axisPlacement": "auto",
+            "barAlignment": 0,
+            "drawStyle": "line",
+            "fillOpacity": 20,
+            "gradientMode": "scheme",
+            "hideFrom": {
+              "legend": false,
+              "tooltip": false,
+              "viz": false
+            },
+            "lineInterpolation": "linear",
+            "lineWidth": 1,
+            "pointSize": 5,
+            "scaleDistribution": {
+              "type": "linear"
+            },
+            "showPoints": "never",
+            "spanNulls": true,
+            "stacking": {
+              "group": "A",
+              "mode": "none"
+            },
+            "thresholdsStyle": {
+              "mode": "off"
+            }
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "blue",
+                "value": null
+              },
+              {
+                "color": "blue",
+                "value": -5
+              },
+              {
+                "color": "dark-green",
+                "value": 0
+              },
+              {
+                "color": "green",
+                "value": 3
+              },
+              {
+                "color": "#EAB839",
+                "value": 5
+              },
+              {
+                "color": "orange",
+                "value": 10
+              },
+              {
+                "color": "red",
+                "value": 15
+              },
+              {
+                "color": "dark-red",
+                "value": 25
+              }
+            ]
+          },
           "unit": "amp"
         },
         "overrides": []
       },
       "gridPos": {
-        "h": 3,
-        "w": 3,
-        "x": 18,
-        "y": 12
+        "h": 9,
+        "w": 18,
+        "x": 0,
+        "y": 16
       },
-      "id": 6,
+      "id": 56,
       "links": [],
-      "maxDataPoints": 100,
       "options": {
-        "colorMode": "none",
-        "graphMode": "none",
-        "justifyMode": "auto",
-        "orientation": "horizontal",
-        "reduceOptions": {
+        "legend": {
           "calcs": [
+            "mean",
             "lastNotNull"
           ],
-          "fields": "",
-          "values": false
+          "displayMode": "list",
+          "placement": "bottom",
+          "showLegend": false
         },
-        "text": {},
-        "textMode": "auto"
+        "tooltip": {
+          "mode": "multi",
+          "sort": "none"
+        }
       },
       "pluginVersion": "9.4.7",
       "targets": [
@@ -902,75 +1024,60 @@
             "type": "prometheus",
             "uid": "OVK6hOB4z"
           },
+          "editorMode": "code",
           "exemplar": true,
-          "expr": "solarmon_solar_amperes",
+          "expr": "junctek_load_amps",
           "format": "time_series",
-          "hide": false,
           "interval": "",
           "intervalFactor": 2,
-          "legendFormat": "Solar Amps",
+          "legendFormat": "Load Amps",
+          "range": true,
           "refId": "A"
         }
       ],
-      "title": "Solar Amps",
-      "type": "stat"
+      "title": "Load Amps",
+      "type": "timeseries"
     },
     {
       "datasource": {
         "type": "prometheus",
         "uid": "OVK6hOB4z"
       },
+      "description": "",
       "fieldConfig": {
         "defaults": {
           "color": {
-            "mode": "thresholds"
+            "mode": "continuous-GrYlRd",
+            "seriesBy": "last"
           },
-          "mappings": [
-            {
-              "options": {
-                "match": "null",
-                "result": {
-                  "text": "N/A"
-                }
-              },
-              "type": "special"
-            }
-          ],
+          "mappings": [],
           "thresholds": {
             "mode": "absolute",
             "steps": [
               {
-                "color": "#d44a3a",
+                "color": "green",
                 "value": null
-              },
-              {
-                "color": "rgba(237, 129, 40, 0.89)",
-                "value": 8
-              },
-              {
-                "color": "#299c46",
-                "value": 14
               }
             ]
           },
-          "unit": "volt"
+          "unit": "celsius"
         },
         "overrides": []
       },
       "gridPos": {
-        "h": 3,
-        "w": 3,
-        "x": 21,
-        "y": 12
+        "h": 5,
+        "w": 6,
+        "x": 18,
+        "y": 16
       },
-      "id": 5,
+      "id": 42,
       "links": [],
-      "maxDataPoints": 100,
+      "maxDataPoints": 10000,
       "options": {
-        "colorMode": "value",
-        "graphMode": "none",
-        "justifyMode": "auto",
-        "orientation": "horizontal",
+        "displayMode": "gradient",
+        "minVizHeight": 10,
+        "minVizWidth": 0,
+        "orientation": "auto",
         "reduceOptions": {
           "calcs": [
             "lastNotNull"
@@ -978,8 +1085,7 @@
           "fields": "",
           "values": false
         },
-        "text": {},
-        "textMode": "auto"
+        "showUnfilled": true
       },
       "pluginVersion": "9.4.7",
       "targets": [
@@ -988,40 +1094,71 @@
             "type": "prometheus",
             "uid": "OVK6hOB4z"
           },
-          "exemplar": true,
-          "expr": "solarmon_solar_volts",
+          "editorMode": "code",
+          "exemplar": false,
+          "expr": "solarmon_controller_temperature_celsius",
           "format": "time_series",
           "hide": false,
+          "instant": false,
           "interval": "",
           "intervalFactor": 2,
-          "legendFormat": "Solar Volts",
+          "legendFormat": "Controller",
+          "range": true,
           "refId": "A"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "OVK6hOB4z"
+          },
+          "editorMode": "code",
+          "expr": "solarmon_battery_temperature_celsius",
+          "hide": false,
+          "legendFormat": "Outside",
+          "range": true,
+          "refId": "B"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "OVK6hOB4z"
+          },
+          "editorMode": "code",
+          "expr": "junctek_temp",
+          "hide": false,
+          "legendFormat": "Inside",
+          "range": true,
+          "refId": "C"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "OVK6hOB4z"
+          },
+          "editorMode": "code",
+          "expr": "pi_temperature_celcius",
+          "hide": false,
+          "legendFormat": "Pi",
+          "range": true,
+          "refId": "D"
         }
       ],
-      "title": "Solar Volts",
-      "type": "stat"
+      "title": "Temps",
+      "type": "bargauge"
     },
     {
       "datasource": {
         "type": "prometheus",
         "uid": "OVK6hOB4z"
       },
+      "description": "",
       "fieldConfig": {
         "defaults": {
           "color": {
-            "mode": "continuous-GrYlRd"
+            "mode": "fixed",
+            "seriesBy": "last"
           },
-          "mappings": [
-            {
-              "options": {
-                "match": "null",
-                "result": {
-                  "text": "N/A"
-                }
-              },
-              "type": "special"
-            }
-          ],
+          "mappings": [],
           "max": 100,
           "min": 0,
           "thresholds": {
@@ -1035,19 +1172,67 @@
           },
           "unit": "percent"
         },
-        "overrides": []
+        "overrides": [
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "CPU"
+            },
+            "properties": [
+              {
+                "id": "color",
+                "value": {
+                  "fixedColor": "#aa00ff",
+                  "mode": "fixed"
+                }
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "RAM"
+            },
+            "properties": [
+              {
+                "id": "color",
+                "value": {
+                  "fixedColor": "#e0ff00",
+                  "mode": "fixed"
+                }
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "Storage"
+            },
+            "properties": [
+              {
+                "id": "color",
+                "value": {
+                  "fixedColor": "#0095ff",
+                  "mode": "fixed"
+                }
+              }
+            ]
+          }
+        ]
       },
       "gridPos": {
         "h": 4,
-        "w": 4,
-        "x": 0,
-        "y": 15
+        "w": 6,
+        "x": 18,
+        "y": 21
       },
-      "id": 42,
-      "interval": "15s",
+      "id": 43,
       "links": [],
       "maxDataPoints": 10000,
       "options": {
+        "displayMode": "gradient",
+        "minVizHeight": 10,
+        "minVizWidth": 0,
         "orientation": "auto",
         "reduceOptions": {
           "calcs": [
@@ -1056,9 +1241,7 @@
           "fields": "",
           "values": false
         },
-        "showThresholdLabels": false,
-        "showThresholdMarkers": true,
-        "text": {}
+        "showUnfilled": true
       },
       "pluginVersion": "9.4.7",
       "targets": [
@@ -1074,479 +1257,37 @@
           "hide": false,
           "interval": "",
           "intervalFactor": 2,
-          "legendFormat": "Battery Charge",
+          "legendFormat": "CPU",
           "range": true,
           "refId": "A"
-        }
-      ],
-      "title": "CPU (%)",
-      "type": "gauge"
-    },
-    {
-      "datasource": {
-        "type": "prometheus",
-        "uid": "OVK6hOB4z"
-      },
-      "fieldConfig": {
-        "defaults": {
-          "color": {
-            "mode": "continuous-GrYlRd"
-          },
-          "mappings": [
-            {
-              "options": {
-                "match": "null",
-                "result": {
-                  "text": "N/A"
-                }
-              },
-              "type": "special"
-            }
-          ],
-          "max": 100,
-          "min": 0,
-          "thresholds": {
-            "mode": "absolute",
-            "steps": [
-              {
-                "color": "green",
-                "value": null
-              }
-            ]
-          },
-          "unit": "percent"
         },
-        "overrides": []
-      },
-      "gridPos": {
-        "h": 4,
-        "w": 4,
-        "x": 4,
-        "y": 15
-      },
-      "id": 43,
-      "interval": "15s",
-      "links": [],
-      "maxDataPoints": 10000,
-      "options": {
-        "orientation": "auto",
-        "reduceOptions": {
-          "calcs": [
-            "lastNotNull"
-          ],
-          "fields": "",
-          "values": false
-        },
-        "showThresholdLabels": false,
-        "showThresholdMarkers": true,
-        "text": {}
-      },
-      "pluginVersion": "9.4.7",
-      "targets": [
         {
           "datasource": {
             "type": "prometheus",
             "uid": "OVK6hOB4z"
           },
           "editorMode": "code",
-          "exemplar": true,
-          "expr": "pi_ram_usage",
-          "format": "time_series",
+          "expr": "pi_ram_usage ",
           "hide": false,
-          "interval": "",
-          "intervalFactor": 2,
-          "legendFormat": "Battery Charge",
+          "legendFormat": "RAM",
           "range": true,
-          "refId": "A"
-        }
-      ],
-      "title": "RAM (%)",
-      "type": "gauge"
-    },
-    {
-      "datasource": {
-        "type": "prometheus",
-        "uid": "OVK6hOB4z"
-      },
-      "fieldConfig": {
-        "defaults": {
-          "color": {
-            "mode": "continuous-GrYlRd"
-          },
-          "mappings": [
-            {
-              "options": {
-                "match": "null",
-                "result": {
-                  "text": "N/A"
-                }
-              },
-              "type": "special"
-            }
-          ],
-          "max": 100,
-          "min": 0,
-          "thresholds": {
-            "mode": "absolute",
-            "steps": [
-              {
-                "color": "green",
-                "value": null
-              }
-            ]
-          },
-          "unit": "percent"
+          "refId": "B"
         },
-        "overrides": []
-      },
-      "gridPos": {
-        "h": 4,
-        "w": 4,
-        "x": 8,
-        "y": 15
-      },
-      "id": 44,
-      "interval": "15s",
-      "links": [],
-      "maxDataPoints": 10000,
-      "options": {
-        "orientation": "auto",
-        "reduceOptions": {
-          "calcs": [
-            "lastNotNull"
-          ],
-          "fields": "",
-          "values": false
-        },
-        "showThresholdLabels": false,
-        "showThresholdMarkers": true,
-        "text": {}
-      },
-      "pluginVersion": "9.4.7",
-      "targets": [
         {
           "datasource": {
             "type": "prometheus",
             "uid": "OVK6hOB4z"
           },
           "editorMode": "code",
-          "exemplar": true,
-          "expr": "pi_storage_usage",
-          "format": "time_series",
+          "expr": "pi_storage_usage ",
           "hide": false,
-          "interval": "",
-          "intervalFactor": 2,
-          "legendFormat": "Battery Charge",
+          "legendFormat": "Storage",
           "range": true,
-          "refId": "A"
+          "refId": "C"
         }
       ],
-      "title": "Storage (%)",
-      "type": "gauge"
-    },
-    {
-      "datasource": {
-        "type": "prometheus",
-        "uid": "OVK6hOB4z"
-      },
-      "fieldConfig": {
-        "defaults": {
-          "color": {
-            "mode": "thresholds"
-          },
-          "mappings": [
-            {
-              "options": {
-                "match": "null",
-                "result": {
-                  "text": "N/A"
-                }
-              },
-              "type": "special"
-            }
-          ],
-          "max": 100,
-          "min": 0,
-          "thresholds": {
-            "mode": "absolute",
-            "steps": [
-              {
-                "color": "green",
-                "value": null
-              },
-              {
-                "color": "yellow",
-                "value": 45
-              },
-              {
-                "color": "dark-orange",
-                "value": 60
-              },
-              {
-                "color": "dark-red",
-                "value": 80
-              }
-            ]
-          },
-          "unit": "celsius"
-        },
-        "overrides": []
-      },
-      "gridPos": {
-        "h": 4,
-        "w": 4,
-        "x": 12,
-        "y": 15
-      },
-      "id": 45,
-      "interval": "15s",
-      "links": [],
-      "maxDataPoints": 10000,
-      "options": {
-        "orientation": "auto",
-        "reduceOptions": {
-          "calcs": [
-            "lastNotNull"
-          ],
-          "fields": "",
-          "values": false
-        },
-        "showThresholdLabels": false,
-        "showThresholdMarkers": true,
-        "text": {}
-      },
-      "pluginVersion": "9.4.7",
-      "targets": [
-        {
-          "datasource": {
-            "type": "prometheus",
-            "uid": "OVK6hOB4z"
-          },
-          "editorMode": "code",
-          "exemplar": true,
-          "expr": "pi_temperature_celcius",
-          "format": "time_series",
-          "hide": false,
-          "interval": "",
-          "intervalFactor": 2,
-          "legendFormat": "Battery Charge",
-          "range": true,
-          "refId": "A"
-        }
-      ],
-      "title": "Pi Temp (C)",
-      "type": "gauge"
-    },
-    {
-      "datasource": {
-        "type": "prometheus",
-        "uid": "OVK6hOB4z"
-      },
-      "fieldConfig": {
-        "defaults": {
-          "color": {
-            "mode": "thresholds"
-          },
-          "mappings": [
-            {
-              "options": {
-                "match": "null",
-                "result": {
-                  "text": "N/A"
-                }
-              },
-              "type": "special"
-            }
-          ],
-          "max": 100,
-          "min": 0,
-          "thresholds": {
-            "mode": "absolute",
-            "steps": [
-              {
-                "color": "green",
-                "value": null
-              },
-              {
-                "color": "yellow",
-                "value": 45
-              },
-              {
-                "color": "dark-orange",
-                "value": 60
-              },
-              {
-                "color": "dark-red",
-                "value": 80
-              }
-            ]
-          },
-          "unit": "celsius"
-        },
-        "overrides": []
-      },
-      "gridPos": {
-        "h": 4,
-        "w": 4,
-        "x": 16,
-        "y": 15
-      },
-      "id": 49,
-      "interval": "15s",
-      "links": [],
-      "maxDataPoints": 10000,
-      "options": {
-        "orientation": "auto",
-        "reduceOptions": {
-          "calcs": [
-            "lastNotNull"
-          ],
-          "fields": "",
-          "values": false
-        },
-        "showThresholdLabels": false,
-        "showThresholdMarkers": true,
-        "text": {}
-      },
-      "pluginVersion": "9.4.7",
-      "targets": [
-        {
-          "datasource": {
-            "type": "prometheus",
-            "uid": "OVK6hOB4z"
-          },
-          "editorMode": "code",
-          "exemplar": true,
-          "expr": "solarmon_battery_temperature_celsius",
-          "format": "time_series",
-          "hide": false,
-          "interval": "",
-          "intervalFactor": 2,
-          "legendFormat": "Battery Charge",
-          "range": true,
-          "refId": "A"
-        }
-      ],
-      "title": "Outdoor Temp (C)",
-      "type": "gauge"
-    },
-    {
-      "datasource": {
-        "type": "prometheus",
-        "uid": "OVK6hOB4z"
-      },
-      "fieldConfig": {
-        "defaults": {
-          "color": {
-            "mode": "thresholds"
-          },
-          "mappings": [
-            {
-              "options": {
-                "match": "null",
-                "result": {
-                  "text": "N/A"
-                }
-              },
-              "type": "special"
-            }
-          ],
-          "max": 100,
-          "min": 0,
-          "thresholds": {
-            "mode": "absolute",
-            "steps": [
-              {
-                "color": "green",
-                "value": null
-              },
-              {
-                "color": "yellow",
-                "value": 45
-              },
-              {
-                "color": "dark-orange",
-                "value": 60
-              },
-              {
-                "color": "dark-red",
-                "value": 80
-              }
-            ]
-          },
-          "unit": "celsius"
-        },
-        "overrides": []
-      },
-      "gridPos": {
-        "h": 4,
-        "w": 4,
-        "x": 20,
-        "y": 15
-      },
-      "id": 50,
-      "interval": "15s",
-      "links": [],
-      "maxDataPoints": 10000,
-      "options": {
-        "orientation": "auto",
-        "reduceOptions": {
-          "calcs": [
-            "lastNotNull"
-          ],
-          "fields": "",
-          "values": false
-        },
-        "showThresholdLabels": false,
-        "showThresholdMarkers": true,
-        "text": {}
-      },
-      "pluginVersion": "9.4.7",
-      "targets": [
-        {
-          "datasource": {
-            "type": "prometheus",
-            "uid": "OVK6hOB4z"
-          },
-          "editorMode": "code",
-          "exemplar": true,
-          "expr": "junctek_temp",
-          "format": "time_series",
-          "hide": false,
-          "interval": "",
-          "intervalFactor": 2,
-          "legendFormat": "Battery Charge",
-          "range": true,
-          "refId": "A"
-        }
-      ],
-      "title": "Trailer Temp (C)",
-      "type": "gauge"
-    },
-    {
-      "datasource": {
-        "type": "prometheus",
-        "uid": "OVK6hOB4z"
-      },
-      "gridPos": {
-        "h": 6,
-        "w": 10,
-        "x": 0,
-        "y": 19
-      },
-      "id": 47,
-      "options": {
-        "code": {
-          "language": "plaintext",
-          "showLineNumbers": false,
-          "showMiniMap": false
-        },
-        "content": "```\n100% = 13.5v\n99%  = 13.4v\n90%  = 13.3v\n70%  = 13.2v\n40%  = 13.1v\n30%  = 13.0v\n20%  = 12.9v\n10%  = 12.8v\n1%   = 10.8v\n0%   =  9.5v\n```",
-        "mode": "markdown"
-      },
-      "pluginVersion": "9.4.7",
-      "title": "PowerQueen SoC Reference",
-      "type": "text"
+      "title": "Raspberry Pi",
+      "type": "bargauge"
     }
   ],
   "refresh": "30s",
@@ -1558,7 +1299,7 @@
     "list": []
   },
   "time": {
-    "from": "now-7d",
+    "from": "now-1d",
     "to": "now"
   },
   "timepicker": {
@@ -1585,6 +1326,6 @@
   "timezone": "",
   "title": "Solar Bluetooth Monitor",
   "uid": "solarmon-01",
-  "version": 126,
+  "version": 172,
   "weekStart": ""
 }
