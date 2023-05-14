@@ -167,9 +167,7 @@ class Util:
         if not self.validate(bs):
             return None
 
-        data = self.parse_incoming_bytestream(
-            bs, self.battery_capacity_ah, self.charging
-        )
+        data = self.parse_incoming_bytestream(bs, self.battery_capacity_ah)
         for key in data:
             self.data[key] = data[key]
 
@@ -220,7 +218,7 @@ class Util:
 
         return True
 
-    def parse_incoming_bytestream(self, bs, battery_capacity_ah, charging):
+    def parse_incoming_bytestream(self, bs, battery_capacity_ah):
         """
         Get raw values from the bytestream:
 
@@ -279,9 +277,9 @@ class Util:
                 values[key] = val_int / 100
             elif key == "junctek_load_status":
                 if value == "01":
-                    charging = True
+                    self.charging = True
                 else:
-                    charging = False
+                    self.charging = False
             elif key == "junctek_ah_remaining":
                 values[key] = val_int / 1000
             elif key == "junctek_min_remaining":
@@ -293,14 +291,14 @@ class Util:
 
         # Display current as negative numbers if discharging
         # Update junctek_load_status value to int
-        if charging:
+        if self.charging:
             values["junctek_load_status"] = 1
-        else:
-            values["junctek_load_status"] = 0
             if "junctek_load_amps" in values:
                 values["junctek_load_amps"] *= -1
             if "junctek_load_power_watts" in values:
                 values["junctek_load_power_watts"] *= -1
+        else:
+            values["junctek_load_status"] = 0
 
         # Calculate percentage
         if "junctek_ah_remaining" in values:

@@ -87,10 +87,10 @@ class PrometheusLogger:
         Combine pi stats with the incoming data and set prometheus guages
         """
         try:
-            combined_data = {**data, **self.pi_stats()}
+            # combined_data = {**data, **self.pi_stats()}
 
-            for key in combined_data:
-                value = combined_data[key]
+            for key in data:
+                value = data[key]
                 gauge = prometheus_map[key]
                 gauge.set(value)
                 logging.info("{}: {}".format(key, value))

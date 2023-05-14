@@ -21,13 +21,15 @@ import time
 import threading
 import importlib
 from datetime import datetime, timedelta
+import psutil
+from gpiozero import CPUTemperature
 
-from lib.devices.battery_device import BatteryDevice
-from lib.devices.charge_controller_device import ChargeControllerDevice
-from lib.devices.inverter_device import InverterDevice
-from lib.devices.monitoring_device import MonitoringDevice
-from lib.devices.power_device import PowerDevice
-from lib.devices.rectifier_device import RectifierDevice
+# from lib.devices.battery_device import BatteryDevice
+# from lib.devices.charge_controller_device import ChargeControllerDevice
+# from lib.devices.inverter_device import InverterDevice
+# from lib.devices.monitoring_device import MonitoringDevice
+# from lib.devices.power_device import PowerDevice
+# from lib.devices.rectifier_device import RectifierDevice
 
 
 class SolarDeviceManager(gatt.DeviceManager):
@@ -75,6 +77,7 @@ class SolarDevice(gatt.Device):
         self.command_trigger = None
         self.config = config
         self.time_of_last_send = None
+        self.time_of_last_pi_stat_send = None
 
         # old
         # self.data_callback = on_data
@@ -92,6 +95,9 @@ class SolarDevice(gatt.Device):
             )
             self.device_type = self.config.get(
                 logger_name, "device_type", fallback=None
+            )
+            self.round_digits = self.config.getint(
+                logger_name, "round_digits", fallback=1
             )
         self.writing = False
 
@@ -118,6 +124,9 @@ class SolarDevice(gatt.Device):
         self.need_polling = getattr(self.module.Config, "NEED_POLLING", None)
         self.wait_to_send = getattr(self.module.Config, "WAIT_TO_SEND", None)
         self.send_ack = getattr(self.module.Config, "SEND_ACK", None)
+
+        # this will be sent to the datalogger
+        self.data_payload = {}
 
         # if "battery" in self.logger_name:
         #     self.entities = BatteryDevice(parent=self)
@@ -267,7 +276,6 @@ class SolarDevice(gatt.Device):
     def characteristic_value_updated(self, characteristic, value):
         super().characteristic_value_updated(characteristic, value)
 
-        logging.debug("[{}] Data Received!".format(self.logger_name))
         data = self.util.on_data_received(value)
 
         if data:
@@ -280,7 +288,11 @@ class SolarDevice(gatt.Device):
             self.send_data_to_logger(data)
 
             if self.need_polling:
-                logging.debug("[{}] Query again in {} seconds...".format(self.logger_name, self.data_read_interval))
+                logging.debug(
+                    "[{}] Query again in {} seconds...".format(
+                        self.logger_name, self.data_read_interval
+                    )
+                )
 
     def characteristic_enable_notifications_succeeded(self, characteristic):
         super().characteristic_enable_notifications_succeeded(characteristic)
@@ -428,22 +440,44 @@ class SolarDevice(gatt.Device):
         )
 
     def send_data_to_logger(self, data):
-        # Loop every x second (set by self.data_send_interval) - the device plugin is responsible for not overloading the device with requests
-        for key, value in data.items():
-            self.datalogger.log(self.logger_name, key, value)
+        """
+        Log data changes continously for url and mqtt logging, and log
+        periodically for prometheus (set by self.data_send_interval).
+
+        Periodically append updating pi stats.
+        """
+        # combine existing payload with new payload, this prevents skipped
+        # data if its not time to send a new payload to datalogger
+        self.data_payload = {**self.data_payload, **data}
+
+        # append pi stats (cpu, ram, hd, temp)
+        # data = self.append_pi_stats(data)
+        self.append_pi_stats()
+
+        for key, value in self.data_payload.items():
+            # universally round all numbers
+            if isinstance(value, int) or isinstance(value, float):
+                self.data_payload[key] = round(value, self.round_digits)
+
+            self.datalogger.log(self.logger_name, key, self.data_payload[key])
 
         is_resend_ready = False
         if self.time_of_last_send:
-            is_resend_ready = self.time_of_last_send < datetime.now() - timedelta(seconds=self.data_send_interval)
+            is_resend_ready = self.time_of_last_send < datetime.now() - timedelta(
+                seconds=self.data_send_interval
+            )
 
         # if not self.wait_to_send or self.time_of_last_send is None or (time_since_last_send > self.data_send_interval):
         if not self.wait_to_send or self.time_of_last_send is None or is_resend_ready:
-
-            if self.datalogger.log_to_prometheus(data):
+            if self.datalogger.log_to_prometheus(self.data_payload):
                 self.time_of_last_send = datetime.now()
 
                 if self.wait_to_send:
-                    logging.debug("[{}] Logged to Prometheus. Sending again in {} seconds...".format(self.logger_name, self.data_send_interval))
+                    logging.debug(
+                        "[{}] Logged to Prometheus. Sending again in {} seconds...".format(
+                            self.logger_name, self.data_send_interval
+                        )
+                    )
 
         # logging.info(
         #     "[{}] Starting new thread {}".format(
@@ -468,3 +502,28 @@ class SolarDevice(gatt.Device):
         #         self.logger_name, threading.current_thread().name
         #     )
         # )
+
+    def append_pi_stats(self):
+        # def append_pi_stats(self, data):
+        """
+        Append pi stats
+        """
+        is_pi_append_ready = False
+        if self.time_of_last_pi_stat_send:
+            is_pi_append_ready = (
+                self.time_of_last_pi_stat_send < datetime.now() - timedelta(seconds=30)
+            )
+
+        if self.time_of_last_pi_stat_send is None or is_pi_append_ready:
+            pi_stats = {
+                "pi_temp": round(CPUTemperature().temperature),
+                "pi_cpu": round(psutil.cpu_percent()),
+                "pi_ram": round(psutil.virtual_memory().percent),
+                "pi_storage": round(psutil.disk_usage("/").percent),
+            }
+
+            self.time_of_last_pi_stat_send = datetime.now()
+
+            self.data_payload = {**self.data_payload, **pi_stats}
+
+        # return data

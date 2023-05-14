@@ -64,18 +64,21 @@ class DataLogger:
                 self.logdata[device][var]["value"] = val
                 logging.info("[{}] Sending new data {}: {}".format(device, var, val))
                 self.send_to_server(device, var, val)
-            elif self.logdata[device][var]["ts"] < datetime.now() - timedelta(minutes=15):
+            elif self.logdata[device][var]["ts"] < datetime.now() - timedelta(
+                minutes=15
+            ):
                 self.logdata[device][var]["ts"] = ts
                 self.logdata[device][var]["value"] = val
-                # logging.debug("Sending data to server due to long wait")
-                logging.info("[{}] Sending refreshed data {}: {}".format(device, var, val))
+                logging.info(
+                    "[{}] Sending refreshed data {}: {}".format(device, var, val)
+                )
                 self.send_to_server(device, var, val)
 
     def send_to_server(self, device, var, val):
         if self.mqtt:
             self.mqtt.publish(device, var, val)
         if self.url:
-            logging.info("[{}] Sending data to {}".format(device, self.url))
+            # logging.info("[{}] Sending data to {}".format(device, self.url))
             ts = datetime.now().isoformat(" ", "seconds")
             payload = {"device": device, var: val, "ts": ts}
             header = {
