@@ -283,7 +283,7 @@
             "uid": "OVK6hOB4z"
           },
           "editorMode": "code",
-          "expr": "solarmon_battery_percentage",
+          "expr": "junctek_battery_percentage",
           "legendFormat": "__auto",
           "range": true,
           "refId": "A"
@@ -315,20 +315,37 @@
         "colorSpace": "RGB",
         "customColors": [
           {
-            "$$hashKey": "object:54",
-            "color": "#006837"
+            "$$hashKey": "object:507",
+            "breakpoint": -5,
+            "color": "#5794F2"
           },
           {
-            "$$hashKey": "object:55",
-            "color": "#aa0526"
+            "$$hashKey": "object:54",
+            "breakpoint": 0,
+            "color": "#FADE2A"
+          },
+          {
+            "$$hashKey": "object:192",
+            "breakpoint": 15,
+            "color": "#FF9830"
+          },
+          {
+            "$$hashKey": "object:501",
+            "breakpoint": 25,
+            "color": "#F2495C"
+          },
+          {
+            "$$hashKey": "object:189",
+            "breakpoint": 58,
+            "color": "#C4162A"
           }
         ],
-        "invert": false,
-        "mode": "SPECTRUM",
+        "invert": true,
+        "mode": "CUSTOM",
         "nullColor": "transparent"
       },
       "data": {
-        "unitFormat": "celsius"
+        "unitFormat": "amp"
       },
       "datasource": {
         "type": "prometheus",
@@ -343,10 +360,11 @@
         "y": 15
       },
       "hideTimeOverride": true,
-      "id": 9,
+      "id": 16,
       "legend": {
         "show": false
       },
+      "maxDataPoints": 10000,
       "scale": {
         "max": 80,
         "min": 0
@@ -358,13 +376,13 @@
             "uid": "OVK6hOB4z"
           },
           "editorMode": "code",
-          "expr": "solarmon_controller_temperature_celsius",
+          "expr": "junctek_load_amps",
           "legendFormat": "__auto",
           "range": true,
           "refId": "A"
         }
       ],
-      "title": "Controller Temp (C)",
+      "title": "Battery Load (A)",
       "tooltip": {
         "show": false
       },
@@ -466,36 +484,19 @@
         "customColors": [
           {
             "$$hashKey": "object:54",
-            "breakpoint": 0,
-            "color": "#C4162A"
+            "color": "#006837"
           },
           {
             "$$hashKey": "object:55",
-            "breakpoint": 11.5,
-            "color": "#FADE2A"
-          },
-          {
-            "$$hashKey": "object:501",
-            "breakpoint": 12.06,
-            "color": "#96D98D"
-          },
-          {
-            "$$hashKey": "object:504",
-            "breakpoint": 13,
-            "color": "#37872D"
-          },
-          {
-            "$$hashKey": "object:507",
-            "breakpoint": 13.1,
-            "color": "#5794F2"
+            "color": "#aa0526"
           }
         ],
-        "invert": true,
-        "mode": "CUSTOM",
+        "invert": false,
+        "mode": "SPECTRUM",
         "nullColor": "transparent"
       },
       "data": {
-        "unitFormat": "volt"
+        "unitFormat": "celsius"
       },
       "datasource": {
         "type": "prometheus",
@@ -510,7 +511,7 @@
         "y": 23
       },
       "hideTimeOverride": true,
-      "id": 11,
+      "id": 9,
       "legend": {
         "show": false
       },
@@ -525,13 +526,13 @@
             "uid": "OVK6hOB4z"
           },
           "editorMode": "code",
-          "expr": "solarmon_battery_volts",
+          "expr": "solarmon_controller_temperature_celsius",
           "legendFormat": "__auto",
           "range": true,
           "refId": "A"
         }
       ],
-      "title": "Battery Volts (V)",
+      "title": "Outdoor Temp (C)",
       "tooltip": {
         "show": false
       },
@@ -570,7 +571,7 @@
         "nullColor": "transparent"
       },
       "data": {
-        "unitFormat": "percent"
+        "unitFormat": "celsius"
       },
       "datasource": {
         "type": "prometheus",
@@ -585,13 +586,13 @@
         "y": 23
       },
       "hideTimeOverride": true,
-      "id": 13,
+      "id": 15,
       "legend": {
         "show": false
       },
       "scale": {
-        "max": 100,
-        "min": 0
+        "max": 80,
+        "min": 20
       },
       "targets": [
         {
@@ -600,13 +601,13 @@
             "uid": "OVK6hOB4z"
           },
           "editorMode": "code",
-          "expr": "pi_ram_usage",
+          "expr": "junctek_temp",
           "legendFormat": "__auto",
           "range": true,
           "refId": "A"
         }
       ],
-      "title": "Raspberry Pi RAM Usage (%)",
+      "title": "Indoor Temp (C)",
       "tooltip": {
         "show": false
       },
@@ -699,6 +700,178 @@
         "show": true,
         "showCrosshair": false
       }
+    },
+    {
+      "aggregate": "AVG",
+      "color": {
+        "colorScheme": "interpolateRdYlGn",
+        "colorSpace": "RGB",
+        "customColors": [
+          {
+            "$$hashKey": "object:54",
+            "color": "#006837"
+          },
+          {
+            "$$hashKey": "object:55",
+            "color": "#aa0526"
+          }
+        ],
+        "invert": false,
+        "mode": "SPECTRUM",
+        "nullColor": "transparent"
+      },
+      "data": {
+        "unitFormat": "percent"
+      },
+      "datasource": {
+        "type": "prometheus",
+        "uid": "OVK6hOB4z"
+      },
+      "description": "",
+      "fragment": "HOUR",
+      "gridPos": {
+        "h": 8,
+        "w": 12,
+        "x": 12,
+        "y": 31
+      },
+      "hideTimeOverride": true,
+      "id": 13,
+      "legend": {
+        "show": false
+      },
+      "scale": {
+        "max": 100,
+        "min": 0
+      },
+      "targets": [
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "OVK6hOB4z"
+          },
+          "editorMode": "code",
+          "expr": "pi_ram_usage",
+          "legendFormat": "__auto",
+          "range": true,
+          "refId": "A"
+        }
+      ],
+      "title": "Raspberry Pi RAM Usage (%)",
+      "tooltip": {
+        "show": false
+      },
+      "type": "petrslavotinek-carpetplot-panel",
+      "xAxis": {
+        "hideLabels": false,
+        "labelFormat": "%a %m/%d",
+        "minBucketWidthToShowWeekends": 4,
+        "show": true,
+        "showCrosshair": true,
+        "showWeekends": true
+      },
+      "yAxis": {
+        "hideLabels": false,
+        "show": true,
+        "showCrosshair": false
+      }
+    },
+    {
+      "aggregate": "AVG",
+      "color": {
+        "colorScheme": "interpolateRdYlGn",
+        "colorSpace": "RGB",
+        "customColors": [
+          {
+            "$$hashKey": "object:54",
+            "breakpoint": 0,
+            "color": "#C4162A"
+          },
+          {
+            "$$hashKey": "object:365",
+            "breakpoint": 12.9,
+            "color": "#F2495C"
+          },
+          {
+            "$$hashKey": "object:189",
+            "breakpoint": 13,
+            "color": "#FADE2A"
+          },
+          {
+            "$$hashKey": "object:501",
+            "breakpoint": 13.1,
+            "color": "#96D98D"
+          },
+          {
+            "$$hashKey": "object:192",
+            "breakpoint": 13.2,
+            "color": "#37872D"
+          },
+          {
+            "$$hashKey": "object:507",
+            "breakpoint": 14,
+            "color": "#5794F2"
+          }
+        ],
+        "invert": true,
+        "mode": "CUSTOM",
+        "nullColor": "transparent"
+      },
+      "data": {
+        "unitFormat": "volt"
+      },
+      "datasource": {
+        "type": "prometheus",
+        "uid": "OVK6hOB4z"
+      },
+      "description": "",
+      "fragment": "HOUR",
+      "gridPos": {
+        "h": 8,
+        "w": 12,
+        "x": 0,
+        "y": 39
+      },
+      "hideTimeOverride": true,
+      "id": 14,
+      "legend": {
+        "show": false
+      },
+      "scale": {
+        "max": 80,
+        "min": 0
+      },
+      "targets": [
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "OVK6hOB4z"
+          },
+          "editorMode": "code",
+          "expr": "junctek_load_volts",
+          "legendFormat": "__auto",
+          "range": true,
+          "refId": "A"
+        }
+      ],
+      "title": "Battery Volts (V)",
+      "tooltip": {
+        "show": false
+      },
+      "type": "petrslavotinek-carpetplot-panel",
+      "xAxis": {
+        "hideLabels": false,
+        "labelFormat": "%a %m/%d",
+        "minBucketWidthToShowWeekends": 4,
+        "show": true,
+        "showCrosshair": true,
+        "showWeekends": true
+      },
+      "yAxis": {
+        "hideLabels": false,
+        "show": true,
+        "showCrosshair": false
+      }
     }
   ],
   "refresh": "30s",
@@ -737,6 +910,6 @@
   "timezone": "",
   "title": "Solar Bluetooth Monitor - History",
   "uid": "solarmon-03",
-  "version": 19,
+  "version": 27,
   "weekStart": ""
 }
