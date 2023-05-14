@@ -296,7 +296,7 @@ point-rpi
 ```
 sudo apt install onboard
 ```
-13. Go to Main Menu -> Preferences -> Raspberry Pi Configuration -> Display tag.
+13. Go to Main Menu -> Preferences -> Raspberry Pi Configuration -> Display
 14. Disable Screen-Blanking.
 15. If you'd like Grafana to launch after booting continue with the following steps. If you prefer an html launcher instead, [read the launcher guide](docs/launcher_readme.md) and skip to step 21 in this section.
 
