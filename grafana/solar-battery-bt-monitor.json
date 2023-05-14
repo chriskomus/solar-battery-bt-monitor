@@ -1299,7 +1299,7 @@
     "list": []
   },
   "time": {
-    "from": "now-1d",
+    "from": "now-3d",
     "to": "now"
   },
   "timepicker": {
