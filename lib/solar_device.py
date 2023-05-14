@@ -275,7 +275,8 @@ class SolarDevice(gatt.Device):
 
             self.datalogger.log_to_prometheus(data)
 
-            logging.debug("[{}] Query again in {} seconds...".format(self.logger_name, self.data_read_interval))
+            if self.need_polling:
+                logging.debug("[{}] Query again in {} seconds...".format(self.logger_name, self.data_read_interval))
 
     def characteristic_enable_notifications_succeeded(self, characteristic):
         super().characteristic_enable_notifications_succeeded(characteristic)

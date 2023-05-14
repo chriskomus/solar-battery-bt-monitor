@@ -73,7 +73,7 @@ prometheus_map = {
     "pi_temp": Gauge("pi_temperature_celcius", "Pi Temperature"),
     "pi_cpu": Gauge("pi_cpu_usage", "Pi CPU Usage"),
     "pi_ram": Gauge("pi_ram_usage", "Pi RAM Usage"),
-    "pi_storage": Gauge("pi_storage", "Pi Storage Usage"),
+    "pi_storage": Gauge("pi_storage_usage", "Pi Storage Usage"),
 }
 
 

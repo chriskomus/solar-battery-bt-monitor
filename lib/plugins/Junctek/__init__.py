@@ -163,7 +163,6 @@ class Util:
     def on_data_received(self, value):
         # logging.debug("junctek data received!")
         bs = str(value.hex()).upper()
-        logging.debug(bs)
         if not self.validate(bs):
             return None
 
