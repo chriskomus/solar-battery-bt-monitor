@@ -86,13 +86,19 @@ class PrometheusLogger:
         """
         Combine pi stats with the incoming data and set prometheus guages
         """
-        combined_data = {**data, **self.pi_stats()}
+        try:
+            combined_data = {**data, **self.pi_stats()}
 
-        for key in combined_data:
-            value = combined_data[key]
-            gauge = prometheus_map[key]
-            gauge.set(value)
-            logging.info("{}: {}".format(key, value))
+            for key in combined_data:
+                value = combined_data[key]
+                gauge = prometheus_map[key]
+                gauge.set(value)
+                logging.info("{}: {}".format(key, value))
+
+            return True
+        except Exception as e:
+            logging.warning("{}".format(e))
+            return False
 
     def pi_stats(self):
         """

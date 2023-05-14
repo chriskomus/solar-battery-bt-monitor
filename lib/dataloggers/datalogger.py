@@ -46,29 +46,30 @@ class DataLogger:
         self.logdata = {}
 
     def log(self, device, var, val):
-        # MQTT and URL - Only log modified data
-        # <timestamp> <device> <var>: <val>
-        device = device.strip()
-        # ts = datetime.now().isoformat(' ', 'seconds')
-        ts = datetime.now()
-        if device not in self.logdata:
-            self.logdata[device] = {}
-        if var not in self.logdata[device]:
-            self.logdata[device][var] = {}
-            self.logdata[device][var]["ts"] = None
-            self.logdata[device][var]["value"] = None
+        if self.url or self.mqtt:
+            # MQTT and URL - Only log modified data
+            # <timestamp> <device> <var>: <val>
+            device = device.strip()
+            # ts = datetime.now().isoformat(' ', 'seconds')
+            ts = datetime.now()
+            if device not in self.logdata:
+                self.logdata[device] = {}
+            if var not in self.logdata[device]:
+                self.logdata[device][var] = {}
+                self.logdata[device][var]["ts"] = None
+                self.logdata[device][var]["value"] = None
 
-        if self.logdata[device][var]["value"] != val:
-            self.logdata[device][var]["ts"] = ts
-            self.logdata[device][var]["value"] = val
-            logging.info("[{}] Sending new data {}: {}".format(device, var, val))
-            self.send_to_server(device, var, val)
-        elif self.logdata[device][var]["ts"] < datetime.now() - timedelta(minutes=15):
-            self.logdata[device][var]["ts"] = ts
-            self.logdata[device][var]["value"] = val
-            # logging.debug("Sending data to server due to long wait")
-            logging.info("[{}] Sending refreshed data {}: {}".format(device, var, val))
-            self.send_to_server(device, var, val)
+            if self.logdata[device][var]["value"] != val:
+                self.logdata[device][var]["ts"] = ts
+                self.logdata[device][var]["value"] = val
+                logging.info("[{}] Sending new data {}: {}".format(device, var, val))
+                self.send_to_server(device, var, val)
+            elif self.logdata[device][var]["ts"] < datetime.now() - timedelta(minutes=15):
+                self.logdata[device][var]["ts"] = ts
+                self.logdata[device][var]["value"] = val
+                # logging.debug("Sending data to server due to long wait")
+                logging.info("[{}] Sending refreshed data {}: {}".format(device, var, val))
+                self.send_to_server(device, var, val)
 
     def send_to_server(self, device, var, val):
         if self.mqtt:
@@ -94,4 +95,5 @@ class DataLogger:
         This should be called on intervals, not every time there is an update.
         """
         if self.prometheus_logger:
-            self.prometheus_logger.data_received_callback(values)
+            return self.prometheus_logger.data_received_callback(values)
+        return False
