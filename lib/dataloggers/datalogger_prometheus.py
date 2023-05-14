@@ -77,7 +77,7 @@ prometheus_map = {
 }
 
 
-class prometheus_logger:
+class PrometheusLogger:
     def __init__(self):
         logging.info("Starting Prometheus Server")
         start_http_server(5000)
