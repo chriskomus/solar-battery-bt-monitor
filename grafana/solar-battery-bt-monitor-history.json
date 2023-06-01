@@ -1,0 +1,1472 @@
+{
+  "annotations": {
+    "list": [
+      {
+        "builtIn": 1,
+        "datasource": {
+          "uid": "OVK6hOB4z"
+        },
+        "enable": true,
+        "hide": true,
+        "iconColor": "rgba(0, 211, 255, 1)",
+        "name": "Annotations & Alerts",
+        "target": {
+          "limit": 100,
+          "matchAny": false,
+          "tags": [],
+          "type": "dashboard"
+        },
+        "type": "dashboard"
+      }
+    ]
+  },
+  "editable": true,
+  "fiscalYearStartMonth": 0,
+  "graphTooltip": 0,
+  "id": 5,
+  "links": [],
+  "liveNow": false,
+  "panels": [
+    {
+      "aggregate": "AVG",
+      "color": {
+        "colorScheme": "interpolateBuPu",
+        "colorSpace": "RGB",
+        "customColors": [
+          {
+            "$$hashKey": "object:54",
+            "breakpoint": 0,
+            "color": "#000000"
+          },
+          {
+            "$$hashKey": "object:55",
+            "breakpoint": 10,
+            "color": "#FFF899"
+          },
+          {
+            "$$hashKey": "object:356",
+            "breakpoint": 100,
+            "color": "#C8F2C2"
+          },
+          {
+            "$$hashKey": "object:359",
+            "breakpoint": 200,
+            "color": "#37872D"
+          }
+        ],
+        "invert": true,
+        "mode": "CUSTOM",
+        "nullColor": "transparent"
+      },
+      "data": {
+        "unitFormat": "watt"
+      },
+      "datasource": {
+        "type": "prometheus",
+        "uid": "OVK6hOB4z"
+      },
+      "description": "",
+      "fragment": "HOUR",
+      "gridPos": {
+        "h": 10,
+        "w": 24,
+        "x": 0,
+        "y": 0
+      },
+      "hideTimeOverride": true,
+      "id": 4,
+      "legend": {
+        "show": false
+      },
+      "scale": {
+        "max": 200,
+        "min": 0
+      },
+      "targets": [
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "OVK6hOB4z"
+          },
+          "editorMode": "code",
+          "expr": "solarmon_solar_watts",
+          "legendFormat": "__auto",
+          "range": true,
+          "refId": "A"
+        }
+      ],
+      "title": "Solar Charging History (W)",
+      "tooltip": {
+        "show": false
+      },
+      "type": "petrslavotinek-carpetplot-panel",
+      "xAxis": {
+        "hideLabels": false,
+        "labelFormat": "%a %m/%d",
+        "minBucketWidthToShowWeekends": 4,
+        "show": true,
+        "showCrosshair": true,
+        "showWeekends": true
+      },
+      "yAxis": {
+        "hideLabels": false,
+        "show": true,
+        "showCrosshair": false
+      }
+    },
+    {
+      "aggregate": "AVG",
+      "color": {
+        "colorScheme": "interpolateRdYlGn",
+        "colorSpace": "RGB",
+        "customColors": [
+          {
+            "$$hashKey": "object:54",
+            "color": "#006837"
+          },
+          {
+            "$$hashKey": "object:55",
+            "color": "#aa0526"
+          }
+        ],
+        "invert": true,
+        "mode": "SPECTRUM",
+        "nullColor": "transparent"
+      },
+      "data": {
+        "unitFormat": "percent"
+      },
+      "datasource": {
+        "type": "prometheus",
+        "uid": "OVK6hOB4z"
+      },
+      "description": "",
+      "fragment": "HOUR",
+      "gridPos": {
+        "h": 8,
+        "w": 18,
+        "x": 0,
+        "y": 10
+      },
+      "hideTimeOverride": true,
+      "id": 2,
+      "legend": {
+        "show": false
+      },
+      "scale": {
+        "max": 100,
+        "min": 0
+      },
+      "targets": [
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "OVK6hOB4z"
+          },
+          "editorMode": "code",
+          "expr": "junctek_battery_percentage",
+          "legendFormat": "__auto",
+          "range": true,
+          "refId": "A"
+        }
+      ],
+      "title": "Battery Charging HIstory (%)",
+      "tooltip": {
+        "show": false
+      },
+      "type": "petrslavotinek-carpetplot-panel",
+      "xAxis": {
+        "hideLabels": false,
+        "labelFormat": "%a %m/%d",
+        "minBucketWidthToShowWeekends": 4,
+        "show": true,
+        "showCrosshair": true,
+        "showWeekends": true
+      },
+      "yAxis": {
+        "hideLabels": false,
+        "show": true,
+        "showCrosshair": false
+      }
+    },
+    {
+      "datasource": {
+        "type": "prometheus",
+        "uid": "OVK6hOB4z"
+      },
+      "description": "",
+      "gridPos": {
+        "h": 6,
+        "w": 6,
+        "x": 18,
+        "y": 10
+      },
+      "id": 6,
+      "options": {
+        "code": {
+          "language": "plaintext",
+          "showLineNumbers": false,
+          "showMiniMap": false
+        },
+        "content": "<div class=\"gf-form\">\r\n  <a class=\"gf-form-label gf-form-label\" style=\"font-size: 1.5em;\" href=\"http://solar-monitor.local:3000/d/solarmon-03/solar-bluetooth-monitor-history?orgId=1&refresh=30s&from=now-7d&to=now&kiosk\">1w</a>\r\n  <a class=\"gf-form-label gf-form-label\" style=\"font-size: 1.5em;\" href=\"http://solar-monitor.local:3000/d/solarmon-03/solar-bluetooth-monitor-history?orgId=1&refresh=30s&from=now-28d&to=now&kiosk\">4w</a>\r\n  <a class=\"gf-form-label gf-form-label\" style=\"font-size: 1.5em;\" href=\"http://solar-monitor.local:3000/d/solarmon-03/solar-bluetooth-monitor-history?orgId=1&refresh=30s&from=now-3M&to=now&kiosk\">3m</a>\r\n  <a class=\"gf-form-label gf-form-label\" style=\"font-size: 1.5em;\" href=\"http://solar-monitor.local:3000/d/solarmon-03/solar-bluetooth-monitor-history?orgId=1&refresh=30s&from=now-6M&to=now&kiosk\">6m</a>\r\n</div>\r\n<div class=\"gf-form\">\r\n  <a class=\"gf-form-label gf-form-label--dashlink\" style=\"font-size: 1.5em;\" href=\"http://solar-monitor.local:3000/d/solarmon-01/solar-bluetooth-monitor?orgId=1&refresh=30s&from=now-1d&to=now&kiosk\">MAIN</a>\r\n  <a class=\"gf-form-label gf-form-label--dashlink\" style=\"font-size: 1.5em;\" href=\"http://solar-monitor.local:3000/d/solarmon-05/solar-bluetooth-monitor-gauges?orgId=1&refresh=30s&from=now-1d&to=now&kiosk\">GAUGES</a>\r\n</div>\r\n<div class=\"gf-form\">\r\n  <a class=\"gf-form-label gf-form-label--dashlink\" style=\"font-size: 1.5em;\" href=\"http://solar-monitor.local:3000/d/solarmon-04/solar-bluetooth-monitor-detailed?orgId=1&refresh=30s&from=now-3d&to=now&kiosk\">CHARTS</a>\r\n  <a class=\"gf-form-label gf-form-label--dashlink\" style=\"font-size: 1.5em;\" href=\"http://solar-monitor.local:3000/d/solarmon-03/solar-bluetooth-monitor-history?orgId=1&refresh=30s&from=now-28d&to=now&kiosk\">HISTORY</a>\r\n</div>\r\n<div class=\"gf-form\">\r\n  <a class=\"gf-form-label gf-form-label--dashlink\" style=\"font-size: 1.5em;\" href=\"http://solar-monitor.local:3000/d/solarmon-03/solar-bluetooth-monitor-history?orgId=1&refresh=30s&kiosk=tv\">DASH</a>\r\n  <a class=\"gf-form-label gf-form-label--dashlink\" style=\"font-size: 1.5em;\" href=\"http://solar-monitor.local:7800/\">EXIT</a>\r\n</div>",
+        "mode": "html"
+      },
+      "pluginVersion": "9.4.7",
+      "targets": [
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "OVK6hOB4z"
+          },
+          "refId": "A"
+        }
+      ],
+      "title": "Options",
+      "transparent": true,
+      "type": "text"
+    },
+    {
+      "datasource": {
+        "type": "prometheus",
+        "uid": "OVK6hOB4z"
+      },
+      "gridPos": {
+        "h": 2,
+        "w": 24,
+        "x": 0,
+        "y": 18
+      },
+      "id": 24,
+      "options": {
+        "code": {
+          "language": "plaintext",
+          "showLineNumbers": false,
+          "showMiniMap": false
+        },
+        "content": "# Battery Monitor",
+        "mode": "markdown"
+      },
+      "pluginVersion": "9.4.7",
+      "transparent": true,
+      "type": "text"
+    },
+    {
+      "aggregate": "AVG",
+      "color": {
+        "colorScheme": "interpolateRdYlGn",
+        "colorSpace": "RGB",
+        "customColors": [
+          {
+            "$$hashKey": "object:507",
+            "breakpoint": -5,
+            "color": "#5794F2"
+          },
+          {
+            "$$hashKey": "object:54",
+            "breakpoint": -1,
+            "color": "#5794F2"
+          },
+          {
+            "$$hashKey": "object:192",
+            "breakpoint": 0,
+            "color": "#37872D"
+          },
+          {
+            "$$hashKey": "object:501",
+            "breakpoint": 3,
+            "color": "#73BF69"
+          },
+          {
+            "$$hashKey": "object:189",
+            "breakpoint": 5,
+            "color": "#FADE2A"
+          },
+          {
+            "$$hashKey": "object:357",
+            "breakpoint": 10,
+            "color": "#FF9830"
+          },
+          {
+            "$$hashKey": "object:360",
+            "breakpoint": 15,
+            "color": "#F2495C"
+          },
+          {
+            "$$hashKey": "object:363",
+            "breakpoint": 25,
+            "color": "#C4162A"
+          }
+        ],
+        "invert": true,
+        "mode": "CUSTOM",
+        "nullColor": "transparent"
+      },
+      "data": {
+        "unitFormat": "amp"
+      },
+      "datasource": {
+        "type": "prometheus",
+        "uid": "OVK6hOB4z"
+      },
+      "description": "",
+      "fragment": "HOUR",
+      "gridPos": {
+        "h": 8,
+        "w": 12,
+        "x": 0,
+        "y": 20
+      },
+      "hideTimeOverride": true,
+      "id": 16,
+      "legend": {
+        "show": false
+      },
+      "maxDataPoints": 10000,
+      "scale": {
+        "max": 80,
+        "min": 0
+      },
+      "targets": [
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "OVK6hOB4z"
+          },
+          "editorMode": "code",
+          "expr": "junctek_load_amps",
+          "legendFormat": "__auto",
+          "range": true,
+          "refId": "A"
+        }
+      ],
+      "title": "Load (A)",
+      "tooltip": {
+        "show": false
+      },
+      "type": "petrslavotinek-carpetplot-panel",
+      "xAxis": {
+        "hideLabels": false,
+        "labelFormat": "%a %m/%d",
+        "minBucketWidthToShowWeekends": 4,
+        "show": true,
+        "showCrosshair": true,
+        "showWeekends": true
+      },
+      "yAxis": {
+        "hideLabels": false,
+        "show": true,
+        "showCrosshair": false
+      }
+    },
+    {
+      "aggregate": "AVG",
+      "color": {
+        "colorScheme": "interpolateRdYlGn",
+        "colorSpace": "RGB",
+        "customColors": [
+          {
+            "$$hashKey": "object:54",
+            "breakpoint": 0,
+            "color": "#C4162A"
+          },
+          {
+            "$$hashKey": "object:365",
+            "breakpoint": 12.9,
+            "color": "#F2495C"
+          },
+          {
+            "$$hashKey": "object:189",
+            "breakpoint": 13,
+            "color": "#FADE2A"
+          },
+          {
+            "$$hashKey": "object:501",
+            "breakpoint": 13.1,
+            "color": "#96D98D"
+          },
+          {
+            "$$hashKey": "object:192",
+            "breakpoint": 13.2,
+            "color": "#37872D"
+          },
+          {
+            "$$hashKey": "object:507",
+            "breakpoint": 14,
+            "color": "#5794F2"
+          }
+        ],
+        "invert": true,
+        "mode": "CUSTOM",
+        "nullColor": "transparent"
+      },
+      "data": {
+        "unitFormat": "volt"
+      },
+      "datasource": {
+        "type": "prometheus",
+        "uid": "OVK6hOB4z"
+      },
+      "description": "",
+      "fragment": "HOUR",
+      "gridPos": {
+        "h": 8,
+        "w": 12,
+        "x": 12,
+        "y": 20
+      },
+      "hideTimeOverride": true,
+      "id": 14,
+      "legend": {
+        "show": false
+      },
+      "scale": {
+        "max": 80,
+        "min": 0
+      },
+      "targets": [
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "OVK6hOB4z"
+          },
+          "editorMode": "code",
+          "expr": "junctek_load_volts",
+          "legendFormat": "__auto",
+          "range": true,
+          "refId": "A"
+        }
+      ],
+      "title": "Battery Volts (V)",
+      "tooltip": {
+        "show": false
+      },
+      "type": "petrslavotinek-carpetplot-panel",
+      "xAxis": {
+        "hideLabels": false,
+        "labelFormat": "%a %m/%d",
+        "minBucketWidthToShowWeekends": 4,
+        "show": true,
+        "showCrosshair": true,
+        "showWeekends": true
+      },
+      "yAxis": {
+        "hideLabels": false,
+        "show": true,
+        "showCrosshair": false
+      }
+    },
+    {
+      "datasource": {
+        "type": "prometheus",
+        "uid": "OVK6hOB4z"
+      },
+      "gridPos": {
+        "h": 2,
+        "w": 24,
+        "x": 0,
+        "y": 28
+      },
+      "id": 25,
+      "options": {
+        "code": {
+          "language": "plaintext",
+          "showLineNumbers": false,
+          "showMiniMap": false
+        },
+        "content": "# Temperatures",
+        "mode": "markdown"
+      },
+      "pluginVersion": "9.4.7",
+      "transparent": true,
+      "type": "text"
+    },
+    {
+      "aggregate": "AVG",
+      "color": {
+        "colorScheme": "interpolateRdYlGn",
+        "colorSpace": "RGB",
+        "customColors": [
+          {
+            "$$hashKey": "object:54",
+            "color": "#006837"
+          },
+          {
+            "$$hashKey": "object:55",
+            "color": "#aa0526"
+          }
+        ],
+        "invert": false,
+        "mode": "SPECTRUM",
+        "nullColor": "transparent"
+      },
+      "data": {
+        "unitFormat": "celsius"
+      },
+      "datasource": {
+        "type": "prometheus",
+        "uid": "OVK6hOB4z"
+      },
+      "description": "",
+      "fragment": "HOUR",
+      "gridPos": {
+        "h": 8,
+        "w": 12,
+        "x": 0,
+        "y": 30
+      },
+      "hideTimeOverride": true,
+      "id": 17,
+      "legend": {
+        "show": false
+      },
+      "scale": {
+        "max": 80,
+        "min": 20
+      },
+      "targets": [
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "OVK6hOB4z"
+          },
+          "editorMode": "code",
+          "expr": "solarmon_controller_temperature_celsius",
+          "legendFormat": "__auto",
+          "range": true,
+          "refId": "A"
+        }
+      ],
+      "title": "Controller Temp (C)",
+      "tooltip": {
+        "show": false
+      },
+      "type": "petrslavotinek-carpetplot-panel",
+      "xAxis": {
+        "hideLabels": false,
+        "labelFormat": "%a %m/%d",
+        "minBucketWidthToShowWeekends": 4,
+        "show": true,
+        "showCrosshair": true,
+        "showWeekends": true
+      },
+      "yAxis": {
+        "hideLabels": false,
+        "show": true,
+        "showCrosshair": false
+      }
+    },
+    {
+      "aggregate": "AVG",
+      "color": {
+        "colorScheme": "interpolateRdYlGn",
+        "colorSpace": "RGB",
+        "customColors": [
+          {
+            "$$hashKey": "object:54",
+            "color": "#006837"
+          },
+          {
+            "$$hashKey": "object:55",
+            "color": "#aa0526"
+          }
+        ],
+        "invert": false,
+        "mode": "SPECTRUM",
+        "nullColor": "transparent"
+      },
+      "data": {
+        "unitFormat": "celsius"
+      },
+      "datasource": {
+        "type": "prometheus",
+        "uid": "OVK6hOB4z"
+      },
+      "description": "",
+      "fragment": "HOUR",
+      "gridPos": {
+        "h": 8,
+        "w": 12,
+        "x": 12,
+        "y": 30
+      },
+      "hideTimeOverride": true,
+      "id": 10,
+      "legend": {
+        "show": false
+      },
+      "scale": {
+        "max": 80,
+        "min": 20
+      },
+      "targets": [
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "OVK6hOB4z"
+          },
+          "editorMode": "code",
+          "expr": "pi_temperature_celcius",
+          "legendFormat": "__auto",
+          "range": true,
+          "refId": "A"
+        }
+      ],
+      "title": "Raspberry Pi Temp (C)",
+      "tooltip": {
+        "show": false
+      },
+      "type": "petrslavotinek-carpetplot-panel",
+      "xAxis": {
+        "hideLabels": false,
+        "labelFormat": "%a %m/%d",
+        "minBucketWidthToShowWeekends": 4,
+        "show": true,
+        "showCrosshair": true,
+        "showWeekends": true
+      },
+      "yAxis": {
+        "hideLabels": false,
+        "show": true,
+        "showCrosshair": false
+      }
+    },
+    {
+      "aggregate": "AVG",
+      "color": {
+        "colorScheme": "interpolateRdYlGn",
+        "colorSpace": "RGB",
+        "customColors": [
+          {
+            "$$hashKey": "object:54",
+            "color": "#006837"
+          },
+          {
+            "$$hashKey": "object:55",
+            "color": "#aa0526"
+          }
+        ],
+        "invert": false,
+        "mode": "SPECTRUM",
+        "nullColor": "transparent"
+      },
+      "data": {
+        "unitFormat": "celsius"
+      },
+      "datasource": {
+        "type": "prometheus",
+        "uid": "OVK6hOB4z"
+      },
+      "description": "",
+      "fragment": "HOUR",
+      "gridPos": {
+        "h": 8,
+        "w": 12,
+        "x": 0,
+        "y": 38
+      },
+      "hideTimeOverride": true,
+      "id": 15,
+      "legend": {
+        "show": false
+      },
+      "scale": {
+        "max": 80,
+        "min": 20
+      },
+      "targets": [
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "OVK6hOB4z"
+          },
+          "editorMode": "code",
+          "expr": "junctek_temp",
+          "legendFormat": "__auto",
+          "range": true,
+          "refId": "A"
+        }
+      ],
+      "title": "Indoor Temp (C)",
+      "tooltip": {
+        "show": false
+      },
+      "type": "petrslavotinek-carpetplot-panel",
+      "xAxis": {
+        "hideLabels": false,
+        "labelFormat": "%a %m/%d",
+        "minBucketWidthToShowWeekends": 4,
+        "show": true,
+        "showCrosshair": true,
+        "showWeekends": true
+      },
+      "yAxis": {
+        "hideLabels": false,
+        "show": true,
+        "showCrosshair": false
+      }
+    },
+    {
+      "aggregate": "AVG",
+      "color": {
+        "colorScheme": "interpolateRdYlGn",
+        "colorSpace": "RGB",
+        "customColors": [
+          {
+            "$$hashKey": "object:54",
+            "color": "#006837"
+          },
+          {
+            "$$hashKey": "object:55",
+            "color": "#aa0526"
+          }
+        ],
+        "invert": false,
+        "mode": "SPECTRUM",
+        "nullColor": "transparent"
+      },
+      "data": {
+        "unitFormat": "celsius"
+      },
+      "datasource": {
+        "type": "prometheus",
+        "uid": "OVK6hOB4z"
+      },
+      "description": "",
+      "fragment": "HOUR",
+      "gridPos": {
+        "h": 8,
+        "w": 12,
+        "x": 12,
+        "y": 38
+      },
+      "hideTimeOverride": true,
+      "id": 9,
+      "legend": {
+        "show": false
+      },
+      "scale": {
+        "max": 80,
+        "min": 0
+      },
+      "targets": [
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "OVK6hOB4z"
+          },
+          "editorMode": "code",
+          "expr": "solarmon_controller_temperature_celsius",
+          "legendFormat": "__auto",
+          "range": true,
+          "refId": "A"
+        }
+      ],
+      "title": "Outdoor Temp (C)",
+      "tooltip": {
+        "show": false
+      },
+      "type": "petrslavotinek-carpetplot-panel",
+      "xAxis": {
+        "hideLabels": false,
+        "labelFormat": "%a %m/%d",
+        "minBucketWidthToShowWeekends": 4,
+        "show": true,
+        "showCrosshair": true,
+        "showWeekends": true
+      },
+      "yAxis": {
+        "hideLabels": false,
+        "show": true,
+        "showCrosshair": false
+      }
+    },
+    {
+      "datasource": {
+        "type": "prometheus",
+        "uid": "OVK6hOB4z"
+      },
+      "gridPos": {
+        "h": 2,
+        "w": 24,
+        "x": 0,
+        "y": 46
+      },
+      "id": 26,
+      "options": {
+        "code": {
+          "language": "plaintext",
+          "showLineNumbers": false,
+          "showMiniMap": false
+        },
+        "content": "# Raspberry Pi",
+        "mode": "markdown"
+      },
+      "pluginVersion": "9.4.7",
+      "transparent": true,
+      "type": "text"
+    },
+    {
+      "aggregate": "AVG",
+      "color": {
+        "colorScheme": "interpolateRdYlGn",
+        "colorSpace": "RGB",
+        "customColors": [
+          {
+            "$$hashKey": "object:54",
+            "color": "#006837"
+          },
+          {
+            "$$hashKey": "object:55",
+            "color": "#aa0526"
+          }
+        ],
+        "invert": false,
+        "mode": "SPECTRUM",
+        "nullColor": "transparent"
+      },
+      "data": {
+        "unitFormat": "percent"
+      },
+      "datasource": {
+        "type": "prometheus",
+        "uid": "OVK6hOB4z"
+      },
+      "description": "",
+      "fragment": "HOUR",
+      "gridPos": {
+        "h": 8,
+        "w": 12,
+        "x": 0,
+        "y": 48
+      },
+      "hideTimeOverride": true,
+      "id": 12,
+      "legend": {
+        "show": false
+      },
+      "scale": {
+        "max": 100,
+        "min": 0
+      },
+      "targets": [
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "OVK6hOB4z"
+          },
+          "editorMode": "code",
+          "expr": "pi_cpu_usage",
+          "legendFormat": "__auto",
+          "range": true,
+          "refId": "A"
+        }
+      ],
+      "title": "Raspberry Pi CPU Usage (%)",
+      "tooltip": {
+        "show": false
+      },
+      "type": "petrslavotinek-carpetplot-panel",
+      "xAxis": {
+        "hideLabels": false,
+        "labelFormat": "%a %m/%d",
+        "minBucketWidthToShowWeekends": 4,
+        "show": true,
+        "showCrosshair": true,
+        "showWeekends": true
+      },
+      "yAxis": {
+        "hideLabels": false,
+        "show": true,
+        "showCrosshair": false
+      }
+    },
+    {
+      "aggregate": "AVG",
+      "color": {
+        "colorScheme": "interpolateRdYlGn",
+        "colorSpace": "RGB",
+        "customColors": [
+          {
+            "$$hashKey": "object:54",
+            "color": "#006837"
+          },
+          {
+            "$$hashKey": "object:55",
+            "color": "#aa0526"
+          }
+        ],
+        "invert": false,
+        "mode": "SPECTRUM",
+        "nullColor": "transparent"
+      },
+      "data": {
+        "unitFormat": "percent"
+      },
+      "datasource": {
+        "type": "prometheus",
+        "uid": "OVK6hOB4z"
+      },
+      "description": "",
+      "fragment": "HOUR",
+      "gridPos": {
+        "h": 8,
+        "w": 12,
+        "x": 12,
+        "y": 48
+      },
+      "hideTimeOverride": true,
+      "id": 13,
+      "legend": {
+        "show": false
+      },
+      "scale": {
+        "max": 100,
+        "min": 0
+      },
+      "targets": [
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "OVK6hOB4z"
+          },
+          "editorMode": "code",
+          "expr": "pi_ram_usage",
+          "legendFormat": "__auto",
+          "range": true,
+          "refId": "A"
+        }
+      ],
+      "title": "Raspberry Pi RAM Usage (%)",
+      "tooltip": {
+        "show": false
+      },
+      "type": "petrslavotinek-carpetplot-panel",
+      "xAxis": {
+        "hideLabels": false,
+        "labelFormat": "%a %m/%d",
+        "minBucketWidthToShowWeekends": 4,
+        "show": true,
+        "showCrosshair": true,
+        "showWeekends": true
+      },
+      "yAxis": {
+        "hideLabels": false,
+        "show": true,
+        "showCrosshair": false
+      }
+    },
+    {
+      "datasource": {
+        "type": "prometheus",
+        "uid": "OVK6hOB4z"
+      },
+      "gridPos": {
+        "h": 2,
+        "w": 24,
+        "x": 0,
+        "y": 56
+      },
+      "id": 27,
+      "options": {
+        "code": {
+          "language": "plaintext",
+          "showLineNumbers": false,
+          "showMiniMap": false
+        },
+        "content": "# Solar Charge Controller",
+        "mode": "markdown"
+      },
+      "pluginVersion": "9.4.7",
+      "transparent": true,
+      "type": "text"
+    },
+    {
+      "datasource": {
+        "type": "prometheus",
+        "uid": "OVK6hOB4z"
+      },
+      "description": "",
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "palette-classic"
+          },
+          "custom": {
+            "axisCenteredZero": false,
+            "axisColorMode": "text",
+            "axisLabel": "",
+            "axisPlacement": "auto",
+            "barAlignment": 0,
+            "drawStyle": "line",
+            "fillOpacity": 0,
+            "gradientMode": "none",
+            "hideFrom": {
+              "legend": false,
+              "tooltip": false,
+              "viz": false
+            },
+            "lineInterpolation": "linear",
+            "lineWidth": 1,
+            "pointSize": 5,
+            "scaleDistribution": {
+              "type": "linear"
+            },
+            "showPoints": "auto",
+            "spanNulls": false,
+            "stacking": {
+              "group": "A",
+              "mode": "none"
+            },
+            "thresholdsStyle": {
+              "mode": "off"
+            }
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green"
+              }
+            ]
+          },
+          "unit": "amph"
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 8,
+        "w": 12,
+        "x": 0,
+        "y": 58
+      },
+      "id": 19,
+      "interval": "24h",
+      "options": {
+        "legend": {
+          "calcs": [
+            "max"
+          ],
+          "displayMode": "list",
+          "placement": "bottom",
+          "showLegend": true
+        },
+        "tooltip": {
+          "mode": "single",
+          "sort": "none"
+        }
+      },
+      "targets": [
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "OVK6hOB4z"
+          },
+          "editorMode": "code",
+          "expr": "solarmon_charging_amp_hours_today",
+          "legendFormat": "Solar aH",
+          "range": true,
+          "refId": "A"
+        }
+      ],
+      "title": "Solar aH Generated Per Day",
+      "type": "timeseries"
+    },
+    {
+      "datasource": {
+        "type": "prometheus",
+        "uid": "OVK6hOB4z"
+      },
+      "description": "",
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "palette-classic"
+          },
+          "custom": {
+            "axisCenteredZero": false,
+            "axisColorMode": "text",
+            "axisLabel": "",
+            "axisPlacement": "auto",
+            "barAlignment": 0,
+            "drawStyle": "line",
+            "fillOpacity": 0,
+            "gradientMode": "none",
+            "hideFrom": {
+              "legend": false,
+              "tooltip": false,
+              "viz": false
+            },
+            "lineInterpolation": "linear",
+            "lineWidth": 1,
+            "pointSize": 5,
+            "scaleDistribution": {
+              "type": "linear"
+            },
+            "showPoints": "auto",
+            "spanNulls": false,
+            "stacking": {
+              "group": "A",
+              "mode": "none"
+            },
+            "thresholdsStyle": {
+              "mode": "off"
+            }
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green"
+              }
+            ]
+          },
+          "unit": "amph"
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 8,
+        "w": 12,
+        "x": 12,
+        "y": 58
+      },
+      "id": 20,
+      "interval": "24h",
+      "options": {
+        "legend": {
+          "calcs": [
+            "max"
+          ],
+          "displayMode": "list",
+          "placement": "bottom",
+          "showLegend": true
+        },
+        "tooltip": {
+          "mode": "single",
+          "sort": "none"
+        }
+      },
+      "targets": [
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "OVK6hOB4z"
+          },
+          "editorMode": "code",
+          "expr": "solarmon_discharging_amp_hours_today",
+          "legendFormat": "Solar aH Discharched",
+          "range": true,
+          "refId": "A"
+        }
+      ],
+      "title": "Solar aH Discharged Per Day",
+      "type": "timeseries"
+    },
+    {
+      "datasource": {
+        "type": "prometheus",
+        "uid": "OVK6hOB4z"
+      },
+      "description": "",
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "palette-classic"
+          },
+          "custom": {
+            "axisCenteredZero": false,
+            "axisColorMode": "text",
+            "axisLabel": "",
+            "axisPlacement": "auto",
+            "barAlignment": 0,
+            "drawStyle": "line",
+            "fillOpacity": 0,
+            "gradientMode": "none",
+            "hideFrom": {
+              "legend": false,
+              "tooltip": false,
+              "viz": false
+            },
+            "lineInterpolation": "linear",
+            "lineWidth": 1,
+            "pointSize": 5,
+            "scaleDistribution": {
+              "type": "linear"
+            },
+            "showPoints": "auto",
+            "spanNulls": false,
+            "stacking": {
+              "group": "A",
+              "mode": "none"
+            },
+            "thresholdsStyle": {
+              "mode": "off"
+            }
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green"
+              }
+            ]
+          },
+          "unit": "watt"
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 8,
+        "w": 12,
+        "x": 0,
+        "y": 66
+      },
+      "id": 22,
+      "interval": "24h",
+      "options": {
+        "legend": {
+          "calcs": [
+            "max"
+          ],
+          "displayMode": "list",
+          "placement": "bottom",
+          "showLegend": true
+        },
+        "tooltip": {
+          "mode": "single",
+          "sort": "none"
+        }
+      },
+      "targets": [
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "OVK6hOB4z"
+          },
+          "editorMode": "code",
+          "expr": "solarmon_power_generation_today",
+          "legendFormat": "Solar aH Discharched",
+          "range": true,
+          "refId": "A"
+        }
+      ],
+      "title": "Max Power Generated Per Day (W)",
+      "type": "timeseries"
+    },
+    {
+      "datasource": {
+        "type": "prometheus",
+        "uid": "OVK6hOB4z"
+      },
+      "description": "",
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "palette-classic"
+          },
+          "custom": {
+            "axisCenteredZero": false,
+            "axisColorMode": "text",
+            "axisLabel": "",
+            "axisPlacement": "auto",
+            "barAlignment": 0,
+            "drawStyle": "line",
+            "fillOpacity": 0,
+            "gradientMode": "none",
+            "hideFrom": {
+              "legend": false,
+              "tooltip": false,
+              "viz": false
+            },
+            "lineInterpolation": "linear",
+            "lineWidth": 1,
+            "pointSize": 5,
+            "scaleDistribution": {
+              "type": "linear"
+            },
+            "showPoints": "auto",
+            "spanNulls": false,
+            "stacking": {
+              "group": "A",
+              "mode": "none"
+            },
+            "thresholdsStyle": {
+              "mode": "off"
+            }
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green"
+              }
+            ]
+          },
+          "unit": "watt"
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 8,
+        "w": 12,
+        "x": 12,
+        "y": 66
+      },
+      "id": 21,
+      "interval": "24h",
+      "options": {
+        "legend": {
+          "calcs": [
+            "max"
+          ],
+          "displayMode": "list",
+          "placement": "bottom",
+          "showLegend": true
+        },
+        "tooltip": {
+          "mode": "single",
+          "sort": "none"
+        }
+      },
+      "targets": [
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "OVK6hOB4z"
+          },
+          "editorMode": "code",
+          "expr": "solarmon_max_charging_power_today",
+          "legendFormat": "Solar aH Discharched",
+          "range": true,
+          "refId": "A"
+        }
+      ],
+      "title": "Max Charging Power Per Day (W)",
+      "type": "timeseries"
+    },
+    {
+      "datasource": {
+        "type": "prometheus",
+        "uid": "OVK6hOB4z"
+      },
+      "description": "",
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "thresholds"
+          },
+          "mappings": [
+            {
+              "options": {
+                "match": "null",
+                "result": {
+                  "text": "N/A"
+                }
+              },
+              "type": "special"
+            }
+          ],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green"
+              },
+              {
+                "color": "red",
+                "value": 80
+              }
+            ]
+          },
+          "unit": "watt"
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 6,
+        "w": 6,
+        "x": 0,
+        "y": 74
+      },
+      "id": 8,
+      "links": [],
+      "maxDataPoints": 100,
+      "options": {
+        "colorMode": "none",
+        "graphMode": "none",
+        "justifyMode": "auto",
+        "orientation": "horizontal",
+        "reduceOptions": {
+          "calcs": [
+            "lastNotNull"
+          ],
+          "fields": "",
+          "values": false
+        },
+        "text": {},
+        "textMode": "auto"
+      },
+      "pluginVersion": "9.4.7",
+      "targets": [
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "OVK6hOB4z"
+          },
+          "exemplar": true,
+          "expr": "solarmon_power_generation_total",
+          "format": "time_series",
+          "hide": false,
+          "interval": "",
+          "intervalFactor": 2,
+          "legendFormat": "Solar Amps",
+          "refId": "A"
+        }
+      ],
+      "title": "Power Generation (Total)",
+      "type": "stat"
+    }
+  ],
+  "refresh": "30s",
+  "revision": 1,
+  "schemaVersion": 38,
+  "style": "dark",
+  "tags": [],
+  "templating": {
+    "list": []
+  },
+  "time": {
+    "from": "now-24h",
+    "to": "now"
+  },
+  "timepicker": {
+    "refresh_intervals": [
+      "10s",
+      "30s",
+      "1m",
+      "5m",
+      "15m",
+      "30m",
+      "1h",
+      "2h",
+      "1d"
+    ],
+    "time_options": [
+      "15m",
+      "1h",
+      "24h",
+      "3d",
+      "7d",
+      "30d"
+    ]
+  },
+  "timezone": "",
+  "title": "Solar Bluetooth Monitor - History",
+  "uid": "solarmon-03",
+  "version": 44,
+  "weekStart": ""
+}
