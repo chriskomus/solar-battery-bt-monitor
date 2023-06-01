@@ -12,6 +12,7 @@ Any capable Raspberry Pi setup should work, as long as it has bluetooth. I'm usi
 - 12V DC 5.5mm x 2.1mm Barrel Jack Power Cable
 - BrosTrend AC650 Dual Band WiFi [installation guide](https://cdn.shopify.com/s/files/1/0270/1023/6487/files/AC1L_AC3L_AC5L_Linux_Manual_BrosTrend_WiFi_Adapter_v8.pdf?v=1671154201)
 - Kinivo BTD400 Bluetooth Low Energy USB Adapter [installation guide](https://community.kinivo.com/t/how-to-raspberry-pi-setup/173)
+- RTC Real Time Clock, DS3231 Clock Memory Module
 
 ### 2nd Raspberry Pi
 - Raspberry Pi 3 Model A+ [Setup 2nd Pi Instructions](second_pi_setup.md)
@@ -203,3 +204,78 @@ hdmi_cvt 1024 600 60 6 0 0 0
 sudo shutdown -r now
 ```
 5. Plug in HDMI and USB cable.
+
+## RTC Setup
+
+This is only required if the Pi won't have internet access. The Pi gets the current datetime from the internet when it boots up, if there's no internet, the time will be incorrect and the logged data will be inaccurate.
+
+[Full installation instructions here.](https://thepihut.com/blogs/raspberry-pi-tutorials/17209332-adding-a-real-time-clock-to-your-raspberry-pi)
+
+1. Edit the /boot/config.txt file:
+```
+sudo nano /boot/config.txt
+```
+2. Add the following to the end of the file and save:
+```
+dtparam=i2c_arm=on
+```
+3. Shutdown:
+```
+sudo shutdown -h now
+```
+4. Install the RTC on Pins 1 thru 5.
+5. Start up the Pi and run this command to check that it is installed, You should see ID #68:
+```
+sudo i2cdetect -y 1
+```
+6. The RTC module must be loaded by the kernel by running:
+```
+sudo modprobe rtc-ds1307
+```
+7. Now you need to be running as the super user; type in:
+```
+sudo bash
+```
+8. Setup new device:
+```
+echo ds1307 0x68 > /sys/class/i2c-adapter/i2c-1/new_device
+```
+9. Exit bash:
+```
+exit
+```
+10. Check the time on the RTC, if its the first time being used it should show Jan 1 2000:
+```
+sudo hwclock -r
+```
+11. Set the current datetime:
+```
+sudo date -s '2023-05-31 20:20:20 PM'
+```
+12. Write the time to the RTC:
+```
+sudo hwclock -w
+```
+13. Verify that the time has been written:
+```
+sudo hwclock -r
+```
+14. Add the RTC kernel module to the file `/etc/modules` so it is loaded when the Raspberry Pi boots.
+```
+sudo nano /etc/modules
+```
+15. Add to the end of the file:
+```
+rtc-ds1307
+```
+16. add the DS1307 device creation at boot by editing `/etc/rc.local`
+```
+sudo nano /etc/rc.local
+```
+17. Add just before the `exit 0` line at the end of the file:
+```
+echo ds1307 0x68 > /sys/class/i2c-adapter/i2c-1/new_device
+sudo hwclock -s
+date
+```
+18. Save and reboot. The time should be cvorrect even without internet.
