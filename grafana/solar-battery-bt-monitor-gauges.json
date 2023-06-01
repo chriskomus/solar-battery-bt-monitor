@@ -116,7 +116,7 @@
           "values": false
         },
         "showThresholdLabels": false,
-        "showThresholdMarkers": true,
+        "showThresholdMarkers": false,
         "text": {}
       },
       "pluginVersion": "9.4.7",
@@ -928,7 +928,7 @@
             "mode": "absolute",
             "steps": [
               {
-                "color": "green",
+                "color": "blue",
                 "value": null
               },
               {
@@ -960,7 +960,7 @@
           "values": false
         },
         "showThresholdLabels": false,
-        "showThresholdMarkers": true
+        "showThresholdMarkers": false
       },
       "pluginVersion": "9.4.7",
       "targets": [
@@ -1004,7 +1004,7 @@
               "type": "special"
             }
           ],
-          "max": 24,
+          "max": 30,
           "min": 0,
           "thresholds": {
             "mode": "absolute",
@@ -1014,12 +1014,20 @@
                 "value": null
               },
               {
-                "color": "super-light-green",
-                "value": 4
+                "color": "super-light-blue",
+                "value": 10
               },
               {
                 "color": "blue",
-                "value": 10
+                "value": 12
+              },
+              {
+                "color": "#EAB839",
+                "value": 22
+              },
+              {
+                "color": "dark-red",
+                "value": 25
               }
             ]
           },
@@ -1102,23 +1110,19 @@
               },
               {
                 "color": "super-light-green",
-                "value": 50
+                "value": 1
+              },
+              {
+                "color": "light-green",
+                "value": 36
               },
               {
                 "color": "green",
-                "value": 100
-              },
-              {
-                "color": "semi-dark-green",
-                "value": 125
-              },
-              {
-                "color": "dark-green",
-                "value": 150
+                "value": 60
               },
               {
                 "color": "blue",
-                "value": 175
+                "value": 84
               }
             ]
           },
@@ -1188,7 +1192,7 @@
               "type": "special"
             }
           ],
-          "max": 18,
+          "max": 11,
           "min": 0,
           "thresholds": {
             "mode": "absolute",
@@ -1199,23 +1203,19 @@
               },
               {
                 "color": "super-light-green",
-                "value": 4
+                "value": 1
+              },
+              {
+                "color": "light-green",
+                "value": 3
               },
               {
                 "color": "green",
-                "value": 8
-              },
-              {
-                "color": "semi-dark-green",
-                "value": 10
-              },
-              {
-                "color": "dark-green",
-                "value": 12.5
+                "value": 5
               },
               {
                 "color": "blue",
-                "value": 14
+                "value": 7
               }
             ]
           },
@@ -1271,171 +1271,11 @@
         "type": "prometheus",
         "uid": "OVK6hOB4z"
       },
-      "fieldConfig": {
-        "defaults": {
-          "color": {
-            "mode": "continuous-YlBl"
-          },
-          "mappings": [
-            {
-              "options": {
-                "match": "null",
-                "result": {
-                  "text": "N/A"
-                }
-              },
-              "type": "special"
-            }
-          ],
-          "max": 100,
-          "min": 0,
-          "thresholds": {
-            "mode": "absolute",
-            "steps": [
-              {
-                "color": "green"
-              }
-            ]
-          },
-          "unit": "amph"
-        },
-        "overrides": []
-      },
-      "gridPos": {
-        "h": 6,
-        "w": 6,
-        "x": 0,
-        "y": 24
-      },
-      "id": 59,
-      "interval": "15s",
-      "links": [],
-      "maxDataPoints": 10000,
-      "options": {
-        "orientation": "auto",
-        "reduceOptions": {
-          "calcs": [
-            "lastNotNull"
-          ],
-          "fields": "",
-          "values": false
-        },
-        "showThresholdLabels": false,
-        "showThresholdMarkers": true,
-        "text": {}
-      },
-      "pluginVersion": "9.4.7",
-      "targets": [
-        {
-          "datasource": {
-            "type": "prometheus",
-            "uid": "OVK6hOB4z"
-          },
-          "editorMode": "code",
-          "exemplar": true,
-          "expr": "solarmon_charging_amp_hours_today",
-          "format": "time_series",
-          "hide": false,
-          "interval": "",
-          "intervalFactor": 2,
-          "legendFormat": "Charging aH Today",
-          "range": true,
-          "refId": "A"
-        }
-      ],
-      "title": "Charging aH Today",
-      "type": "gauge"
-    },
-    {
-      "datasource": {
-        "type": "prometheus",
-        "uid": "OVK6hOB4z"
-      },
-      "fieldConfig": {
-        "defaults": {
-          "color": {
-            "mode": "continuous-YlBl"
-          },
-          "mappings": [
-            {
-              "options": {
-                "match": "null",
-                "result": {
-                  "text": "N/A"
-                }
-              },
-              "type": "special"
-            }
-          ],
-          "max": 100,
-          "min": 0,
-          "thresholds": {
-            "mode": "absolute",
-            "steps": [
-              {
-                "color": "green"
-              }
-            ]
-          },
-          "unit": "amph"
-        },
-        "overrides": []
-      },
-      "gridPos": {
-        "h": 6,
-        "w": 6,
-        "x": 6,
-        "y": 24
-      },
-      "id": 60,
-      "interval": "15s",
-      "links": [],
-      "maxDataPoints": 10000,
-      "options": {
-        "orientation": "auto",
-        "reduceOptions": {
-          "calcs": [
-            "lastNotNull"
-          ],
-          "fields": "",
-          "values": false
-        },
-        "showThresholdLabels": false,
-        "showThresholdMarkers": true,
-        "text": {}
-      },
-      "pluginVersion": "9.4.7",
-      "targets": [
-        {
-          "datasource": {
-            "type": "prometheus",
-            "uid": "OVK6hOB4z"
-          },
-          "editorMode": "code",
-          "exemplar": true,
-          "expr": "solarmon_discharging_amp_hours_today",
-          "format": "time_series",
-          "hide": false,
-          "interval": "",
-          "intervalFactor": 2,
-          "legendFormat": "Discharging aH Today",
-          "range": true,
-          "refId": "A"
-        }
-      ],
-      "title": "Discharging aH Today",
-      "type": "gauge"
-    },
-    {
-      "datasource": {
-        "type": "prometheus",
-        "uid": "OVK6hOB4z"
-      },
       "description": "",
       "fieldConfig": {
         "defaults": {
           "color": {
-            "mode": "continuous-YlBl"
+            "mode": "thresholds"
           },
           "mappings": [
             {
@@ -1448,13 +1288,37 @@
               "type": "special"
             }
           ],
-          "max": 100,
+          "max": 2000,
           "min": 0,
           "thresholds": {
             "mode": "absolute",
             "steps": [
               {
-                "color": "green"
+                "color": "text"
+              },
+              {
+                "color": "super-light-yellow",
+                "value": 250
+              },
+              {
+                "color": "super-light-green",
+                "value": 500
+              },
+              {
+                "color": "light-green",
+                "value": 750
+              },
+              {
+                "color": "green",
+                "value": 1000
+              },
+              {
+                "color": "green",
+                "value": 1250
+              },
+              {
+                "color": "blue",
+                "value": 1500
               }
             ]
           },
@@ -1465,7 +1329,7 @@
       "gridPos": {
         "h": 6,
         "w": 6,
-        "x": 12,
+        "x": 0,
         "y": 24
       },
       "id": 61,
@@ -1512,11 +1376,10 @@
         "type": "prometheus",
         "uid": "OVK6hOB4z"
       },
-      "description": "",
       "fieldConfig": {
         "defaults": {
           "color": {
-            "mode": "continuous-YlBl"
+            "mode": "thresholds"
           },
           "mappings": [
             {
@@ -1535,7 +1398,128 @@
             "mode": "absolute",
             "steps": [
               {
-                "color": "green"
+                "color": "text"
+              },
+              {
+                "color": "super-light-yellow",
+                "value": 1
+              },
+              {
+                "color": "super-light-green",
+                "value": 20
+              },
+              {
+                "color": "light-green",
+                "value": 30
+              },
+              {
+                "color": "green",
+                "value": 40
+              },
+              {
+                "color": "semi-dark-green",
+                "value": 60
+              },
+              {
+                "color": "blue",
+                "value": 80
+              }
+            ]
+          },
+          "unit": "amph"
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 6,
+        "w": 6,
+        "x": 6,
+        "y": 24
+      },
+      "id": 59,
+      "interval": "15s",
+      "links": [],
+      "maxDataPoints": 10000,
+      "options": {
+        "orientation": "auto",
+        "reduceOptions": {
+          "calcs": [
+            "lastNotNull"
+          ],
+          "fields": "",
+          "values": false
+        },
+        "showThresholdLabels": false,
+        "showThresholdMarkers": true,
+        "text": {}
+      },
+      "pluginVersion": "9.4.7",
+      "targets": [
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "OVK6hOB4z"
+          },
+          "editorMode": "code",
+          "exemplar": true,
+          "expr": "solarmon_charging_amp_hours_today",
+          "format": "time_series",
+          "hide": false,
+          "interval": "",
+          "intervalFactor": 2,
+          "legendFormat": "Charging aH Today",
+          "range": true,
+          "refId": "A"
+        }
+      ],
+      "title": "Charging aH Today",
+      "type": "gauge"
+    },
+    {
+      "datasource": {
+        "type": "prometheus",
+        "uid": "OVK6hOB4z"
+      },
+      "description": "",
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "thresholds"
+          },
+          "mappings": [
+            {
+              "options": {
+                "match": "null",
+                "result": {
+                  "text": "N/A"
+                }
+              },
+              "type": "special"
+            }
+          ],
+          "max": 200,
+          "min": 0,
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "text"
+              },
+              {
+                "color": "super-light-green",
+                "value": 1
+              },
+              {
+                "color": "light-green",
+                "value": 36
+              },
+              {
+                "color": "green",
+                "value": 60
+              },
+              {
+                "color": "blue",
+                "value": 84
               }
             ]
           },
@@ -1546,7 +1530,7 @@
       "gridPos": {
         "h": 6,
         "w": 6,
-        "x": 18,
+        "x": 12,
         "y": 24
       },
       "id": 62,
@@ -1586,6 +1570,86 @@
         }
       ],
       "title": "Max Charging Power Today",
+      "type": "gauge"
+    },
+    {
+      "datasource": {
+        "type": "prometheus",
+        "uid": "OVK6hOB4z"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "continuous-YlBl"
+          },
+          "mappings": [
+            {
+              "options": {
+                "match": "null",
+                "result": {
+                  "text": "N/A"
+                }
+              },
+              "type": "special"
+            }
+          ],
+          "max": 100,
+          "min": 0,
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green"
+              }
+            ]
+          },
+          "unit": "amph"
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 6,
+        "w": 6,
+        "x": 18,
+        "y": 24
+      },
+      "id": 60,
+      "interval": "15s",
+      "links": [],
+      "maxDataPoints": 10000,
+      "options": {
+        "orientation": "auto",
+        "reduceOptions": {
+          "calcs": [
+            "lastNotNull"
+          ],
+          "fields": "",
+          "values": false
+        },
+        "showThresholdLabels": false,
+        "showThresholdMarkers": true,
+        "text": {}
+      },
+      "pluginVersion": "9.4.7",
+      "targets": [
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "OVK6hOB4z"
+          },
+          "editorMode": "code",
+          "exemplar": true,
+          "expr": "solarmon_discharging_amp_hours_today",
+          "format": "time_series",
+          "hide": false,
+          "interval": "",
+          "intervalFactor": 2,
+          "legendFormat": "Discharging aH Today",
+          "range": true,
+          "refId": "A"
+        }
+      ],
+      "title": "Discharging aH Today",
       "type": "gauge"
     },
     {
@@ -2284,6 +2348,6 @@
   "timezone": "",
   "title": "Solar Bluetooth Monitor - Gauges",
   "uid": "solarmon-05",
-  "version": 37,
+  "version": 41,
   "weekStart": ""
 }

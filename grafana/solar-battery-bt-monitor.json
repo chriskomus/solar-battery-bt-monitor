@@ -75,7 +75,7 @@
       "fieldConfig": {
         "defaults": {
           "color": {
-            "fixedColor": "super-light-blue",
+            "fixedColor": "purple",
             "mode": "fixed",
             "seriesBy": "last"
           },
@@ -100,7 +100,7 @@
             "scaleDistribution": {
               "type": "linear"
             },
-            "showPoints": "always",
+            "showPoints": "never",
             "spanNulls": 3600000,
             "stacking": {
               "group": "A",
@@ -164,8 +164,18 @@
               {
                 "id": "color",
                 "value": {
-                  "fixedColor": "blue",
+                  "fixedColor": "text",
                   "mode": "fixed"
+                }
+              },
+              {
+                "id": "custom.lineStyle",
+                "value": {
+                  "dash": [
+                    0,
+                    10
+                  ],
+                  "fill": "dot"
                 }
               }
             ]
@@ -207,7 +217,7 @@
               {
                 "id": "color",
                 "value": {
-                  "fixedColor": "dark-green",
+                  "fixedColor": "blue",
                   "mode": "fixed"
                 }
               },
@@ -289,7 +299,7 @@
       "id": 16,
       "interval": "15s",
       "links": [],
-      "maxDataPoints": 100,
+      "maxDataPoints": 10000,
       "options": {
         "legend": {
           "calcs": [],
@@ -338,7 +348,7 @@
             "uid": "OVK6hOB4z"
           },
           "editorMode": "code",
-          "expr": "solarmon_load_amperes",
+          "expr": "solarmon_solar_amperes",
           "hide": false,
           "legendFormat": "Solar Charge (A)",
           "range": true,
@@ -416,7 +426,7 @@
               },
               {
                 "color": "blue",
-                "value": 95
+                "value": 98
               }
             ]
           },
@@ -426,7 +436,7 @@
       },
       "gridPos": {
         "h": 6,
-        "w": 5,
+        "w": 4,
         "x": 0,
         "y": 10
       },
@@ -536,8 +546,8 @@
       },
       "gridPos": {
         "h": 6,
-        "w": 5,
-        "x": 5,
+        "w": 4,
+        "x": 4,
         "y": 10
       },
       "id": 54,
@@ -599,7 +609,7 @@
               "type": "special"
             }
           ],
-          "max": 200,
+          "max": 11,
           "min": 0,
           "thresholds": {
             "mode": "absolute",
@@ -610,34 +620,30 @@
               },
               {
                 "color": "super-light-green",
-                "value": 50
+                "value": 1
+              },
+              {
+                "color": "light-green",
+                "value": 3
               },
               {
                 "color": "green",
-                "value": 100
-              },
-              {
-                "color": "semi-dark-green",
-                "value": 125
-              },
-              {
-                "color": "dark-green",
-                "value": 150
+                "value": 5
               },
               {
                 "color": "blue",
-                "value": 175
+                "value": 7
               }
             ]
           },
-          "unit": "watt"
+          "unit": "amp"
         },
         "overrides": []
       },
       "gridPos": {
         "h": 6,
-        "w": 5,
-        "x": 10,
+        "w": 4,
+        "x": 8,
         "y": 10
       },
       "id": 12,
@@ -662,19 +668,94 @@
             "type": "prometheus",
             "uid": "OVK6hOB4z"
           },
+          "editorMode": "code",
           "exemplar": true,
-          "expr": "solarmon_solar_watts",
+          "expr": "solarmon_solar_amperes",
           "format": "time_series",
           "hide": false,
           "interval": "",
           "intervalFactor": 2,
-          "legendFormat": "Solar Watts",
+          "legendFormat": "Solar Amps",
+          "range": true,
           "refId": "A"
         }
       ],
-      "title": "Solar Power (W)",
+      "title": "Solar Amps (A)",
       "transparent": true,
       "type": "gauge"
+    },
+    {
+      "datasource": {
+        "type": "prometheus",
+        "uid": "OVK6hOB4z"
+      },
+      "description": "",
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "continuous-BlPu",
+            "seriesBy": "last"
+          },
+          "mappings": [],
+          "max": 100,
+          "min": 0,
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              }
+            ]
+          },
+          "unit": "amph"
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 5,
+        "w": 3,
+        "x": 12,
+        "y": 10
+      },
+      "id": 57,
+      "links": [],
+      "maxDataPoints": 10000,
+      "options": {
+        "displayMode": "lcd",
+        "minVizHeight": 10,
+        "minVizWidth": 0,
+        "orientation": "vertical",
+        "reduceOptions": {
+          "calcs": [
+            "lastNotNull"
+          ],
+          "fields": "",
+          "values": false
+        },
+        "showUnfilled": true
+      },
+      "pluginVersion": "9.4.7",
+      "targets": [
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "OVK6hOB4z"
+          },
+          "editorMode": "code",
+          "exemplar": true,
+          "expr": "solarmon_charging_amp_hours_today",
+          "format": "time_series",
+          "hide": false,
+          "interval": "",
+          "intervalFactor": 2,
+          "legendFormat": "__auto",
+          "range": true,
+          "refId": "A"
+        }
+      ],
+      "title": "Generated",
+      "type": "bargauge"
     },
     {
       "datasource": {
@@ -867,7 +948,7 @@
         "overrides": []
       },
       "gridPos": {
-        "h": 3,
+        "h": 2,
         "w": 3,
         "x": 15,
         "y": 13
@@ -903,7 +984,7 @@
           "format": "time_series",
           "interval": "",
           "intervalFactor": 2,
-          "legendFormat": "Solar Panels:",
+          "legendFormat": "Solar:",
           "range": true,
           "refId": "A"
         }
@@ -1051,6 +1132,8 @@
             "seriesBy": "last"
           },
           "mappings": [],
+          "max": 60,
+          "min": 0,
           "thresholds": {
             "mode": "absolute",
             "steps": [
@@ -1299,7 +1382,7 @@
     "list": []
   },
   "time": {
-    "from": "now-3d",
+    "from": "now-1d",
     "to": "now"
   },
   "timepicker": {
@@ -1326,6 +1409,6 @@
   "timezone": "",
   "title": "Solar Bluetooth Monitor",
   "uid": "solarmon-01",
-  "version": 172,
+  "version": 189,
   "weekStart": ""
 }
