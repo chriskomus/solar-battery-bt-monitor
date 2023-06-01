@@ -506,7 +506,7 @@ class SolarDevice(gatt.Device):
     def append_pi_stats(self):
         # def append_pi_stats(self, data):
         """
-        Append pi stats
+        Append pi stats every 30 seconds.
         """
         is_pi_append_ready = False
         if self.time_of_last_pi_stat_send:

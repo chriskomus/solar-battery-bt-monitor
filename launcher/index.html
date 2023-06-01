@@ -171,8 +171,20 @@
     </a>
   </h2>
   <h5><a href="http://solar-monitor.local:9090/targets?search=">Prometheus</a> | <a href="http://solar-monitor.local:5000/metrics">Raw Feed</a></h5>
+  <!-- <h5>Current Date/Time: <span id="time"> </span></h5> -->
+  <h6>Update time:</h6>
+  <code>
+    sudo date -s '<span id="time_terminal"> </span>'
+  </code>
 
   <script>
+    var datetime = new Date();
+    // document.getElementById("time").textContent = datetime;
+    var timeTerminal = datetime.getFullYear() + "-" + (datetime.getMonth() + 1) + "-" + datetime.getDate() + " " + datetime.toLocaleTimeString();
+    timeTerminal = timeTerminal.replace(' AM','').replace(' PM','');
+    document.getElementById("time_terminal").textContent = timeTerminal;
+
+
     // Fullscreen button
     if (document.fullscreenEnabled || document.webkitFullscreenEnabled ||
       document.msFullscreenEnabled) {

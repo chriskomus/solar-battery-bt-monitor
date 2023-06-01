@@ -193,7 +193,7 @@ For simplicity, the [readme](README.md) and [hardware setup](docs/hardware_setup
     ...
     ```
 
-## Run The Script Automatically as a Service
+## Run The Script as a Service
 
 1. Create the solar-bt-service.service file in /etc/systemd/system/solar-battery-bt-monitor.service
 ```
