@@ -8,17 +8,13 @@ Any capable Raspberry Pi setup should work, as long as it has bluetooth. I'm usi
 - Raspberry Pi Compute Module 4, 8GB Lite - CM4008000
 - Raspberry Pi Compute Module CM4IO Board
 - 64gb microSD card
-- ~~USB to DC Barrel Jack Power Cable 5.5 x 2.1 mm 5V~~
 - 12V DC 5.5mm x 2.1mm Barrel Jack Power Cable
 - BrosTrend AC650 Dual Band WiFi [installation guide](https://cdn.shopify.com/s/files/1/0270/1023/6487/files/AC1L_AC3L_AC5L_Linux_Manual_BrosTrend_WiFi_Adapter_v8.pdf?v=1671154201)
 - Kinivo BTD400 Bluetooth Low Energy USB Adapter [installation guide](https://community.kinivo.com/t/how-to-raspberry-pi-setup/173)
-- RTC Real Time Clock, DS3231 Clock Memory Module
-
-### 2nd Raspberry Pi
-- Raspberry Pi 3 Model A+ [Setup 2nd Pi Instructions](second_pi_setup.md)
+- RTC Real Time Clock, DS3231 Clock Memory Module [installation guide](https://thepihut.com/blogs/raspberry-pi-tutorials/17209332-adding-a-real-time-clock-to-your-raspberry-pi)
 - 7inch HDMI LCD (H) Display (with case), 1024x600, IPS [installation guide](https://www.waveshare.com/wiki/7inch_HDMI_LCD_(H)_(with_case))
 
-### Renogy Solar Equipment
+### Renogy Solar Charge Controller and Panels
 - Renogy Adventurer Solar Charge Controller
 - Renogy BT-1 Bluetooth Module
 - 2x 100 watt solar panels
@@ -27,16 +23,15 @@ Any capable Raspberry Pi setup should work, as long as it has bluetooth. I'm usi
 - Junctek Battery Monitor KH140F [user manual](http://68.168.132.244/KG-F_EN_manual.pdf)
 
 ### Battery
-- ~~12v 100ah lead acid deep cycle battery~~
 - PowerQueen 12.8v 100ah LifePo4 battery
 
 # Raspberry Pi Setup
 
 ## Powering the Pi
 
-Insufficient power will cause low voltage warnings. I wanted to power it off the front USB port on the Renogy Solar Charge Controller but I kept getting low voltage warnings, so I ended up just using a 12v DC barrel jack (The Raspberry Pi CM4 Board accepts 12v DC, most other Pis only accept 5v). YMMV on how well powering off the solar charge controller's usb works depending on controller and power cable.
+Insufficient power will cause low voltage warnings and lots of problems. I wanted to power it off the front USB port on the Renogy Solar Charge Controller but I kept getting low voltage warnings, so I ended up using a 12v DC barrel jack (**IMPORTANT:** The Raspberry Pi CM4 Board accepts 12v DC, most other Pis only accept 5v) and powering right from the 12v DC source.
 
-The best solution is to use officially supported power supplies that supply 5.1v.
+YMMV on how well powering off the solar charge controller's usb works depending on controller and power cable. The best solution is to use officially supported power supplies that supply 5.1v.
 
 ## Getting Started
 
@@ -209,71 +204,69 @@ sudo shutdown -r now
 
 This is only required if the Pi won't have internet access. The Pi gets the current datetime from the internet when it boots up, if there's no internet, the time will be incorrect and the logged data will be inaccurate.
 
-[Full installation instructions here.](https://thepihut.com/blogs/raspberry-pi-tutorials/17209332-adding-a-real-time-clock-to-your-raspberry-pi)
-
 1. Edit the /boot/config.txt file:
-```
+```bash
 sudo nano /boot/config.txt
 ```
 2. Add the following to the end of the file and save:
-```
+```bash
 dtparam=i2c_arm=on
 ```
 3. Shutdown:
-```
+```bash
 sudo shutdown -h now
 ```
 4. Install the RTC on Pins 1 thru 5.
 5. Start up the Pi and run this command to check that it is installed, You should see ID #68:
-```
+```bash
 sudo i2cdetect -y 1
 ```
 6. The RTC module must be loaded by the kernel by running:
-```
+```bash
 sudo modprobe rtc-ds1307
 ```
 7. Now you need to be running as the super user; type in:
-```
+```bash
 sudo bash
 ```
 8. Setup new device:
-```
+```bash
 echo ds1307 0x68 > /sys/class/i2c-adapter/i2c-1/new_device
 ```
 9. Exit bash:
-```
+```bash
 exit
 ```
 10. Check the time on the RTC, if its the first time being used it should show Jan 1 2000:
-```
+```bash
 sudo hwclock -r
 ```
 11. Set the current datetime:
-```
+```bash
 sudo date -s '2023-05-31 20:20:20 PM'
 ```
 12. Write the time to the RTC:
-```
+```bash
 sudo hwclock -w
 ```
 13. Verify that the time has been written:
-```
+```bash
 sudo hwclock -r
 ```
 14. Add the RTC kernel module to the file `/etc/modules` so it is loaded when the Raspberry Pi boots.
-```
+```bash
 sudo nano /etc/modules
 ```
 15. Add to the end of the file:
-```
+```bash
 rtc-ds1307
 ```
 16. add the DS1307 device creation at boot by editing `/etc/rc.local`
-```
+```bash
 sudo nano /etc/rc.local
 ```
 17. Add just before the `exit 0` line at the end of the file:
-```
+```bash
 echo ds1307 0x68 > /sys/class/i2c-adapter/i2c-1/new_device
 sudo hwclock -s
 date
