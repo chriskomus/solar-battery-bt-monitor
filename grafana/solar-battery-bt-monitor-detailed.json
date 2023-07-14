@@ -43,7 +43,7 @@
             "axisCenteredZero": false,
             "axisColorMode": "text",
             "axisLabel": "",
-            "axisPlacement": "auto",
+            "axisPlacement": "right",
             "barAlignment": 0,
             "drawStyle": "line",
             "fillOpacity": 10,
@@ -70,7 +70,6 @@
             }
           },
           "mappings": [],
-          "max": 200,
           "min": 0,
           "thresholds": {
             "mode": "absolute",
@@ -82,6 +81,10 @@
               {
                 "color": "super-light-yellow",
                 "value": 1
+              },
+              {
+                "color": "#d5dde9",
+                "value": 10
               },
               {
                 "color": "super-light-blue",
@@ -407,7 +410,7 @@
           "showLineNumbers": false,
           "showMiniMap": false
         },
-        "content": "<div class=\"gf-form\">\r\n  <a class=\"gf-form-label gf-form-label\" style=\"font-size: 1.5em;\" href=\"http://solar-monitor.local:3000/d/solarmon-04/solar-bluetooth-monitor-detailed?orgId=1&refresh=30s&from=now-1h&to=now&kiosk\">1h</a>\r\n  <a class=\"gf-form-label gf-form-label\" style=\"font-size: 1.5em;\" href=\"http://solar-monitor.local:3000/d/solarmon-04/solar-bluetooth-monitor-detailed?orgId=1&refresh=30s&from=now-24h&to=now&kiosk\">1d</a>\r\n  <a class=\"gf-form-label gf-form-label\" style=\"font-size: 1.5em;\" href=\"http://solar-monitor.local:3000/d/solarmon-04/solar-bluetooth-monitor-detailed?orgId=1&refresh=30s&from=now-3d&to=now&kiosk\">3d</a>\r\n  <a class=\"gf-form-label gf-form-label\" style=\"font-size: 1.5em;\" href=\"http://solar-monitor.local:3000/d/solarmon-04/solar-bluetooth-monitor-detailed?orgId=1&refresh=30s&from=now-7d&to=now&kiosk\">7d</a>\r\n  <a class=\"gf-form-label gf-form-label\" style=\"font-size: 1.5em;\" href=\"http://solar-monitor.local:3000/d/solarmon-04/solar-bluetooth-monitor-detailed?orgId=1&refresh=30s&from=now-28d&to=now&kiosk\">4w</a>\r\n</div>\r\n<div class=\"gf-form\">\r\n  <a class=\"gf-form-label gf-form-label--dashlink\" style=\"font-size: 1.5em;\" href=\"http://solar-monitor.local:3000/d/solarmon-01/solar-bluetooth-monitor?orgId=1&refresh=30s&from=now-1d&to=now&kiosk\">MAIN</a>\r\n  <a class=\"gf-form-label gf-form-label--dashlink\" style=\"font-size: 1.5em;\" href=\"http://solar-monitor.local:3000/d/solarmon-05/solar-bluetooth-monitor-gauges?orgId=1&refresh=30s&from=now-1d&to=now&kiosk\">GAUGES</a>\r\n</div>\r\n<div class=\"gf-form\">\r\n  <a class=\"gf-form-label gf-form-label--dashlink\" style=\"font-size: 1.5em;\" href=\"http://solar-monitor.local:3000/d/solarmon-04/solar-bluetooth-monitor-detailed?orgId=1&refresh=30s&from=now-3d&to=now&kiosk\">CHARTS</a>\r\n  <a class=\"gf-form-label gf-form-label--dashlink\" style=\"font-size: 1.5em;\" href=\"http://solar-monitor.local:3000/d/solarmon-03/solar-bluetooth-monitor-history?orgId=1&refresh=30s&from=now-28d&to=now&kiosk\">HISTORY</a>\r\n</div>\r\n<div class=\"gf-form\">\r\n  <a class=\"gf-form-label gf-form-label--dashlink\" style=\"font-size: 1.5em;\" href=\"http://solar-monitor.local:3000/d/solarmon-04/solar-bluetooth-monitor-detailed?orgId=1&refresh=30s&kiosk=tv\">DASH</a>\r\n  <a class=\"gf-form-label gf-form-label--dashlink\" style=\"font-size: 1.5em;\" href=\"http://solar-monitor.local:7800/\">EXIT</a>\r\n</div>\r\n",
+        "content": "<div class=\"gf-form\">\r\n  <a class=\"gf-form-label gf-form-label\" style=\"font-size: 1.5em;\" href=\"http://solar-monitor.local:3000/d/solarmon-04/solar-bluetooth-monitor-detailed?orgId=1&refresh=30s&from=now-1h&to=now&kiosk\">1h</a>\r\n  <a class=\"gf-form-label gf-form-label\" style=\"font-size: 1.5em;\" href=\"http://solar-monitor.local:3000/d/solarmon-04/solar-bluetooth-monitor-detailed?orgId=1&refresh=30s&from=now-12h&to=now&kiosk\">12h</a>\r\n  <a class=\"gf-form-label gf-form-label\" style=\"font-size: 1.5em;\" href=\"http://solar-monitor.local:3000/d/solarmon-04/solar-bluetooth-monitor-detailed?orgId=1&refresh=30s&from=now-24h&to=now&kiosk\">1d</a>\r\n  <a class=\"gf-form-label gf-form-label\" style=\"font-size: 1.5em;\" href=\"http://solar-monitor.local:3000/d/solarmon-04/solar-bluetooth-monitor-detailed?orgId=1&refresh=30s&from=now-3d&to=now&kiosk\">3d</a>\r\n  <a class=\"gf-form-label gf-form-label\" style=\"font-size: 1.5em;\" href=\"http://solar-monitor.local:3000/d/solarmon-04/solar-bluetooth-monitor-detailed?orgId=1&refresh=30s&from=now-7d&to=now&kiosk\">7d</a>\r\n</div>\r\n<div class=\"gf-form\">\r\n  <a class=\"gf-form-label gf-form-label--dashlink\" style=\"font-size: 1.5em;\" href=\"http://solar-monitor.local:3000/d/solarmon-01/solar-bluetooth-monitor?orgId=1&refresh=30s&from=now-1d&to=now&kiosk\">MAIN</a>\r\n  <a class=\"gf-form-label gf-form-label--dashlink\" style=\"font-size: 1.5em;\" href=\"http://solar-monitor.local:3000/d/solarmon-05/solar-bluetooth-monitor-gauges?orgId=1&refresh=30s&from=now-1d&to=now&kiosk\">GAUGES</a>\r\n</div>\r\n<div class=\"gf-form\">\r\n  <a class=\"gf-form-label gf-form-label--dashlink\" style=\"font-size: 1.5em;\" href=\"http://solar-monitor.local:3000/d/solarmon-04/solar-bluetooth-monitor-detailed?orgId=1&refresh=30s&from=now-3d&to=now&kiosk\">CHARTS</a>\r\n  <a class=\"gf-form-label gf-form-label--dashlink\" style=\"font-size: 1.5em;\" href=\"http://solar-monitor.local:3000/d/solarmon-03/solar-bluetooth-monitor-history?orgId=1&refresh=30s&from=now-28d&to=now&kiosk\">HISTORY</a>\r\n</div>\r\n<div class=\"gf-form\">\r\n  <a class=\"gf-form-label gf-form-label--dashlink\" style=\"font-size: 1.5em;\" href=\"http://solar-monitor.local:3000/d/solarmon-04/solar-bluetooth-monitor-detailed?orgId=1&refresh=30s&kiosk=tv\">DASH</a>\r\n  <a class=\"gf-form-label gf-form-label--dashlink\" style=\"font-size: 1.5em;\" href=\"http://solar-monitor.local:7800/\">EXIT</a>\r\n</div>\r\n",
         "mode": "html"
       },
       "pluginVersion": "9.4.7",
@@ -440,7 +443,7 @@
             "axisCenteredZero": false,
             "axisColorMode": "text",
             "axisLabel": "",
-            "axisPlacement": "auto",
+            "axisPlacement": "right",
             "barAlignment": 0,
             "drawStyle": "line",
             "fillOpacity": 27,
@@ -488,9 +491,13 @@
               {
                 "id": "color",
                 "value": {
-                  "fixedColor": "#f4ff00",
+                  "fixedColor": "yellow",
                   "mode": "fixed"
                 }
+              },
+              {
+                "id": "custom.fillOpacity",
+                "value": 0
               }
             ]
           },
@@ -506,6 +513,10 @@
                   "fixedColor": "#1eff00",
                   "mode": "fixed"
                 }
+              },
+              {
+                "id": "custom.fillOpacity",
+                "value": 50
               }
             ]
           },
@@ -518,9 +529,13 @@
               {
                 "id": "color",
                 "value": {
-                  "fixedColor": "#00d7ff",
+                  "fixedColor": "purple",
                   "mode": "fixed"
                 }
+              },
+              {
+                "id": "custom.fillOpacity",
+                "value": 50
               }
             ]
           },
@@ -536,6 +551,10 @@
                   "fixedColor": "#fb455a",
                   "mode": "fixed"
                 }
+              },
+              {
+                "id": "custom.fillOpacity",
+                "value": 0
               }
             ]
           }
@@ -639,7 +658,7 @@
             "axisCenteredZero": false,
             "axisColorMode": "text",
             "axisLabel": "",
-            "axisPlacement": "auto",
+            "axisPlacement": "right",
             "barAlignment": 0,
             "drawStyle": "line",
             "fillOpacity": 20,
@@ -843,7 +862,7 @@
             "axisCenteredZero": false,
             "axisColorMode": "text",
             "axisLabel": "",
-            "axisPlacement": "auto",
+            "axisPlacement": "right",
             "barAlignment": 0,
             "drawStyle": "line",
             "fillOpacity": 20,
@@ -1001,7 +1020,7 @@
             "axisCenteredZero": false,
             "axisColorMode": "text",
             "axisLabel": "",
-            "axisPlacement": "auto",
+            "axisPlacement": "right",
             "barAlignment": 0,
             "drawStyle": "line",
             "fillOpacity": 20,
@@ -1127,7 +1146,7 @@
             "axisCenteredZero": false,
             "axisColorMode": "text",
             "axisLabel": "",
-            "axisPlacement": "auto",
+            "axisPlacement": "right",
             "barAlignment": 0,
             "drawStyle": "line",
             "fillOpacity": 20,
@@ -1254,7 +1273,7 @@
             "axisCenteredZero": false,
             "axisColorMode": "text",
             "axisLabel": "",
-            "axisPlacement": "auto",
+            "axisPlacement": "right",
             "barAlignment": 0,
             "drawStyle": "line",
             "fillOpacity": 20,
@@ -1352,7 +1371,7 @@
             "axisCenteredZero": false,
             "axisColorMode": "text",
             "axisLabel": "",
-            "axisPlacement": "auto",
+            "axisPlacement": "right",
             "barAlignment": 0,
             "drawStyle": "line",
             "fillOpacity": 20,
@@ -1477,7 +1496,7 @@
             "axisCenteredZero": false,
             "axisColorMode": "text",
             "axisLabel": "",
-            "axisPlacement": "auto",
+            "axisPlacement": "right",
             "barAlignment": 0,
             "drawStyle": "line",
             "fillOpacity": 10,
@@ -1504,7 +1523,6 @@
             }
           },
           "mappings": [],
-          "max": 200,
           "min": 0,
           "thresholds": {
             "mode": "absolute",
@@ -1639,7 +1657,7 @@
             "axisCenteredZero": false,
             "axisColorMode": "text",
             "axisLabel": "",
-            "axisPlacement": "auto",
+            "axisPlacement": "right",
             "barAlignment": 0,
             "drawStyle": "line",
             "fillOpacity": 10,
@@ -1740,7 +1758,7 @@
             "axisCenteredZero": false,
             "axisColorMode": "text",
             "axisLabel": "",
-            "axisPlacement": "auto",
+            "axisPlacement": "right",
             "barAlignment": 0,
             "drawStyle": "line",
             "fillOpacity": 10,
@@ -1868,7 +1886,7 @@
             "axisCenteredZero": false,
             "axisColorMode": "text",
             "axisLabel": "",
-            "axisPlacement": "auto",
+            "axisPlacement": "right",
             "barAlignment": 0,
             "drawStyle": "line",
             "fillOpacity": 20,
@@ -1981,7 +1999,7 @@
             "axisCenteredZero": false,
             "axisColorMode": "text",
             "axisLabel": "",
-            "axisPlacement": "auto",
+            "axisPlacement": "right",
             "barAlignment": 0,
             "drawStyle": "line",
             "fillOpacity": 20,
@@ -2094,7 +2112,7 @@
             "axisCenteredZero": false,
             "axisColorMode": "text",
             "axisLabel": "",
-            "axisPlacement": "auto",
+            "axisPlacement": "right",
             "barAlignment": 0,
             "drawStyle": "line",
             "fillOpacity": 20,
@@ -2232,7 +2250,7 @@
             "axisCenteredZero": false,
             "axisColorMode": "text",
             "axisLabel": "",
-            "axisPlacement": "auto",
+            "axisPlacement": "right",
             "barAlignment": 0,
             "drawStyle": "line",
             "fillOpacity": 20,
@@ -2345,7 +2363,7 @@
             "axisCenteredZero": false,
             "axisColorMode": "text",
             "axisLabel": "",
-            "axisPlacement": "auto",
+            "axisPlacement": "right",
             "barAlignment": 0,
             "drawStyle": "line",
             "fillOpacity": 20,
@@ -2461,7 +2479,7 @@
             "axisCenteredZero": false,
             "axisColorMode": "text",
             "axisLabel": "",
-            "axisPlacement": "auto",
+            "axisPlacement": "right",
             "barAlignment": 0,
             "drawStyle": "line",
             "fillOpacity": 20,
@@ -2582,7 +2600,7 @@
             "axisCenteredZero": false,
             "axisColorMode": "text",
             "axisLabel": "",
-            "axisPlacement": "auto",
+            "axisPlacement": "right",
             "barAlignment": 0,
             "drawStyle": "line",
             "fillOpacity": 20,
@@ -2776,6 +2794,6 @@
   "timezone": "",
   "title": "Solar Bluetooth Monitor - Detailed",
   "uid": "solarmon-04",
-  "version": 75,
+  "version": 83,
   "weekStart": ""
 }

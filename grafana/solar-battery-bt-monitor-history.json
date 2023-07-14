@@ -40,18 +40,38 @@
           },
           {
             "$$hashKey": "object:55",
-            "breakpoint": 10,
+            "breakpoint": 1,
             "color": "#FFF899"
           },
           {
+            "$$hashKey": "object:521",
+            "breakpoint": 10,
+            "color": "#d5dde9"
+          },
+          {
             "$$hashKey": "object:356",
-            "breakpoint": 100,
-            "color": "#C8F2C2"
+            "breakpoint": 25,
+            "color": "#C0D8FF"
           },
           {
             "$$hashKey": "object:359",
+            "breakpoint": 50,
+            "color": "#8AB8FF"
+          },
+          {
+            "$$hashKey": "object:512",
+            "breakpoint": 100,
+            "color": "#5794F2"
+          },
+          {
+            "$$hashKey": "object:515",
+            "breakpoint": 150,
+            "color": "#3274D9"
+          },
+          {
+            "$$hashKey": "object:518",
             "breakpoint": 200,
-            "color": "#37872D"
+            "color": "#1F60C4"
           }
         ],
         "invert": true,
@@ -121,17 +141,44 @@
         "colorSpace": "RGB",
         "customColors": [
           {
-            "$$hashKey": "object:54",
-            "color": "#006837"
+            "$$hashKey": "object:286",
+            "breakpoint": 0,
+            "color": "#C4162A"
+          },
+          {
+            "$$hashKey": "object:224",
+            "breakpoint": 20,
+            "color": "#F2495C"
+          },
+          {
+            "$$hashKey": "object:221",
+            "breakpoint": 30,
+            "color": "#FADE2A"
+          },
+          {
+            "$$hashKey": "object:218",
+            "breakpoint": 50,
+            "color": "#73BF69"
           },
           {
             "$$hashKey": "object:55",
-            "color": "#aa0526"
+            "breakpoint": 80,
+            "color": "#56A64B"
+          },
+          {
+            "$$hashKey": "object:54",
+            "breakpoint": 98,
+            "color": "#37872D"
+          },
+          {
+            "$$hashKey": "object:444",
+            "breakpoint": 98,
+            "color": "#5794F2"
           }
         ],
         "invert": true,
-        "mode": "SPECTRUM",
-        "nullColor": "transparent"
+        "mode": "CUSTOM",
+        "nullColor": "#00000000"
       },
       "data": {
         "unitFormat": "percent"
@@ -170,7 +217,7 @@
           "refId": "A"
         }
       ],
-      "title": "Battery Charging HIstory (%)",
+      "title": "Battery State of Charge History (%)",
       "tooltip": {
         "show": false
       },
@@ -995,7 +1042,7 @@
             "axisCenteredZero": false,
             "axisColorMode": "text",
             "axisLabel": "",
-            "axisPlacement": "auto",
+            "axisPlacement": "right",
             "barAlignment": 0,
             "drawStyle": "line",
             "fillOpacity": 0,
@@ -1087,7 +1134,7 @@
             "axisCenteredZero": false,
             "axisColorMode": "text",
             "axisLabel": "",
-            "axisPlacement": "auto",
+            "axisPlacement": "right",
             "barAlignment": 0,
             "drawStyle": "line",
             "fillOpacity": 0,
@@ -1179,7 +1226,7 @@
             "axisCenteredZero": false,
             "axisColorMode": "text",
             "axisLabel": "",
-            "axisPlacement": "auto",
+            "axisPlacement": "right",
             "barAlignment": 0,
             "drawStyle": "line",
             "fillOpacity": 0,
@@ -1271,7 +1318,7 @@
             "axisCenteredZero": false,
             "axisColorMode": "text",
             "axisLabel": "",
-            "axisPlacement": "auto",
+            "axisPlacement": "right",
             "barAlignment": 0,
             "drawStyle": "line",
             "fillOpacity": 0,
@@ -1467,6 +1514,6 @@
   "timezone": "",
   "title": "Solar Bluetooth Monitor - History",
   "uid": "solarmon-03",
-  "version": 44,
+  "version": 52,
   "weekStart": ""
 }
