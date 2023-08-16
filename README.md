@@ -10,6 +10,8 @@ A real-time dashboard for monitoring the performance of your system uses a touch
 
 **[Junctek KG-F Series KH140F Bluetooth Battery Monitor](https://www.aliexpress.com/item/1005005293243736.html)**: The python script reads data from the Junctek KH140F battery monitor.
 
+![Main dashboard](https://github.com/chriskomus/solar-battery-bt-monitor/blob/master/docs/img/1.jpg?raw=true)
+
 # Setup
 
 ## Getting Started
@@ -392,3 +394,19 @@ This project contains elements of the following:
 - [BarkinSpider/SolarShed](https://github.com/BarkinSpider/SolarShed)
 - [corbinbs/solarshed](https://github.com/corbinbs/solarshed)
 - [Rover 20A/40A Charge Controller—MODBUS Protocol](https://docs.google.com/document/d/1OSW3gluYNK8d_gSz4Bk89LMQ4ZrzjQY6/edit)
+
+# Screenshots
+
+![2](https://github.com/chriskomus/solar-battery-bt-monitor/blob/master/docs/img/2.jpg?raw=true)
+
+![3](https://github.com/chriskomus/solar-battery-bt-monitor/blob/master/docs/img/3.jpg?raw=true)
+
+![4](https://github.com/chriskomus/solar-battery-bt-monitor/blob/master/docs/img/4.jpg?raw=true)
+
+![5](https://github.com/chriskomus/solar-battery-bt-monitor/blob/master/docs/img/5.jpg?raw=true)
+
+![6](https://github.com/chriskomus/solar-battery-bt-monitor/blob/master/docs/img/6.jpg?raw=true)
+
+![7](https://github.com/chriskomus/solar-battery-bt-monitor/blob/master/docs/img/7.jpg?raw=true)
+
+![8](https://github.com/chriskomus/solar-battery-bt-monitor/blob/master/docs/img/8.jpg?raw=true)
