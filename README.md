@@ -1,6 +1,4 @@
-# Solar Panel and Battery Bluetooth Monitor with Dashboard
-
-All-in-one DIY solar charge controller and battery monitoring dashboard solution!
+# Solar Charge Controller and Battery Bluetooth Monitor with Dashboard
 
 This guide is for Renogy BT-1 compatible charge controllers and the Junctek KG-F Series bluetooth battery monitor, monitored by a Raspberry Pi.
 
@@ -12,17 +10,11 @@ A real-time dashboard for monitoring the performance of your system uses a touch
 
 **[Junctek KG-F Series KH140F Bluetooth Battery Monitor](https://www.aliexpress.com/item/1005005293243736.html)**: The python script reads data from the Junctek KH140F battery monitor.
 
-My setup utilizes two Raspberry Pis:
-- Server: **Raspberry Pi Compute Module 4 with the Compute Module 4 IO Board**. [See the hardware instructions specific to that build.](docs/hardware_setup.md) Handles the heavy lifting: running the python script, prometheus and grafana services.
-- Touchscren Dashboard: **Raspberry Pi 3 A+** [See 2nd Pi Instructions](docs/second_pi_setup.md) Runs Chromium in full screen mode displaying the Grafana dashboard.
-
-For simplicity, the [readme](README.md) and [hardware setup](docs/hardware_setup.md) is written for using one Raspberry Pi. [See the 2nd Pi readme guide for setting up two Pis.](docs/second_pi_setup.md)
-
 # Setup
 
 ## Getting Started
 
-1. Set up a Raspberry Pi with wifi/bluetooth. [See the hardware instructions specific to my build.](docs/hardware_setup.md) Or set up two Raspberry Pis: one for running python/prometheus/grafana server and the other as a LCD touch-screen dashboard. [See 2nd Pi Instructions](docs/second_pi_setup.md)
+1. Set up a Raspberry Pi with wifi/bluetooth. [See the hardware instructions specific to my build](docs/hardware_setup.md). Or set up two Raspberry Pis: one for running python/prometheus/grafana server and the other as a LCD touch-screen dashboard. [See 2nd Pi Instructions](docs/second_pi_setup.md)
 
 ## Install Project
 
@@ -139,32 +131,32 @@ For simplicity, the [readme](README.md) and [hardware setup](docs/hardware_setup
     ```
 
 ### Configure your BT Devices
-4. Now you'll need to edit the solar-battery-bt-monitor.ini with the specifics of your setup. You need to get the MAC address of your particular Renogy BT-1 device and Junctek KG-F Series device.
+1. Now you'll need to edit the solar-battery-bt-monitor.ini with the specifics of your setup. You need to get the MAC address of your particular Renogy BT-1 device and Junctek KG-F Series device.
    ```
    sudo bluetoothctl
    scan on
    ```
 
 #### Renogy BT-1
-5. Look for devices with alias `BT-TH-XXXX..` and note the device name and mac address. If the device doesn't show up in the scanner, make sure you force quit any of the Renogy apps that might be connected to your BT-1.
+2. Look for devices with alias `BT-TH-XXXX..` and note the device name and mac address. If the device doesn't show up in the scanner, make sure you force quit any of the Renogy apps that might be connected to your BT-1.
 
 #### Junctek KG-F Series KH140F
-6. Look for devices with alias `BTGXXX` and note the device name and mac address. **Note** there is no documention online regarding the BT device name for this device. So I'm taking a guess that other KG-F Series devices have a similar alias. Download the official Juncket app, and tap "Search" and it should bring up the device name. Tap connect to confirm it's correct, then be sure to disconnect before proceeding.
+3. Look for devices with alias `BTGXXX` and note the device name and mac address. **Note** there is no documention online regarding the BT device name for this device. So I'm taking a guess that other KG-F Series devices have a similar alias. Download the official Juncket app, and tap "Search" and it should bring up the device name. Tap connect to confirm it's correct, then be sure to disconnect before proceeding.
 
 #### Edit solar-battery-bt-monitor.ini
-7. If you are using BT-1 data, set `renogy_enable` to True.
-8. If you are using KG-F Series data, set `junctek_enable` to True.
+4. If you are using BT-1 data, set `renogy_enable` to True.
+5. If you are using KG-F Series data, set `junctek_enable` to True.
 6. Edit solar-battery-bt-monitor.ini file with the device name and MAC address for both devices.
 
 ### Fire it up!
-7. It's time to test it out:
+1. It's time to test it out:
     ```
     cd ~/solar-battery-bt-monitor
     python3 solar-battery-bt-monitor.py
     ```
-8. The script will attempt to connect to your BT-1 and KG-F Series device.  Often times, the bluetooth libraries will immediately disconnect. This script is set up by default to reconnect if that happens. Usually after a handful of reconnect attempts, the application will connect and you'll see the values output on the console.
+2. The script will attempt to connect to your BT-1 and KG-F Series device.  Often times, the bluetooth libraries will immediately disconnect. This script is set up by default to reconnect if that happens. Usually after a handful of reconnect attempts, the application will connect and you'll see the values output on the console.
 
-9. The script by default logs the data read from the controller to prometheus. If prometheus is running on your pi, you should be able to go to the URL http://192.168.0.XXX:5000 or http://solar-monitor.local:5000 and see some output that looks something like the following (you'll likely see a bunch of additional parameters).
+3. The script by default logs the data read from the controller to prometheus. If prometheus is running on your pi, you should be able to go to the URL http://192.168.0.XXX:5000 or http://solar-monitor.local:5000 and see some output that looks something like the following (you'll likely see a bunch of additional parameters).
     ```
     # HELP solarshed_battery_percentage Battery %
     # TYPE solarshed_battery_percentage gauge
@@ -278,13 +270,13 @@ hide_version = true
 9. You should now see the dashboard without having logged in!
 
 ### Part 2 - Launch Chromium at startup
-10. Open a terminal and type this to get to the configuration setting:
+1. Open a terminal and type this to get to the configuration setting:
 ```
 cd .config
 sudo mkdir -p lxsession/LXDE-pi
 sudo nano lxsession/LXDE-pi/autostart
 ```
-11. Paste this into nano and save:
+2. Paste this into nano and save:
 ```
 @lxpanel --profile LXDE-pi
 @pcmanfm --desktop --profile LXDE-pi
@@ -292,27 +284,27 @@ sudo nano lxsession/LXDE-pi/autostart
 point-rpi
 @chromium-browser --start-fullscreen --start-maximized
 ```
-12. Optional: Install virtual keyboard for the touchscreen.
+3. Optional: Install virtual keyboard for the touchscreen.
 ```
 sudo apt install onboard
 ```
-13. Go to Main Menu -> Preferences -> Raspberry Pi Configuration -> Display
-14. Disable Screen-Blanking.
-15. If you'd like Grafana to launch after booting continue with the following steps. If you prefer an html launcher instead, [read the launcher guide](docs/launcher_readme.md) and skip to step 21 in this section.
+4. Go to Main Menu -> Preferences -> Raspberry Pi Configuration -> Display
+5. Disable Screen-Blanking.
+6. If you'd like Grafana to launch after booting continue with the following steps. If you prefer an html launcher instead, [read the launcher guide](docs/launcher_readme.md) and skip to step 21 in this section.
 
 ### Part 3 - Set up Bookmarks and Home Button
-16. Bookmark the dashboard with the settings you'd like to see as a default.
-17. Go into Chromium settings -> Appearance -> Show Home Button.
-18. Set the home button to the grafana url that you bookmarked.
-19. Go into Chromium settings -> On start-up -> Open a specific page... -> Add a new page
-20. Paste the grafana url.
+1. Bookmark the dashboard with the settings you'd like to see as a default.
+2. Go into Chromium settings -> Appearance -> Show Home Button.
+3. Set the home button to the grafana url that you bookmarked.
+4. Go into Chromium settings -> On start-up -> Open a specific page... -> Add a new page
+5. Paste the grafana url.
 
 ### Part 4 - Reboot and test
-21. Use the shutdown script or reboot:
+1. Use the shutdown script or reboot:
 ```
 sudo shutdown -r now
 ```
-22. The grafana dashboard should load after the reset. F11 to toggle fullscreen.
+2. The grafana dashboard should load after the reset. F11 to toggle fullscreen.
 
 
 # Troubleshooting
