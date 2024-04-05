@@ -1,6 +1,6 @@
 # Solar Charge Controller and Battery Bluetooth Monitor with Dashboard
 
-This guide is for Renogy BT-1 compatible charge controllers and the Junctek KG-F Series bluetooth battery monitor, monitored by a Raspberry Pi.
+This guide is for Renogy BT-1 compatible charge controllers and the Junctek KH140F Battery Monitor (or other Junctek KG-F series Battery Monitors), monitored by a Raspberry Pi.
 
 A real-time dashboard for monitoring the performance of your system uses a touch-screen LCD displaying a Grafana dashboard with Prometheus for data logging from a Python script.
 
