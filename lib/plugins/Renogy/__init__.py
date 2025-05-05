@@ -1,13 +1,8 @@
 # ------------------------------------------------------
 # Original Author: Olen, Scott Nichol, Cyril Sebastian
 # ------------------------------------------------------
-import os
-from threading import Timer
 import logging
-import time
 import libscrc
-
-from lib.solar_device import SolarDeviceManager, SolarDevice
 
 
 class Config:
@@ -20,10 +15,6 @@ class Config:
         "REGISTER": 256,
         "WORDS": 34,
     }
-
-    # old
-    # NOTIFY_CHAR_UUID = "0000fff1-0000-1000-8000-00805f9b34fb"
-    # WRITE_CHAR_UUID = "0000ffd1-0000-1000-8000-00805f9b34fb"
 
     # new
     NOTIFY_SERVICE_UUID = "0000fff0-0000-1000-8000-00805f9b34fb"
@@ -50,100 +41,13 @@ class Config:
 class Util:
     def __init__(
         self,
-        # alias=None,
-        # on_data_received=None,
-        # auto_reconnect=False,
-        # continuous=False,
-        # interval=-1,
         logger_name=None,
         config=None,
     ):
-        # self.adapter_name = adapter_name
-        # self.mac_address = mac_address
-        # self.alias = alias
-        # self.data_callback = on_data_received
-        # self.auto_reconnect = auto_reconnect
-        # self.continuous = continuous
-        # self.interval = interval
-        # self.device = None
-        # self.manager = SolarDeviceManager(adapter_name=adapter_name)
-        # self.device = SolarDevice(
-        #     mac_address=mac_address,
-        #     manager=self.manager,
-        #     on_resolved=self.on_resolved,
-        #     on_data=self.on_data_received,
-        #     auto_reconnect=auto_reconnect,
-        #     notify_char_uuid=Config().NOTIFY_CHAR_UUID,
-        #     write_char_uuid=Config().WRITE_CHAR_UUID,
-        #     need_polling=continuous,
-        #     logger_name="renogy",
-        #     config=config,
-        # )
-
         self.logger_name = logger_name
         self.config = config
 
-        # if self.config:
-        #     self.battery_capacity_ah = self.config.getint(self.logger_name, "battery_capacity_ah", fallback=100)
-        #     self.charging = self.config.getboolean(self.logger_name, "start_script_as_charging", fallback=False)
-        #     self.draw_as_negative_value = self.config.getboolean(self.logger_name, "draw_as_negative_value", fallback=False)
-        # else:
-        #     raise ValueError("[{}] Missing config".format(self.logger_name))
-
-        # self.timer = None
-        # if not self.continuous:
-        #     self.timer = Timer(Config().SYSTEM_TIMEOUT, self.gracefully_exit)
-        #     self.timer.start()
         self.data = {}
-
-        # if not self.manager.is_adapter_powered:
-        #     self.manager.is_adapter_powered = True
-        # logging.info(
-        #     "Adapter status - Powered: {}".format(self.manager.is_adapter_powered)
-        # )
-
-    # def connect(self):
-    #     discovering = True
-    #     wait = Config().DISCOVERY_TIMEOUT
-    #     found = False
-
-    #     self.manager.update_devices()
-    #     logging.info("Starting discovery...")
-    #     self.manager.start_discovery()
-
-    #     while discovering:
-    #         time.sleep(1)
-    #         logging.info("Devices found: %s", len(self.manager.devices()))
-    #         for dev in self.manager.devices():
-    #             if dev.mac_address == self.mac_address or dev.alias() == self.alias:
-    #                 logging.info(
-    #                     "Found bt1 device %s  [%s]", dev.alias(), dev.mac_address
-    #                 )
-    #                 discovering = False
-    #                 found = True
-    #         wait = wait - 1
-    #         if wait <= 0:
-    #             discovering = False
-    #     self.manager.stop_discovery()
-
-    #     if found:
-    #         self._connect()
-    #     else:
-    #         logging.error(
-    #             "Device not found: [%s], please check the details provided.",
-    #             self.mac_address,
-    #         )
-    #         self.gracefully_exit(True)
-
-    # def _connect(self):
-    #     try:
-    #         self.device.connect()
-    #         self.manager.run()
-    #     except Exception as e:
-    #         logging.error(e)
-    #         self.gracefully_exit(True)
-    #     except KeyboardInterrupt:
-    #         self.gracefully_exit()
 
     def poll_request(self):
         return self.create_request_payload(
@@ -153,63 +57,16 @@ class Util:
             Config().READ_PARAMS["WORDS"],
         )
 
-    # def request_data(self):
-    #     logging.debug("request_data...")
-    #     request = self.create_request_payload(
-    #         Config().READ_PARAMS["DEVICE_ID"],
-    #         Config().READ_PARAMS["FUNCTION"],
-    #         Config().READ_PARAMS["REGISTER"],
-    #         Config().READ_PARAMS["WORDS"],
-    #     )
-    #     self.device.characteristic_write_value(request)
-
     def on_resolved(self):
         logging.debug("resolved services")
         self.request_data()
 
-    # def on_data_received(self, value):
-    #     logging.debug("renogy data received!")
-    #     data = self.parse_incoming_bytestream(value)
-    #     for key in data:
-    #         self.data[key] = data[key]
-
-    #     if self.data_callback is not None:
-    #         self.data_callback(self.data)
-
-    #     if self.continuous and self.interval > 0:
-    #         logging.info("Query BT-1 again in {} seconds...".format(self.interval))
-    #         time.sleep(self.interval)
-    #         self.request_data()
-
     def on_data_received(self, value):
-        # logging.debug("renogy data received!")
         data = self.parse_incoming_bytestream(value)
         for key in data:
             self.data[key] = data[key]
 
         return self.data
-
-        # if self.data_callback is not None:
-        #     self.data_callback(self.data)
-
-        # if self.continuous and self.interval > 0:
-        #     logging.info("Query BT-1 again in {} seconds...".format(self.interval))
-        #     time.sleep(self.interval)
-        #     self.request_data()
-
-    # def gracefully_exit(self, connectFailed=False):
-    #     logging.info("gracefully_exit")
-    #     if self.timer is not None and self.timer.is_alive():
-    #         self.timer.cancel()
-    #     if self.device is not None and not connectFailed and self.device.is_connected():
-    #         logging.info(
-    #             "Exit: Disconnecting device: %s [%s]",
-    #             self.device.alias(),
-    #             self.device.mac_address,
-    #         )
-    #         self.device.disconnect()
-    #     self.manager.stop()
-    #     os._exit(os.EX_OK)
 
     def bytes_to_int(self, bs, offset, length):
         # Reads data from a list of bytes, and converts to an int
