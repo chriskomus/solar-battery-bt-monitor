@@ -2,29 +2,11 @@
 # Bluetooth Device Settings
 adapter = hci0
 
-# Renogy BT-1
-renogy_enable = True
-renogy_device_alias = BT-TH-B00FXXXX
-renogy_mac_addr = C4:64:E3:3C:XX:XX
-
-# Junctek KH140F
-junctek_enable = True
-junctek_device_alias = BTGXXX
-junctek_mac_addr = C4:64:E3:3C:XX:XX
-
 #Log Level (DEBUG | INFO | WARN | ERROR)
-log_level = INFO
+log_level = DEBUG
 
 #Temperature (C [Celsius] | K [Kelvin] | F [Farenheit])
 temperature = C
-
-# Continuous monitoring of values, script sleeps for
-# number of seconds specified in data_read_interval
-# then makes another read attempt
-continuous_monitor = True
-
-# Number of seconds between data read attempts
-data_read_interval = 30
 
 # Often when starting up the script will disconnect
 # immediately.  Set this parameter to true and the
@@ -33,6 +15,43 @@ data_read_interval = 30
 # resolve services.
 reconnect = True
 
-# Data logger type. Currently supports prometheus
-data_logger = prometheus
 
+[controller_1]
+enabled = True
+device_alias = BT-TH-6A5DC19D
+mac_address = C4:D3:6A:5D:C1:9D
+device_type = Renogy
+# Number of seconds between data read attempts
+data_read_interval = 30
+round_digits = 1
+
+[monitoring_1]
+enabled = True
+device_alias = BTG004
+mac_address = 38:3B:26:79:DF:37
+device_type = Junctek
+battery_capacity_ah = 100
+# The Junctek only transmit its charging state when
+# the charging state changes, so set to True to assume battery
+# is charging when the script starts.
+start_script_as_charging = False
+# power/current draw will display as negative value when battery
+# is discharging if this is set to True
+draw_as_negative_value = False
+# number of seconds between data transmissions to prometheus
+data_send_interval = 30
+round_digits = 1
+
+[datalogger]
+log_to_prometheus = True
+log_to_url = False
+log_to_mqtt = False
+url = https://webhook.site/
+token = 12345
+
+[mqtt]
+# Address to the mqtt broker
+; broker = mqtt.server.addr
+# All topics are prefixed by this prefix
+# E.g. "solar/battery_1/voltage"
+prefix = solar
