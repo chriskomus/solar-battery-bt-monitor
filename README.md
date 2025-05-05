@@ -12,8 +12,11 @@ A real-time dashboard for monitoring the performance of your system uses a touch
 
 ![Main dashboard](https://github.com/chriskomus/solar-battery-bt-monitor/blob/master/docs/img/1.jpg?raw=true)
 
+# Table Of Contents
+
 - [Solar Charge Controller and Battery Bluetooth Monitor with Dashboard](#solar-charge-controller-and-battery-bluetooth-monitor-with-dashboard)
   - [Monitoring Renogy BT-1 Devices with Junctek KH140F Battery Monitor](#monitoring-renogy-bt-1-devices-with-junctek-kh140f-battery-monitor)
+- [Table Of Contents](#table-of-contents)
 - [Setup](#setup)
   - [Getting Started](#getting-started)
   - [Install Project](#install-project)
