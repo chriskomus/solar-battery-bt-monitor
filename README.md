@@ -12,6 +12,41 @@ A real-time dashboard for monitoring the performance of your system uses a touch
 
 ![Main dashboard](https://github.com/chriskomus/solar-battery-bt-monitor/blob/master/docs/img/1.jpg?raw=true)
 
+- [Solar Charge Controller and Battery Bluetooth Monitor with Dashboard](#solar-charge-controller-and-battery-bluetooth-monitor-with-dashboard)
+  - [Monitoring Renogy BT-1 Devices with Junctek KH140F Battery Monitor](#monitoring-renogy-bt-1-devices-with-junctek-kh140f-battery-monitor)
+- [Setup](#setup)
+  - [Getting Started](#getting-started)
+  - [Install Project](#install-project)
+  - [Install Prometheus](#install-prometheus)
+  - [Install Grafana](#install-grafana)
+  - [Setup Project](#setup-project)
+    - [Install Packages](#install-packages)
+    - [Configure your BT Devices](#configure-your-bt-devices)
+      - [Renogy BT-1](#renogy-bt-1)
+      - [Junctek KG-F Series KH140F](#junctek-kg-f-series-kh140f)
+      - [Edit solar-battery-bt-monitor.ini](#edit-solar-battery-bt-monitorini)
+    - [Fire it up!](#fire-it-up)
+  - [Run The Script as a Service](#run-the-script-as-a-service)
+  - [Configure Grafana](#configure-grafana)
+  - [Setup Complete](#setup-complete)
+- [Set Up Touch Screen LCD (Optional)](#set-up-touch-screen-lcd-optional)
+    - [Part 1 - Enable Grafana anonymous auth](#part-1---enable-grafana-anonymous-auth)
+    - [Part 2 - Launch Chromium at startup](#part-2---launch-chromium-at-startup)
+    - [Part 3 - Set up Bookmarks and Home Button](#part-3---set-up-bookmarks-and-home-button)
+    - [Part 4 - Reboot and test](#part-4---reboot-and-test)
+- [Troubleshooting](#troubleshooting)
+  - [BT Issues](#bt-issues)
+  - [solar-battery-bt-monitor Service Issues](#solar-battery-bt-monitor-service-issues)
+  - [Low Voltage Warnings](#low-voltage-warnings)
+  - [Chromium Blank White Screen After Booting](#chromium-blank-white-screen-after-booting)
+  - [Increase Swap Size](#increase-swap-size)
+- [Reverse Engineering A BT Device](#reverse-engineering-a-bt-device)
+- [Future Enhancements](#future-enhancements)
+  - [Junctek](#junctek)
+- [Credits](#credits)
+- [Screenshots](#screenshots)
+
+
 # Setup
 
 ## Getting Started
@@ -382,6 +417,55 @@ sudo dphys-swapfile swapon
 
 If you want to learn more about the process of reverse engineering a BT device using just the device and a Raspberry Pi, check out my guide here:
 [BLE Sniffer Walkthrough for Junctek BT Battery Monitor](https://github.com/chriskomus/ble-sniffer-walkthrough)
+
+# Future Enhancements
+
+## Junctek
+
+Thanks to @bartowl for finding some additional fields from the Junktek BT streams that can be integrated in future versions.
+
+```
+*B0 - total capacity (/10)
+*B1 - ??? calibration
+*B2 - voltage calibration (80-120 - values over 100 represented by 2 bytes, otherwise 1 byte)
+*B3 - current calibration (50-120, 1-2 bytes)
+*B4 - temp calibration (95-105, 1-2 bytes)
+?B5 - ?
+?B6 - ?
+?B7 - ?
+?B8 - ?
+?B9 - ?
+C0 - voltage (/100)
+C1 - amps (/100)
+*C2 - protection delay time in s.
+*C3 - protection recovery time in s.
+C4 - ?
+*C5 - overvoltage protection OVP (/100)
+*C6 - undervoltage protection LVP (/100)
+*C7 - overcurrent protection OCP (/100)
+*C8 - charging overcurrent protection NCP (/100)
+*C9 - overpower protection OPP (/100)
+D0 - current SoC
+D1 - (current direction?)
+D2 - capacity left in Ah (/1000)
+D3 - discharged today Ah (/1000)
+D4 - charged today Ah (/1000)
+D5 - accumulated charging capacity Ah (/1000)
+D6 - time remaining in min
+D7 - ?
+D8 - watts (/100)
+D9 - temperature: 0125 means temp in last byte (25), and 01 means probably that temp is valid (00 when no sensor)
+E0 - ?
+E1 - ?
+E2 - ?
+E4 - ?
+E5 - ?
+E6 - fully charged voltage (/100)
+E7 - zero charged voltage (/100)
+E8 - ?
+E9 - ?
+F0 - ?
+```
 
 # Credits
 
