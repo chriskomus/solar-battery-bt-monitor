@@ -4,6 +4,8 @@
 #
 # ------------------------------------------------------
 import logging
+from collections import deque
+import time
 
 
 class Config:
@@ -28,12 +30,13 @@ class Config:
 
 
 class Util:
+    min_remaining_history = deque()
+
     def __init__(
         self,
         logger_name=None,
         config=None,
     ):
-
         self.logger_name = logger_name
         self.config = config
 
@@ -173,6 +176,28 @@ class Util:
             values["junctek_battery_percentage"] = (
                 values["junctek_ah_remaining"] / battery_capacity_ah * 100
             )
+
+        # Calculate minutes remaining by taking avg of recent junctek_min_remaining values
+        if "junctek_min_remaining" in values:
+            now = time.time()
+            expiry_seconds = (
+                self.config.getint(
+                    self.logger_name, "min_remaining_avg_time_in_mins", fallback=10
+                )
+                * 60
+            )
+
+            self.min_remaining_history.append((now, values["junctek_min_remaining"]))
+
+            while (
+                self.min_remaining_history
+                and now - self.min_remaining_history[0][0] > expiry_seconds
+            ):
+                self.min_remaining_history.popleft()
+
+            if self.min_remaining_history:
+                valid_values = [v for _, v in self.min_remaining_history]
+                values["junctek_min_remaining"] = sum(valid_values) / len(valid_values)
 
         # Append max capacity
         values["junctek_max_capacity"] = battery_capacity_ah
