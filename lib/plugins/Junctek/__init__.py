@@ -3,12 +3,7 @@
 # https://github.com/chriskomus/solar-battery-bt-monitor
 #
 # ------------------------------------------------------
-import os
-from threading import Timer
 import logging
-import time
-
-from lib.solar_device import SolarDeviceManager, SolarDevice
 
 
 class Config:
@@ -35,37 +30,10 @@ class Config:
 class Util:
     def __init__(
         self,
-        # alias=None,
-        # on_data_received=None,
-        # auto_reconnect=False,
-        # continuous=False,
-        # interval=-1,
-        # battery_capacity_ah=100,
-        # start_script_as_charging=False,
         logger_name=None,
         config=None,
     ):
-        # self.adapter_name = adapter_name
-        # self.mac_address = mac_address
-        # self.alias = alias
-        # self.data_callback = on_data_received
-        # self.auto_reconnect = auto_reconnect
-        # self.continuous = continuous
-        # self.interval = interval
-        # self.device = None
-        # self.manager = SolarDeviceManager(adapter_name=adapter_name)
-        # self.device = SolarDevice(
-        #     mac_address=mac_address,
-        #     manager=self.manager,
-        #     on_resolved=self.on_resolved,
-        #     on_data=self.on_data_received,
-        #     auto_reconnect=auto_reconnect,
-        #     notify_char_uuid=Config().NOTIFY_CHAR_UUID,
-        #     notify_service_uuid=Config().NOTIFY_SERVICE_UUID,
-        #     need_polling=continuous,
-        #     logger_name="junctek",
-        #     config=config,
-        # )
+
         self.logger_name = logger_name
         self.config = config
 
@@ -82,87 +50,12 @@ class Util:
         else:
             raise ValueError("[{}] Missing config".format(self.logger_name))
 
-        # self.timer = None
-        # if not self.continuous:
-        #     self.timer = Timer(SYSTEM_TIMEOUT, self.gracefully_exit)
-        #     self.timer.start()
         self.data = {}
-
-        # if not self.manager.is_adapter_powered:
-        #     self.manager.is_adapter_powered = True
-        # logging.info(
-        #     "Adapter status - Powered: {}".format(self.manager.is_adapter_powered)
-        # )
-
-    # def connect(self):
-    #     discovering = True
-    #     wait = Config().DISCOVERY_TIMEOUT
-    #     found = False
-
-    #     self.manager.update_devices()
-    #     logging.info("Starting discovery...")
-    #     self.manager.start_discovery()
-
-    #     while discovering:
-    #         time.sleep(1)
-    #         logging.info("Devices found: %s", len(self.manager.devices()))
-    #         for dev in self.manager.devices():
-    #             if dev.mac_address == self.mac_address or dev.alias() == self.alias:
-    #                 logging.info(
-    #                     "Found bt1 device %s  [%s]", dev.alias(), dev.mac_address
-    #                 )
-    #                 discovering = False
-    #                 found = True
-    #         wait = wait - 1
-    #         if wait <= 0:
-    #             discovering = False
-    #     self.manager.stop_discovery()
-
-    #     if found:
-    #         self._connect()
-    #     else:
-    #         logging.error(
-    #             "Device not found: [%s], please check the details provided.",
-    #             self.mac_address,
-    #         )
-    #         self.gracefully_exit(True)
-
-    # def _connect(self):
-    #     try:
-    #         self.device.connect()
-    #         self.manager.run()
-    #     except Exception as e:
-    #         logging.error(e)
-    #         self.gracefully_exit(True)
-    #     except KeyboardInterrupt:
-    #         self.gracefully_exit()
 
     def on_resolved(self):
         logging.debug("resolved services")
 
-    # def on_data_received(self, value):
-    #     logging.debug("junctek data received!")
-    #     bs = str(value.hex()).upper()
-    #     logging.debug(bs)
-    #     if not self.validate(bs):
-    #         return False
-
-    #     data = self.parse_incoming_bytestream(
-    #         bs, self.battery_capacity_ah, self.charging
-    #     )
-    #     for key in data:
-    #         self.data[key] = data[key]
-
-    #     if self.data_callback is not None:
-    #         self.data_callback(self.data)
-
-    #     if self.continuous and self.interval > 0:
-    #         logging.info("Query Junctek again in {} seconds...".format(self.interval))
-    #         time.sleep(self.interval)
-    #         self.request_data()
-
     def on_data_received(self, value):
-        # logging.debug("junctek data received!")
         bs = str(value.hex()).upper()
         if not self.validate(bs):
             return None
@@ -172,28 +65,6 @@ class Util:
             self.data[key] = data[key]
 
         return self.data
-
-        # if self.data_callback is not None:
-        #     self.data_callback(self.data)
-
-        # if self.continuous and self.interval > 0:
-        #     logging.info("Query Junctek again in {} seconds...".format(self.interval))
-        #     time.sleep(self.interval)
-        #     self.request_data()
-
-    # def gracefully_exit(self, connectFailed=False):
-    #     logging.info("gracefully_exit")
-    #     # if self.timer is not None and self.timer.is_alive():
-    #     #     self.timer.cancel()
-    #     if self.device is not None and not connectFailed and self.device.is_connected():
-    #         logging.info(
-    #             "Exit: Disconnecting device: %s [%s]",
-    #             self.device.alias(),
-    #             self.device.mac_address,
-    #         )
-    #         self.device.disconnect()
-    #     self.manager.stop()
-    #     os._exit(os.EX_OK)
 
     def validate(self, bs):
         """
@@ -213,7 +84,6 @@ class Util:
             return False
 
         if not [v for v in Config().PARAM_KEYS.values() if v in bs]:
-            # logging.debug("No parameters found in stream: {}".format(bs))
             return False
 
         return True
@@ -262,8 +132,6 @@ class Util:
 
                 key = params_keys[position]
                 values[key] = value_str
-
-        # logging.debug(bs_list_rev)
 
         # Format the value to the right decimal place, or perform other formatting
         for key, value in list(values.items()):
