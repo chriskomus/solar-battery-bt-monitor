@@ -255,7 +255,7 @@
           "showLineNumbers": false,
           "showMiniMap": false
         },
-        "content": "<div class=\"gf-form\">\r\n  <a class=\"gf-form-label gf-form-label\" style=\"font-size: 1.5em;\" href=\"http://solar-monitor.local:3000/d/solarmon-03/solar-bluetooth-monitor-history?orgId=1&refresh=30s&from=now-7d&to=now&kiosk\">1w</a>\r\n  <a class=\"gf-form-label gf-form-label\" style=\"font-size: 1.5em;\" href=\"http://solar-monitor.local:3000/d/solarmon-03/solar-bluetooth-monitor-history?orgId=1&refresh=30s&from=now-28d&to=now&kiosk\">4w</a>\r\n  <a class=\"gf-form-label gf-form-label\" style=\"font-size: 1.5em;\" href=\"http://solar-monitor.local:3000/d/solarmon-03/solar-bluetooth-monitor-history?orgId=1&refresh=30s&from=now-3M&to=now&kiosk\">3m</a>\r\n  <a class=\"gf-form-label gf-form-label\" style=\"font-size: 1.5em;\" href=\"http://solar-monitor.local:3000/d/solarmon-03/solar-bluetooth-monitor-history?orgId=1&refresh=30s&from=now-6M&to=now&kiosk\">6m</a>\r\n</div>\r\n<div class=\"gf-form\">\r\n  <a class=\"gf-form-label gf-form-label--dashlink\" style=\"font-size: 1.5em;\" href=\"http://solar-monitor.local:3000/d/solarmon-01/solar-bluetooth-monitor?orgId=1&refresh=30s&from=now-1d&to=now&kiosk\">MAIN</a>\r\n  <a class=\"gf-form-label gf-form-label--dashlink\" style=\"font-size: 1.5em;\" href=\"http://solar-monitor.local:3000/d/solarmon-05/solar-bluetooth-monitor-gauges?orgId=1&refresh=30s&from=now-1d&to=now&kiosk\">GAUGES</a>\r\n</div>\r\n<div class=\"gf-form\">\r\n  <a class=\"gf-form-label gf-form-label--dashlink\" style=\"font-size: 1.5em;\" href=\"http://solar-monitor.local:3000/d/solarmon-04/solar-bluetooth-monitor-detailed?orgId=1&refresh=30s&from=now-3d&to=now&kiosk\">CHARTS</a>\r\n  <a class=\"gf-form-label gf-form-label--dashlink\" style=\"font-size: 1.5em;\" href=\"http://solar-monitor.local:3000/d/solarmon-03/solar-bluetooth-monitor-history?orgId=1&refresh=30s&from=now-28d&to=now&kiosk\">HISTORY</a>\r\n</div>\r\n<div class=\"gf-form\">\r\n  <a class=\"gf-form-label gf-form-label--dashlink\" style=\"font-size: 1.5em;\" href=\"http://solar-monitor.local:3000/d/solarmon-03/solar-bluetooth-monitor-history?orgId=1&refresh=30s&kiosk=tv\">DASH</a>\r\n  <a class=\"gf-form-label gf-form-label--dashlink\" style=\"font-size: 1.5em;\" href=\"http://solar-monitor.local:7800/\">EXIT</a>\r\n</div>",
+        "content": "<div class=\"gf-form\">\r\n  <a class=\"gf-form-label gf-form-label\" style=\"font-size: 1.5em;\" href=\"http://solar-monitor.local:3000/d/solarmon-03/solar-bluetooth-monitor-history?orgId=1&refresh=30s&from=now-7d&to=now&kiosk\">1w</a>\r\n  <a class=\"gf-form-label gf-form-label\" style=\"font-size: 1.5em;\" href=\"http://solar-monitor.local:3000/d/solarmon-03/solar-bluetooth-monitor-history?orgId=1&refresh=30s&from=now-28d&to=now&kiosk\">4w</a>\r\n  <a class=\"gf-form-label gf-form-label\" style=\"font-size: 1.5em;\" href=\"http://solar-monitor.local:3000/d/solarmon-03/solar-bluetooth-monitor-history?orgId=1&refresh=30s&from=now-3M&to=now&kiosk\">3m</a>\r\n  <a class=\"gf-form-label gf-form-label\" style=\"font-size: 1.5em;\" href=\"http://solar-monitor.local:3000/d/solarmon-03/solar-bluetooth-monitor-history?orgId=1&refresh=30s&from=now-6M&to=now&kiosk\">6m</a>\r\n</div>\r\n<div class=\"gf-form\">\r\n  <a class=\"gf-form-label gf-form-label--dashlink\" style=\"font-size: 1.5em;\" href=\"http://solar-monitor.local:3000/d/solarmon-01/solar-bluetooth-monitor?orgId=1&refresh=30s&from=now-1d&to=now&kiosk\">MAIN</a>\r\n  <a class=\"gf-form-label gf-form-label--dashlink\" style=\"font-size: 1.5em;\" href=\"http://solar-monitor.local:3000/d/solarmon-05/solar-bluetooth-monitor-gauges?orgId=1&refresh=30s&from=now-1d&to=now&kiosk\">GAUGES</a>\r\n</div>\r\n<div class=\"gf-form\">\r\n  <a class=\"gf-form-label gf-form-label--dashlink\" style=\"font-size: 1.5em;\" href=\"http://solar-monitor.local:3000/d/solarmon-04/solar-bluetooth-monitor-detailed?orgId=1&refresh=30s&from=now-3d&to=now&kiosk\">MORE</a>\r\n  <a class=\"gf-form-label gf-form-label--dashlink\" style=\"font-size: 1.5em;\" href=\"http://solar-monitor.local:3000/d/solarmon-03/solar-bluetooth-monitor-history?orgId=1&refresh=30s&from=now-28d&to=now&kiosk\">HISTORY</a>\r\n</div>\r\n<div class=\"gf-form\">\r\n  <a class=\"gf-form-label gf-form-label--dashlink\" style=\"font-size: 1.5em;\" href=\"http://solar-monitor.local:3000/d/solarmon-03/solar-bluetooth-monitor-history?orgId=1&refresh=30s&kiosk=tv\">DASH</a>\r\n  <a class=\"gf-form-label gf-form-label--dashlink\" style=\"font-size: 1.5em;\" href=\"http://solar-monitor.local:7800/\">EXIT</a>\r\n</div>",
         "mode": "html"
       },
       "pluginVersion": "9.4.7",
@@ -1073,7 +1073,8 @@
             "mode": "absolute",
             "steps": [
               {
-                "color": "green"
+                "color": "green",
+                "value": null
               }
             ]
           },
@@ -1165,7 +1166,8 @@
             "mode": "absolute",
             "steps": [
               {
-                "color": "green"
+                "color": "green",
+                "value": null
               }
             ]
           },
@@ -1257,7 +1259,8 @@
             "mode": "absolute",
             "steps": [
               {
-                "color": "green"
+                "color": "green",
+                "value": null
               }
             ]
           },
@@ -1349,7 +1352,8 @@
             "mode": "absolute",
             "steps": [
               {
-                "color": "green"
+                "color": "green",
+                "value": null
               }
             ]
           },
@@ -1421,7 +1425,8 @@
             "mode": "absolute",
             "steps": [
               {
-                "color": "green"
+                "color": "green",
+                "value": null
               },
               {
                 "color": "red",
@@ -1487,7 +1492,7 @@
     "list": []
   },
   "time": {
-    "from": "now-24h",
+    "from": "now-28d",
     "to": "now"
   },
   "timepicker": {
@@ -1514,6 +1519,6 @@
   "timezone": "",
   "title": "Solar Bluetooth Monitor - History",
   "uid": "solarmon-03",
-  "version": 52,
+  "version": 53,
   "weekStart": ""
 }
